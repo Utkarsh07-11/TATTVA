@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: sih2026_manganese_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+      - SYNTHETIC_MODE=true
+    volumes:
+      - ../data:/app/data
+    restart: unless-stopped
+
+  frontend:
+    image: node:24-alpine
+    container_name: sih2026_manganese_frontend
+    working_dir: /app
+    volumes:
+      - ../frontend:/app
+    ports:
+      - "5173:5173"
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    depends_on:
+      - backend
+    restart: unless-stopped

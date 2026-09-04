@@ -1,0 +1,135 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "block_id": "BLOCK_A",
+        "name": "Main Pit - Block A (High Grade)",
+        "status": "Active Extraction",
+        "target_monthly_tonnes": 10000,
+        "target_mn_grade_pct": 36.5,
+        "primary_equipment": [
+          "EXC-01",
+          "EXC-02",
+          "EXC-03",
+          "DRL-01"
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              80.17729999999999,
+              21.8735
+            ],
+            [
+              80.1823,
+              21.8795
+            ],
+            [
+              80.1883,
+              21.8765
+            ],
+            [
+              80.1853,
+              21.869500000000002
+            ],
+            [
+              80.1793,
+              21.8705
+            ],
+            [
+              80.17729999999999,
+              21.8735
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "block_id": "BLOCK_B",
+        "name": "East Extension - Block B",
+        "status": "Active Development",
+        "target_monthly_tonnes": 8400,
+        "target_mn_grade_pct": 28.0,
+        "primary_equipment": [
+          "EXC-04",
+          "EXC-05",
+          "DRL-03"
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              80.18929999999999,
+              21.8805
+            ],
+            [
+              80.1963,
+              21.8835
+            ],
+            [
+              80.19829999999999,
+              21.875500000000002
+            ],
+            [
+              80.1913,
+              21.8735
+            ],
+            [
+              80.18929999999999,
+              21.8805
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "block_id": "BLOCK_C",
+        "name": "South Overburden Strip - Block C",
+        "status": "Stripping / Secondary",
+        "target_monthly_tonnes": 6600,
+        "target_mn_grade_pct": 22.0,
+        "primary_equipment": [
+          "EXC-06",
+          "DRL-04"
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              80.17229999999999,
+              21.8675
+            ],
+            [
+              80.1783,
+              21.8685
+            ],
+            [
+              80.18029999999999,
+              21.860500000000002
+            ],
+            [
+              80.1733,
+              21.8595
+            ],
+            [
+              80.17229999999999,
+              21.8675
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

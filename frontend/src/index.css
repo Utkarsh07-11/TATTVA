@@ -1,0 +1,95 @@
+@import "leaflet/dist/leaflet.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html, body, #root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 600px at 12% -10%, rgba(196, 137, 74, 0.12), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(79, 209, 197, 0.07), transparent 50%),
+    #0a0d11;
+  color: #e8edf4;
+  font-family: "IBM Plex Sans", Segoe UI, system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  background: #10151c;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #171e28;
+  color: #e8edf4;
+  border: 1px solid #2a3444;
+  border-radius: 10px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+.leaflet-popup-tip {
+  background: #171e28;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #10151c; }
+::-webkit-scrollbar-thumb { background: #2f3b4d; border-radius: 8px; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.page-enter {
+  animation: fade-up 0.38s ease-out both;
+}
+
+.stagger > * {
+  animation: fade-up 0.4s ease-out both;
+}
+
+.stagger > *:nth-child(1) { animation-delay: 0.02s; }
+.stagger > *:nth-child(2) { animation-delay: 0.07s; }
+.stagger > *:nth-child(3) { animation-delay: 0.12s; }
+.stagger > *:nth-child(4) { animation-delay: 0.17s; }
+.stagger > *:nth-child(5) { animation-delay: 0.22s; }
+.stagger > *:nth-child(6) { animation-delay: 0.27s; }
+
+.nav-link {
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.nav-link:hover {
+  transform: translateX(2px);
+}
+
+.panel {
+  @apply bg-ink-800/90 border border-white/10 rounded-2xl shadow-panel;
+}
+
+.soft-btn {
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.soft-btn:hover {
+  transform: translateY(-1px);
+}
+
+.soft-btn:active {
+  transform: translateY(0);
+}

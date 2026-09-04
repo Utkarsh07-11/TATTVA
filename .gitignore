@@ -1,0 +1,58 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# =========================
+# Build / Distribution
+# =========================
+build/
+dist/
+*.egg-info/
+*.exe
+
+# PyInstaller / caches
+cachedir/
+
+# =========================
+# Node / Frontend
+# =========================
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# =========================
+# Environment / Secrets
+# =========================
+.env
+.env.*
+
+# =========================
+# IDE
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# Testing
+# =========================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# OS
+# =========================
+.DS_Store
+Thumbs.db

@@ -1,0 +1,32 @@
+{
+  "prospectivity_spatial_cv": {
+    "precision": 0.11805555555555555,
+    "recall": 0.07852564102564102,
+    "f1": 0.0903030303030303,
+    "roc_auc": 0.49604359037952794,
+    "pr_auc": 0.27729235595417134
+  },
+  "forecasting_rolling_cv": {
+    "lightgbm_quantile": {
+      "mae": 10.535348617025601,
+      "picp_coverage_90": 0.76
+    },
+    "ridge_baseline": {
+      "mae": 12.455677031543923
+    },
+    "naive_7d_baseline": {
+      "mae": 31.827428571428573
+    },
+    "ml_advantage_pct": 66.9
+  },
+  "resource_estimation_summary": {
+    "total_inferred_tonnes": 68000.0,
+    "average_grade_pct": 20.45,
+    "ore_volume_m3": 18900.0,
+    "cell_count": 1,
+    "cutoff_grade_pct": 20.0,
+    "bulk_density_t_m3": 3.6,
+    "caveat": "Illustrative geostatistical toy resource estimate, not a certified reserve. Requires dense infill drilling and engineering feasibility."
+  },
+  "status": "TRAINED_AND_VERIFIED"
+}

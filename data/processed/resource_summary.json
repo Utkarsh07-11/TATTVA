@@ -1,0 +1,9 @@
+{
+  "total_inferred_tonnes": 68000.0,
+  "average_grade_pct": 20.45,
+  "ore_volume_m3": 18900.0,
+  "cell_count": 1,
+  "cutoff_grade_pct": 20.0,
+  "bulk_density_t_m3": 3.6,
+  "caveat": "Illustrative geostatistical toy resource estimate, not a certified reserve. Requires dense infill drilling and engineering feasibility."
+}
