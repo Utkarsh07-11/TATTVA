@@ -1,6 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
-import { MapPin, Sliders, Layers, Eye, EyeOff, Info } from 'lucide-react';
+import { MapPin, Sliders, Layers, Eye, EyeOff, Info, ShieldCheck } from 'lucide-react';
+
+// India administrative boundary reference geometry based on Survey of India data.
+import indiaBoundaryRaw from '../assets/india_soi_boundary.geojson?raw';
+
+const indiaBoundaryGeoJson = typeof indiaBoundaryRaw === 'string' ? JSON.parse(indiaBoundaryRaw) : indiaBoundaryRaw;
 
 export default function DigitalMineMap({
   prospectivityGeoJson,
@@ -16,6 +21,7 @@ export default function DigitalMineMap({
     prospectivity: null,
     drillholes: null,
     equipment: null,
+    indiaBoundary: null,
   });
 
   const [probCutoff, setProbCutoff] = useState(0.40);
@@ -52,12 +58,26 @@ export default function DigitalMineMap({
         zoomControl: true,
       });
 
-      // CartoDB Dark Basemap
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-        maxZoom: 19,
+      // Boundary-neutral Dark Base TileLayer (No OSM disputed lines baked in)
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Basemap &copy; Esri &mdash; Boundaries: Source: Survey of India, Government of India',
+        maxZoom: 16,
       }).addTo(map);
 
+      // Survey of India Boundary Vector Layer
+      const indiaLayer = L.geoJSON(indiaBoundaryGeoJson, {
+        style: {
+          color: '#818cf8',      // Indigo sovereign boundary outline
+          weight: 1.8,
+          opacity: 0.9,
+          fillColor: '#818cf8',
+          fillOpacity: 0.02,
+          dashArray: 'none',
+        },
+        interactive: false,
+      }).addTo(map);
+
+      layersRef.current.indiaBoundary = indiaLayer;
       mapInstanceRef.current = map;
     }
 
@@ -328,6 +348,10 @@ export default function DigitalMineMap({
 
           <div className="space-y-1.5 text-slate-300">
             <div className="flex items-center gap-2">
+              <span className="w-3 h-0.5 bg-indigo-400 rounded"></span>
+              <span>India Boundary (Survey of India)</span>
+            </div>
+            <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded-full bg-pink-500"></span>
               <span>High-Grade Assay (&gt;35% Mn)</span>
             </div>
@@ -349,11 +373,17 @@ export default function DigitalMineMap({
             </div>
           </div>
 
-          <div className="mt-2 pt-2 border-t border-slate-700 text-[10px] text-slate-400 flex items-start gap-1">
-            <Info className="w-3.5 h-3.5 shrink-0 text-indigo-400 mt-0.5" />
-            <span>
-              Satellite proxies (Sentinel-2 band ratios + DEM) provide surface alteration context, weighted below point drillhole assay evidence.
-            </span>
+          <div className="mt-2 pt-2 border-t border-slate-700 text-[10px] text-slate-400 space-y-1">
+            <div className="flex items-start gap-1">
+              <ShieldCheck className="w-3.5 h-3.5 shrink-0 text-emerald-400 mt-0.5" />
+              <span>India Boundary — Source: Survey of India, Government of India</span>
+            </div>
+            <div className="flex items-start gap-1 text-slate-500">
+              <Info className="w-3.5 h-3.5 shrink-0 text-indigo-400 mt-0.5" />
+              <span>
+                Satellite proxies (Sentinel-2 band ratios + DEM) provide surface alteration context, weighted below point drillhole assay evidence.
+              </span>
+            </div>
           </div>
         </div>
       </div>
