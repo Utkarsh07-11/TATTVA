@@ -1,0 +1,162 @@
+{
+  "experiment_id": "balaghat_real_prospectivity_phase9b",
+  "timestamp": "2026-09-06T17:37:00.634313+00:00",
+  "dataset_summary": {
+    "total_cells": 27720,
+    "valid_cells": 27487,
+    "partial_cells": 233
+  },
+  "known_site_sanity_check": {
+    "cell_id": "GRID-13860",
+    "evidence_id": "EVID_MOIL_BALAGHAT_BHARWELI_01",
+    "anomaly_score": 0.3188,
+    "anomaly_rank": 3652,
+    "anomaly_percentile": 86.83,
+    "robust_distance_score": 0.0845,
+    "robust_distance_rank": 2737,
+    "robust_distance_percentile": 90.13,
+    "positive_anchor_similarity": 1.0,
+    "positive_anchor_rank": 1,
+    "exploration_priority_score": 0.9232,
+    "exploration_priority_rank": 167
+  },
+  "anchor_diagnostics": {
+    "anchor_cell_id": "GRID-13860",
+    "anchor_distance_min": 0.0,
+    "anchor_distance_max": 31.993948940991622,
+    "anchor_distance_mean": 5.431079363753368,
+    "anchor_distance_median": 5.100180281301217,
+    "anchor_self_distance": 0.0,
+    "anchor_self_similarity": 0.999999999999,
+    "anchor_self_rank": 1,
+    "feature_bandwidth_sigma": 5.100180281301217
+  },
+  "sensitivity_config_b_diagnostics": {
+    "candidate_cells_count": 35,
+    "candidate_cells_list": [
+      "GRID-13356",
+      "GRID-13357",
+      "GRID-13522",
+      "GRID-13523",
+      "GRID-13524",
+      "... (35 total)"
+    ],
+    "centroid_distance_min": 0.7383142350678913,
+    "centroid_distance_max": 31.36846151303031,
+    "centroid_distance_mean": 5.232461330024247,
+    "centroid_distance_median": 4.97677195879227,
+    "feature_bandwidth_sigma": 4.97677195879227
+  },
+  "sensitivity_comparison": {
+    "spearman_rank_correlation_config_a_vs_b": 0.972,
+    "top_100_overlap_count": 71,
+    "top_100_overlap_pct": 71.0,
+    "interpretation": "Strong consistency between single-anchor and pit-corridor centroid similarities; both prioritize the active quarry/ridge lithologies."
+  },
+  "score_distributions": {
+    "anomaly_score": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.17906659090909088,
+      "median": 0.1356,
+      "std": 0.12953406463385558
+    },
+    "robust_distance_score": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.03780410533910533,
+      "median": 0.0085,
+      "std": 0.1145781434643276
+    },
+    "positive_anchor_similarity": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.577490183982684,
+      "median": 0.6065,
+      "std": 0.17073193190028982
+    },
+    "exploration_priority_score": {
+      "min": 0.0917,
+      "max": 0.9595,
+      "mean": 0.49999967171717175,
+      "median": 0.4977,
+      "std": 0.1682770501544415
+    }
+  },
+  "model_agreement_top_k": {
+    "top_1_percent": {
+      "top_k_count": 278,
+      "overlap_all_3_models": 0,
+      "overlap_all_3_pct_of_top_k": 0.0,
+      "overlap_anomaly_and_robust": 76,
+      "overlap_anomaly_and_similarity": 0,
+      "overlap_robust_and_similarity": 0
+    },
+    "top_5_percent": {
+      "top_k_count": 1386,
+      "overlap_all_3_models": 0,
+      "overlap_all_3_pct_of_top_k": 0.0,
+      "overlap_anomaly_and_robust": 431,
+      "overlap_anomaly_and_similarity": 8,
+      "overlap_robust_and_similarity": 9
+    },
+    "top_10_percent": {
+      "top_k_count": 2772,
+      "overlap_all_3_models": 94,
+      "overlap_all_3_pct_of_top_k": 3.39,
+      "overlap_anomaly_and_robust": 1096,
+      "overlap_anomaly_and_similarity": 119,
+      "overlap_robust_and_similarity": 318
+    }
+  },
+  "spatial_cluster_statistics": {
+    "top_1_percent": {
+      "threshold_pct": 1.0,
+      "cell_count": 278,
+      "total_area_ha": 25.02,
+      "num_clusters": 28,
+      "largest_cluster_cells": 184,
+      "largest_cluster_area_ha": 16.56,
+      "mean_cluster_size_cells": 9.93
+    },
+    "top_5_percent": {
+      "threshold_pct": 5.0,
+      "cell_count": 1386,
+      "total_area_ha": 124.74,
+      "num_clusters": 79,
+      "largest_cluster_cells": 1081,
+      "largest_cluster_area_ha": 97.29,
+      "mean_cluster_size_cells": 17.54
+    },
+    "top_10_percent": {
+      "threshold_pct": 10.0,
+      "cell_count": 2772,
+      "total_area_ha": 249.48,
+      "num_clusters": 202,
+      "largest_cluster_cells": 2032,
+      "largest_cluster_area_ha": 182.88,
+      "mean_cluster_size_cells": 13.72
+    }
+  },
+  "quality_in_top_priority": {
+    "valid": 2772
+  },
+  "anchor_feature_z_deltas": {
+    "B02": -0.717,
+    "B03": -0.95,
+    "B04": -0.781,
+    "B08": -1.061,
+    "B11": -0.808,
+    "B12": -0.586,
+    "NDVI": 0.587,
+    "NDWI": -0.67,
+    "red_nir_ratio": -0.624,
+    "swir_nir_ratio": -0.192,
+    "elevation": 0.73,
+    "slope": 0.734,
+    "aspect_sin": -1.367,
+    "aspect_cos": -0.801,
+    "hillshade": 0.752,
+    "distance_to_moil_balaghat_m": -2.673
+  }
+}

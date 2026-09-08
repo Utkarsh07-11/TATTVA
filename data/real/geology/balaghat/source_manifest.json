@@ -1,0 +1,72 @@
+{
+  "manifest_name": "Balaghat AOI Authoritative Geological Source Manifest",
+  "aoi_target": "MOIL_BALAGHAT",
+  "spatial_bounds_wgs84": {
+    "min_lon": 80.2039,
+    "max_lon": 80.2523,
+    "min_lat": 21.8239,
+    "max_lat": 21.8689
+  },
+  "anchor_coordinate": [80.2281, 21.8464],
+  "sources": [
+    {
+      "source_id": "GSI_DRM_BALAGHAT_2002",
+      "title": "Geological and Mineral Map of Balaghat District, Madhya Pradesh (District Resource Map)",
+      "publisher": "Geological Survey of India (GSI), Central Region, Nagpur",
+      "publication_year": 2002,
+      "scale": "1:250,000",
+      "map_sheet_series": "Degree Sheet 64 C / 55 O",
+      "url": "https://geodataindia.gov.in",
+      "portal": "National Geoscience Data Repository (NGDR) / GSI Bhukosh",
+      "access_method": "Interactive user portal access (OTP/registration required for full-res PDF)",
+      "georeference_feasibility": "High (Printed 15-minute and 30-minute latitude/longitude graticule intersections)",
+      "aoi_coverage": "Complete 5 km x 5 km AOI covered",
+      "license_use": "Government of India / GSI Open Data Policy (Mandatory formal citation required)",
+      "status": "investigated_accessible_via_portal"
+    },
+    {
+      "source_id": "GSI_BULL22_PART7_1965",
+      "title": "The Geology and Manganese-Ore Deposits of the Balaghat-Ukwa Area, Balaghat District, Madhya Pradesh (Bulletin Series A - Economic Geology No. 22, Part VII)",
+      "authors": ["K. D. Shukla", "M. A. Anandalwar"],
+      "publisher": "Geological Survey of India, Government of India",
+      "publication_year": 1965,
+      "scale": "1:63,360 / 1:50,000 Geological Map Plates",
+      "map_sheet_series": "Survey of India Toposheets 64 C/1, 64 C/5",
+      "url": "https://www.gsi.gov.in",
+      "portal": "GSI Publications Archive / GSI Library Central Region",
+      "access_method": "GSI Monograph / Historical Memoir Archive",
+      "georeference_feasibility": "Very High (Detailed 1:63,360 geological maps with surveyed mine workings and formation contacts)",
+      "aoi_coverage": "Directly covers Bharweli-Balaghat mine strip and Sausar syncline",
+      "license_use": "Public statutory geological survey publication",
+      "status": "investigated_historical_reference"
+    },
+    {
+      "source_id": "SOI_OSM_64C1_64C5",
+      "title": "Survey of India Open Series Maps (OSM) Sheets 64 C/1 and 64 C/5",
+      "publisher": "Survey of India, Department of Science & Technology, Government of India",
+      "publication_year": 2011,
+      "scale": "1:50,000",
+      "map_sheet_series": "64 C/1 (Western AOI) and 64 C/5 (Eastern AOI)",
+      "url": "https://onlinemaps.surveyofindia.gov.in",
+      "portal": "Survey of India Online Maps Portal",
+      "access_method": "Interactive download (Free for registered Indian citizens via Mobile OTP)",
+      "georeference_feasibility": "Highest (Standard Survey of India 1:50,000 metric grid and corner graticules)",
+      "aoi_coverage": "AOI straddles the eastern edge of 64 C/1 (80.2039-80.2500 E) and western edge of 64 C/5 (80.2500-80.2523 E)",
+      "license_use": "Survey of India National Map Policy",
+      "status": "investigated_base_topography"
+    },
+    {
+      "source_id": "IBM_IMYB_MN_2023",
+      "title": "Indian Minerals Yearbook: Manganese Ore Chapter & MP Mining Lease Directory",
+      "publisher": "Indian Bureau of Mines (IBM), Ministry of Mines, Government of India",
+      "publication_year": 2023,
+      "url": "https://ibm.gov.in",
+      "portal": "IBM Official Web Portal",
+      "access_method": "Open Public Download (PDF)",
+      "georeference_feasibility": "Statutory lease centroid coordinates (MOIL Bharweli 39MPR01026)",
+      "aoi_coverage": "Point mine portal within AOI",
+      "license_use": "Government of India National Data Sharing and Accessibility Policy (NDSAP)",
+      "status": "verified_tabular_point"
+    }
+  ]
+}

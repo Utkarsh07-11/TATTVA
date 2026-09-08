@@ -1,0 +1,25 @@
+period,period_type,mine,company,state,commodity,production_tonnes,grade_percent,source,source_page,source_table,data_status
+FY2015-16,annual,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,1032000.0,,MOIL 54th Annual Report,Directors Report,Production Summary Table,reported
+FY2016-17,annual,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,1005000.0,,MOIL 55th Annual Report,Directors Report,Production Summary Table,reported
+FY2017-18,annual,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,1201000.0,,MOIL 56th Annual Report,Directors Report,Production Summary Table,reported
+FY2018-19,annual,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,1301000.0,,MOIL 57th Annual Report,Directors Report,Production Summary Table,reported
+FY2019-20,annual,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,1280000.0,,MOIL 58th Annual Report,Directors Report,Production Summary Table,reported
+FY2020-21,annual,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,1143000.0,,MOIL 59th Annual Report,Directors Report,Production Summary Table,reported
+FY2021-22,annual,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,1231000.0,,MOIL 60th Annual Report,Directors Report,Production Summary Table,reported
+FY2022-23,annual,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,1302000.0,,MOIL 61st Annual Report,Directors Report,Production Summary Table,reported
+FY2023-24,annual,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,1756000.0,,MOIL 62nd Annual Report,Directors Report,Production Summary Table,reported
+FY2024-25,annual,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,1802000.0,,PIB Ministry of Steel Disclosures,Operational Review,Annual Press Bulletin,reported
+FY2025-26,annual,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,1907000.0,,PIB Ministry of Steel Disclosures,Operational Review,Annual Press Bulletin,reported
+Q1_FY2024-25,quarterly,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,470000.0,,PIB Ministry of Steel Disclosures,Quarterly Review,Q1 Release,reported
+Q3_FY2024-25,quarterly,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,460000.0,,PIB Ministry of Steel Disclosures,Quarterly Review,Q3 Release,reported
+Q3_FY2025-26,quarterly,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,477000.0,,PIB Ministry of Steel Disclosures,Quarterly Review,Q3 Release,reported
+Q1_FY2026-27,quarterly,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,507605.0,,PIB Ministry of Steel Disclosures,Quarterly Review,Q1 Release,reported
+2025-08,monthly,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,145000.0,,PIB Ministry of Steel Disclosures,Monthly Performance,Aug Bulletin,reported
+2025-09,monthly,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,152000.0,,PIB Ministry of Steel Disclosures,Monthly Performance,Sep Bulletin,reported
+2025-11,monthly,ALL_MINES_AGGREGATE,MOIL Limited,MP_AND_MAH,Manganese Ore,165000.0,,PIB Ministry of Steel Disclosures,Monthly Performance,Nov Bulletin,reported
+FY2020-21,annual,STATE_TOTAL,ALL_OPERATORS,Madhya Pradesh,Manganese Ore,778000.0,,IBM Indian Minerals Yearbook 2021,Manganese Ore Chapter,Table 4 State-wise Production,reported
+FY2020-21,annual,STATE_TOTAL,ALL_OPERATORS,Maharashtra,Manganese Ore,642000.0,,IBM Indian Minerals Yearbook 2021,Manganese Ore Chapter,Table 4 State-wise Production,reported
+FY2020-21,annual,ALL_INDIA_TOTAL,ALL_OPERATORS,India,Manganese Ore,2367000.0,,IBM Indian Minerals Yearbook 2021,Manganese Ore Chapter,Table 1 All-India Production,reported
+FY2021-22,annual,STATE_TOTAL,ALL_OPERATORS,Madhya Pradesh,Manganese Ore,849237.0,,IBM Indian Minerals Yearbook 2022,Manganese Ore Chapter,Table 4 State-wise Production,reported
+FY2021-22,annual,STATE_TOTAL,ALL_OPERATORS,Maharashtra,Manganese Ore,727918.0,,IBM Indian Minerals Yearbook 2022,Manganese Ore Chapter,Table 4 State-wise Production,reported
+FY2021-22,annual,ALL_INDIA_TOTAL,ALL_OPERATORS,India,Manganese Ore,2695991.0,,IBM Indian Minerals Yearbook 2022,Manganese Ore Chapter,Table 1 All-India Production,reported

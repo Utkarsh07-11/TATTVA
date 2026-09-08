@@ -1,0 +1,15 @@
+evidence_id,mine_or_occurrence_name,source_verified,location_verified,commodity_verified,coordinate_precision_known,spatially_usable,label_eligible,confidence,inside_balaghat_aoi,provenance_notes
+EVID_MOIL_BALAGHAT_BHARWELI_01,Balaghat (Bharweli) Underground Mine,True,True,True,True,True,True,high,True,"surveyed_shaft_point from Ministry of Environment, Forest & Climate Change (MoEFCC) & GSI. Inside 5km AOI."
+EVID_GSI_BHARWELI_OUTCROP_02,Bharweli-Balaghat Manganese Reef Outcrop Strip,True,True,True,True,True,True,high,True,outcrop_strike_center from Geological Survey of India (GSI). Inside 5km AOI.
+EVID_IBM_BHARWELI_EXPLORATION_03,Bharweli Mine Lease Core Drilling & Resource Program,True,False,True,True,False,False,low,True,unlocated_aggregate from Indian Bureau of Mines (IBM). Inside 5km AOI.
+EVID_MOIL_UKWA_04,Ukwa Manganese Mine,True,True,True,True,True,True,medium,False,lease_centroid from Survey of India & MOIL Limited. Outside AOI.
+EVID_MOIL_TIRODI_05,Tirodi Manganese Mine,True,True,True,True,True,True,medium,False,statutory_point from Indian Bureau of Mines (IBM). Outside AOI.
+EVID_MOIL_SITAPATORE_06,Sitapatore-Sukli Manganese Mine,True,True,True,True,True,True,medium,False,lease_centroid from MoEFCC Forest Clearance Portal. Outside AOI.
+EVID_GSI_RAMRAMA_07,Ramrama Manganese Deposit,True,True,True,True,True,True,medium,False,approximate_village_grid from Geological Survey of India (GSI). Outside AOI.
+EVID_MOIL_CHIKLA_08,Chikla Manganese Mine,True,True,True,True,True,True,medium,False,approximate_village_grid from Indian Bureau of Mines (IBM) & Survey of India. Outside AOI.
+EVID_MOIL_DONGRI_BUZURG_09,Dongri Buzurg Manganese Mine,True,True,True,True,True,True,medium,False,approximate_village_grid from MoEFCC PARIVESH & IBM. Outside AOI.
+EVID_MOIL_KANDRI_10,Kandri Manganese Mine,True,True,True,True,True,True,medium,False,approximate_village_grid from Indian Bureau of Mines (IBM). Outside AOI.
+EVID_MOIL_MANSAR_11,Mansar Manganese Mine,True,True,True,True,True,True,medium,False,approximate_village_grid from MoEFCC PARIVESH & Survey of India. Outside AOI.
+EVID_MOIL_GUMGAON_12,Gumgaon Manganese Mine,True,True,True,True,True,True,medium,False,approximate_village_grid from Maharashtra Pollution Control Board (MPCB). Outside AOI.
+EVID_MOIL_BELDONGRI_13,Beldongri Manganese Mine,True,True,True,True,True,True,medium,False,approximate_village_grid from Geological Survey of India (GSI). Outside AOI.
+EVID_GSI_MIRAGPUR_14,Miragpur Manganese Occurrence,True,True,True,True,True,True,medium,False,approximate_village_grid from Geological Survey of India (GSI). Outside AOI.

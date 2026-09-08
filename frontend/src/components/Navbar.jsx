@@ -22,7 +22,7 @@ export default function Navbar({
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-lg font-bold text-white tracking-wide">
-                MOIL GeoProduction AI
+                TATTVA
               </h1>
               <span className="bg-purple-950 text-purple-300 text-xs font-semibold px-2 py-0.5 rounded border border-purple-800">
                 SIH 2026 PS 26009

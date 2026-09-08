@@ -1,0 +1,97 @@
+{
+  "experiment_id": "balaghat_real_prospectivity_phase9b",
+  "execution_timestamp": "2026-09-06T17:37:00.634313+00:00",
+  "status": "completed",
+  "source_datasets": {
+    "feature_grid": "G:\\Tattvam\\TATTVA\\data\\derived\\geospatial\\balaghat\\real_feature_grid.csv",
+    "mineralization_evidence": "G:\\Tattvam\\TATTVA\\data\\real\\geology\\balaghat\\mineralization_evidence.csv",
+    "label_candidates": "G:\\Tattvam\\TATTVA\\data\\derived\\geospatial\\balaghat\\mineralization_label_candidates.csv"
+  },
+  "primary_positive_anchor": {
+    "cell_id": "GRID-13860",
+    "evidence_id": "EVID_MOIL_BALAGHAT_BHARWELI_01",
+    "name": "Balaghat (Bharweli) Underground Mine Shaft Portal",
+    "coordinates_wgs84": [
+      80.2281,
+      21.8464
+    ]
+  },
+  "sensitivity_candidate_count": 35,
+  "model_algorithms": {
+    "model_a1": "Isolation Forest (sklearn.ensemble.IsolationForest)",
+    "model_a2": "PCA-Whitened Robust Mahalanobis Distance (sklearn.covariance.MinCovDet / EmpiricalCovariance)",
+    "model_b_primary": "Single-Anchor Standardized Euclidean / Exponential Decay Similarity (Config A)",
+    "model_b_sensitivity": "Multi-Candidate Spatial Centroid Similarity (Config B)",
+    "ensemble": "Linear Uniform Rank Aggregation (exploration_priority_score)"
+  },
+  "parameters": {
+    "random_state": 42,
+    "isolation_forest_trees": 200,
+    "isolation_forest_contamination": "auto",
+    "robust_cov_support_fraction": 0.85
+  },
+  "preprocessing": {
+    "raw_feature_count": 15,
+    "engineered_feature_count": 16,
+    "features_used": [
+      "B02",
+      "B03",
+      "B04",
+      "B08",
+      "B11",
+      "B12",
+      "NDVI",
+      "NDWI",
+      "red_nir_ratio",
+      "swir_nir_ratio",
+      "elevation",
+      "slope",
+      "aspect_sin",
+      "aspect_cos",
+      "hillshade",
+      "distance_to_moil_balaghat_m"
+    ],
+    "excluded_features": [
+      "cell_id",
+      "x",
+      "y",
+      "longitude",
+      "latitude",
+      "valid_feature_fraction",
+      "feature_quality",
+      "label_candidate"
+    ],
+    "total_cells": 27720,
+    "valid_cells": 27487,
+    "partial_cells": 233,
+    "imputed_missing_counts": {
+      "B11": 165,
+      "B12": 165,
+      "elevation": 233,
+      "slope": 233,
+      "aspect": 233,
+      "hillshade": 233
+    },
+    "imputation_strategy": "Feature-wise median imputation for partial-quality edge rows (feature_quality preserved in outputs)",
+    "aspect_transformation": "aspect_sin = sin(rad(aspect)), aspect_cos = cos(rad(aspect))",
+    "scaler_type": "StandardScaler (zero mean, unit variance)"
+  },
+  "robust_covariance_details": {
+    "method_attempted": "MinCovDet (FastMCD) on PCA-decorrelated features",
+    "method_used": "MinCovDet (FastMCD) on PCA-decorrelated features",
+    "fallback_applied": false,
+    "fallback_reason": null,
+    "pca_components": 9,
+    "explained_variance_ratio": 0.9868663621391289,
+    "support_fraction": 0.85
+  },
+  "critical_scientific_limitations": [
+    "1. Only ONE strong verified spatial positive anchor exists inside the AOI (Bharweli shaft, GRID-13860).",
+    "2. There are ZERO genuine public negative labels. Subsurface barrenness requires exploratory drilling assay logs not released publicly.",
+    "3. 99.87% of cells (27,685 cells) are strictly unlabeled.",
+    "4. Mine/site proximity does NOT equal orebody extent. Pit proximity cells are spatial candidates for sensitivity analysis only.",
+    "5. Spectral and terrain anomalies do NOT automatically indicate manganese mineralization.",
+    "6. The experiment has NO independent ground-truth validation set. Supervised metrics (AUC/Precision/Recall) are scientifically invalid.",
+    "7. Results are suitable strictly for CANDIDATE EXPLORATION PRIORITIZATION, not reserve estimation or confirmed orebody mapping."
+  ]
+}

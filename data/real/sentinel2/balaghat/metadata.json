@@ -1,0 +1,96 @@
+{
+  "source": "Copernicus Sentinel-2 Level-2A (via AWS Earth Search / Open Data STAC)",
+  "provider": "European Space Agency (ESA) / AWS Open Data",
+  "product_id": "S2A_44QMK_20240417_0_L2A",
+  "stac_item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_44QMK_20240417_0_L2A",
+  "satellite": "Sentinel-2A",
+  "acquisition_date": "2024-04-17T05:22:46.341000Z",
+  "processing_level": "Level-2A (Bottom-of-Atmosphere Surface Reflectance)",
+  "cloud_cover_pct": 0.000325,
+  "aoi": {
+    "target": "MOIL_BALAGHAT",
+    "center_wgs84": [
+      80.2281,
+      21.8464
+    ],
+    "bbox_wgs84": [
+      80.2039,
+      21.8239,
+      80.2523,
+      21.8689
+    ],
+    "dimensions_km": [
+      5.0,
+      5.0
+    ]
+  },
+  "bands": [
+    {
+      "band": "B02",
+      "name": "Blue",
+      "wavelength_nm": 492.4,
+      "native_resolution_m": 10,
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/MK/2024/4/S2A_44QMK_20240417_0_L2A/B02.tif"
+    },
+    {
+      "band": "B03",
+      "name": "Green",
+      "wavelength_nm": 559.8,
+      "native_resolution_m": 10,
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/MK/2024/4/S2A_44QMK_20240417_0_L2A/B03.tif"
+    },
+    {
+      "band": "B04",
+      "name": "Red",
+      "wavelength_nm": 664.6,
+      "native_resolution_m": 10,
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/MK/2024/4/S2A_44QMK_20240417_0_L2A/B04.tif"
+    },
+    {
+      "band": "B08",
+      "name": "NIR",
+      "wavelength_nm": 832.8,
+      "native_resolution_m": 10,
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/MK/2024/4/S2A_44QMK_20240417_0_L2A/B08.tif"
+    },
+    {
+      "band": "B11",
+      "name": "SWIR1",
+      "wavelength_nm": 1610.4,
+      "native_resolution_m": 20,
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/MK/2024/4/S2A_44QMK_20240417_0_L2A/B11.tif",
+      "resampling_for_analysis": "Bilinear interpolation to 10m reference grid"
+    },
+    {
+      "band": "B12",
+      "name": "SWIR2",
+      "wavelength_nm": 2185.7,
+      "native_resolution_m": 20,
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/MK/2024/4/S2A_44QMK_20240417_0_L2A/B12.tif",
+      "resampling_for_analysis": "None (preserved at native 20m in raw/)"
+    },
+    {
+      "band": "TCI",
+      "name": "True Color Image (RGB)",
+      "native_resolution_m": 10,
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/MK/2024/4/S2A_44QMK_20240417_0_L2A/TCI.tif"
+    }
+  ],
+  "crs": "EPSG:32644 (UTM Zone 44N)",
+  "resolution_m": 10.0,
+  "download_date": "2026-09-06",
+  "processing_steps": [
+    "Identified lowest cloud-cover Level-2A acquisition for Balaghat AOI via STAC search (cloud cover 0.0003%).",
+    "Performed windowed HTTP range read from Cloud-Optimized GeoTIFFs (COGs) for 5 km x 5 km bounding box.",
+    "Saved cropped raw bands (B02, B03, B04, B08, B11, B12, TCI) to data/real/sentinel2/balaghat/raw/.",
+    "Scaled raw digital numbers (DN) to surface reflectance (DN / 10000.0).",
+    "Resampled 20m SWIR1 band (B11) to 10m reference grid using bilinear interpolation.",
+    "Computed NDVI: (B08 - B04) / (B08 + B04).",
+    "Computed NDWI: (B03 - B08) / (B03 + B08) [McFeeters 1996].",
+    "Computed spectral ratios: Red/NIR (B04/B08) and SWIR1/NIR (B11/B08).",
+    "Exported single-band analytical GeoTIFFs to data/derived/sentinel2/balaghat/.",
+    "Generated diagnostic true_color.png and ndvi.png visualizations."
+  ],
+  "credentials_required": false,
+  "scientific_disclaimer": "NDVI, NDWI, and spectral ratios represent real remote-sensing surface reflectance indices. They are NOT classified as proven manganese mineralization indicators at this stage."
+}

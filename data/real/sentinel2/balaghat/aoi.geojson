@@ -1,0 +1,60 @@
+{
+  "type": "FeatureCollection",
+  "name": "MOIL_Balaghat_Sentinel2_AOI",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "aoi_name": "Balaghat Mine 5km x 5km AOI",
+        "anchor_mine_id": "MOIL_BALAGHAT",
+        "anchor_mine_name": "Balaghat (Bharweli)",
+        "center_wgs84": [
+          80.2281,
+          21.8464
+        ],
+        "bbox_wgs84": [
+          80.2039,
+          21.8239,
+          80.2523,
+          21.8689
+        ],
+        "width_km": 5.0,
+        "height_km": 5.0,
+        "purpose": "Phase 3 Real Remote-Sensing Baseline Acquisition"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              80.2039,
+              21.8239
+            ],
+            [
+              80.2523,
+              21.8239
+            ],
+            [
+              80.2523,
+              21.8689
+            ],
+            [
+              80.2039,
+              21.8689
+            ],
+            [
+              80.2039,
+              21.8239
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

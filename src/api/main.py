@@ -9,7 +9,7 @@ from fastapi.staticfiles import StaticFiles
 
 from config.settings import settings
 from src.api.deps import get_forecaster, get_optimizer, get_prospectivity_model, get_shap_engine, runtime_status
-from src.api.routes import forecast, explain, recommend, prospectivity, mine
+from src.api.routes import forecast, explain, recommend, prospectivity, mine, real_data
 
 
 @asynccontextmanager
@@ -48,6 +48,7 @@ app.include_router(explain.router, prefix=api_prefix)
 app.include_router(recommend.router, prefix=api_prefix)
 app.include_router(prospectivity.router, prefix=api_prefix)
 app.include_router(mine.router, prefix=api_prefix)
+app.include_router(real_data.router, prefix=api_prefix)
 
 
 @app.exception_handler(Exception)

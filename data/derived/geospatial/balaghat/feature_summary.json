@@ -1,0 +1,211 @@
+{
+  "dataset_name": "Balaghat 30m Real Geospatial Feature Grid",
+  "data_status": "derived",
+  "total_cells": 27720,
+  "quality_counts": {
+    "valid": 27487,
+    "partial": 233
+  },
+  "numerical_features": {
+    "x": {
+      "total_count": 27720,
+      "valid_count": 27720,
+      "missing_count": 0,
+      "min": 417737.89,
+      "max": 422747.89,
+      "mean": 420242.89,
+      "median": 420242.89,
+      "std": 1454.9231
+    },
+    "y": {
+      "total_count": 27720,
+      "valid_count": 27720,
+      "missing_count": 0,
+      "min": 2413568.9,
+      "max": 2418488.9,
+      "mean": 2416028.9,
+      "median": 2416028.9,
+      "std": 1428.9414
+    },
+    "longitude": {
+      "total_count": 27720,
+      "valid_count": 27720,
+      "missing_count": 0,
+      "min": 80.2038,
+      "max": 80.2525,
+      "mean": 80.2282,
+      "median": 80.2282,
+      "std": 0.0141
+    },
+    "latitude": {
+      "total_count": 27720,
+      "valid_count": 27720,
+      "missing_count": 0,
+      "min": 21.8241,
+      "max": 21.8688,
+      "mean": 21.8464,
+      "median": 21.8464,
+      "std": 0.0129
+    },
+    "B02": {
+      "total_count": 27720,
+      "valid_count": 27720,
+      "missing_count": 0,
+      "min": 199.0,
+      "max": 5536.0,
+      "mean": 571.7685,
+      "median": 518.0,
+      "std": 267.3574
+    },
+    "B03": {
+      "total_count": 27720,
+      "valid_count": 27720,
+      "missing_count": 0,
+      "min": 260.0,
+      "max": 6064.0,
+      "mean": 874.9137,
+      "median": 808.0,
+      "std": 329.2853
+    },
+    "B04": {
+      "total_count": 27720,
+      "valid_count": 27720,
+      "missing_count": 0,
+      "min": 179.0,
+      "max": 6396.0,
+      "mean": 872.4839,
+      "median": 788.0,
+      "std": 491.3282
+    },
+    "B08": {
+      "total_count": 27720,
+      "valid_count": 27720,
+      "missing_count": 0,
+      "min": 321.0,
+      "max": 6208.0,
+      "mean": 2563.6461,
+      "median": 2567.0,
+      "std": 406.8199
+    },
+    "B11": {
+      "total_count": 27720,
+      "valid_count": 27555,
+      "missing_count": 165,
+      "min": 294.0,
+      "max": 7846.0,
+      "mean": 2379.9032,
+      "median": 2453.0,
+      "std": 863.4509
+    },
+    "B12": {
+      "total_count": 27720,
+      "valid_count": 27555,
+      "missing_count": 165,
+      "min": 182.0,
+      "max": 9628.0,
+      "mean": 1662.5033,
+      "median": 1677.0,
+      "std": 788.3872
+    },
+    "NDVI": {
+      "total_count": 27720,
+      "valid_count": 27720,
+      "missing_count": 0,
+      "min": -0.2256,
+      "max": 0.8829,
+      "mean": 0.5148,
+      "median": 0.517,
+      "std": 0.1909
+    },
+    "NDWI": {
+      "total_count": 27720,
+      "valid_count": 27720,
+      "missing_count": 0,
+      "min": -0.8028,
+      "max": 0.3136,
+      "mean": -0.4987,
+      "median": -0.5056,
+      "std": 0.1255
+    },
+    "red_nir_ratio": {
+      "total_count": 27720,
+      "valid_count": 27720,
+      "missing_count": 0,
+      "min": 0.0622,
+      "max": 1.5827,
+      "mean": 0.343,
+      "median": 0.3184,
+      "std": 0.1822
+    },
+    "swir_nir_ratio": {
+      "total_count": 27720,
+      "valid_count": 27720,
+      "missing_count": 0,
+      "min": 0.3674,
+      "max": 3.5803,
+      "mean": 0.9341,
+      "median": 0.985,
+      "std": 0.3111
+    },
+    "elevation": {
+      "total_count": 27720,
+      "valid_count": 27487,
+      "missing_count": 233,
+      "min": 295.8513,
+      "max": 559.4283,
+      "mean": 312.8032,
+      "median": 304.9882,
+      "std": 25.8954
+    },
+    "slope": {
+      "total_count": 27720,
+      "valid_count": 27487,
+      "missing_count": 233,
+      "min": 0.0028,
+      "max": 89.6857,
+      "mean": 3.9778,
+      "median": 0.9927,
+      "std": 11.5403
+    },
+    "aspect": {
+      "total_count": 27720,
+      "valid_count": 27487,
+      "missing_count": 233,
+      "min": -1.0,
+      "max": 360.0,
+      "mean": 168.8188,
+      "median": 153.5064,
+      "std": 115.5428
+    },
+    "hillshade": {
+      "total_count": 27720,
+      "valid_count": 27487,
+      "missing_count": 233,
+      "min": 0.0,
+      "max": 242.754,
+      "mean": 178.6156,
+      "median": 180.5524,
+      "std": 19.4213
+    },
+    "distance_to_moil_balaghat_m": {
+      "total_count": 27720,
+      "valid_count": 27720,
+      "missing_count": 0,
+      "min": 9.24,
+      "max": 3517.69,
+      "mean": 1911.1058,
+      "median": 1992.52,
+      "std": 711.5254
+    },
+    "valid_feature_fraction": {
+      "total_count": 27720,
+      "valid_count": 27720,
+      "missing_count": 0,
+      "min": 0.5714,
+      "max": 1.0,
+      "mean": 0.9967,
+      "median": 1.0,
+      "std": 0.0358
+    }
+  }
+}

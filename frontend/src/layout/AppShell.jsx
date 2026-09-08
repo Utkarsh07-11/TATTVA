@@ -1,27 +1,16 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import {
-  LayoutDashboard,
-  Map,
-  LineChart,
-  Cpu,
-  Zap,
-  Sliders,
-  Database,
-  RefreshCw,
-  ShieldAlert,
-  Layers,
-} from 'lucide-react';
+import { RefreshCw } from 'lucide-react';
 import { useDashboard } from '../context/DashboardContext';
 
-const links = [
-  { to: '/', label: 'Overview', icon: LayoutDashboard },
-  { to: '/mine-map', label: 'Digital Mine', icon: Map },
-  { to: '/forecast', label: 'Forecast', icon: LineChart },
-  { to: '/explain', label: 'Root Cause', icon: Cpu },
-  { to: '/actions', label: 'Actions', icon: Zap },
-  { to: '/simulate', label: 'Simulator', icon: Sliders },
-  { to: '/resources', label: 'Resources', icon: Database },
+const navItems = [
+  { to: '/', label: 'Overview' },
+  { to: '/mine-map', label: 'Digital Mine' },
+  { to: '/forecast', label: 'Production' },
+  { to: '/explain', label: 'Root Cause' },
+  { to: '/actions', label: 'Actions' },
+  { to: '/simulate', label: 'Simulator' },
+  { to: '/resources', label: 'Resources' },
 ];
 
 export default function AppShell() {
@@ -30,137 +19,164 @@ export default function AppShell() {
     setSelectedBlock,
     horizonDays,
     setHorizonDays,
-    showWatermark,
-    setShowWatermark,
     loading,
     loadDashboardData,
     error,
   } = useDashboard();
 
   return (
-    <div className="min-h-screen text-slate-100 flex">
-      <aside className="hidden lg:flex w-64 flex-col border-r border-white/10 bg-ink-900/90 backdrop-blur-md">
-        <div className="px-5 py-6 border-b border-white/10">
-          <div className="text-[11px] tracking-[0.22em] uppercase text-copper-400 font-semibold">SIH 2026 · PS 26009</div>
-          <h1 className="mt-2 text-xl font-semibold tracking-tight">GeoProduction AI</h1>
-          <p className="mt-1 text-xs text-slate-400 leading-relaxed">MOIL manganese reserve & shortfall decision support</p>
+    <div className="min-h-screen text-slate-200 flex flex-col bg-[#07090d]">
+      {/* 1. QUIET WORKSTATION TOP NAVIGATION */}
+      <header className="sticky top-0 z-50 bg-[#07090d]/95 backdrop-blur-md border-b border-technical">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-between h-12 gap-3">
+            {/* Brand Logo & Current Mine Context */}
+            <div className="flex items-center gap-3 shrink-0">
+              <NavLink to="/" className="flex items-center gap-1.5 group">
+                <span className="text-xl font-black font-condensed tracking-wider text-white group-hover:text-industrial-amber transition-colors">
+                  TATTVA
+                </span>
+              </NavLink>
+              <div className="hidden sm:block h-3.5 w-px bg-white/10" />
+              <div className="hidden sm:flex items-center gap-1.5 text-[10px] font-mono text-slate-400">
+                <span className="text-white font-bold">BALAGHAT</span>
+                <span className="text-slate-600">·</span>
+                <span className="text-slate-400">MP</span>
+              </div>
+            </div>
+
+            {/* Quiet Horizontal Navigation Links */}
+            <nav className="hidden lg:flex items-center space-x-1">
+              {navItems.map(({ to, label }) => (
+                <NavLink
+                  key={to}
+                  to={to}
+                  end={to === '/'}
+                  className={({ isActive }) =>
+                    `px-3 py-1 text-xs font-sans font-medium transition-colors relative ${
+                      isActive
+                        ? 'text-industrial-amber font-semibold'
+                        : 'text-slate-400 hover:text-white'
+                    }`
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      <span>{label}</span>
+                      {isActive && (
+                        <span className="absolute bottom-[-14px] left-2 right-2 h-[2px] bg-industrial-amber" />
+                      )}
+                    </>
+                  )}
+                </NavLink>
+              ))}
+            </nav>
+
+            {/* Quick Status Bar */}
+            <div className="flex items-center gap-2 font-mono text-[10px] shrink-0">
+              <div className="hidden sm:flex items-center gap-1 px-2 py-0.5 rounded bg-[#0b0e14] border border-technical">
+                <span className="text-slate-500">BLOCK:</span>
+                <select
+                  value={selectedBlock}
+                  onChange={(e) => setSelectedBlock(e.target.value)}
+                  className="bg-transparent text-slate-200 font-bold focus:outline-none cursor-pointer"
+                >
+                  <option value="BLOCK_A" className="bg-[#0b0e14] text-slate-200">Block A</option>
+                  <option value="BLOCK_B" className="bg-[#0b0e14] text-slate-200">Block B</option>
+                  <option value="BLOCK_C" className="bg-[#0b0e14] text-slate-200">Block C</option>
+                </select>
+              </div>
+
+              <div className="hidden xl:flex items-center gap-0.5 bg-[#0b0e14] rounded border border-technical p-0.5">
+                {[7, 15, 30].map((days) => (
+                  <button
+                    key={days}
+                    onClick={() => setHorizonDays(days)}
+                    className={`px-1.5 py-0.5 rounded text-[9px] font-bold transition-colors ${
+                      horizonDays === days
+                        ? 'bg-industrial-amber text-black'
+                        : 'text-slate-400 hover:text-slate-200'
+                    }`}
+                  >
+                    {days}D
+                  </button>
+                ))}
+              </div>
+
+              <span className="hidden md:inline-flex items-center gap-1 text-[10px] text-slate-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                SIMULATION
+              </span>
+
+              <button
+                onClick={loadDashboardData}
+                disabled={loading}
+                className="flex items-center gap-1 px-2 py-0.5 rounded bg-[#0b0e14] hover:bg-[#141b26] border border-technical text-slate-300 hover:text-white transition-colors cursor-pointer disabled:opacity-50"
+                title="Synchronize live inference"
+              >
+                <RefreshCw className={`w-3 h-3 ${loading ? 'animate-spin text-industrial-amber' : 'text-slate-400'}`} />
+                <span className="text-[10px] font-medium hidden xs:inline">Sync</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <nav className="flex-1 p-3 space-y-1">
-          {links.map(({ to, label, icon: Icon }) => (
+
+        {/* Mobile Navigation Scrollbar */}
+        <div className="lg:hidden flex overflow-x-auto gap-1.5 px-3 py-1.5 border-t border-technical bg-[#0a0d14]">
+          {navItems.map(({ to, label }) => (
             <NavLink
               key={to}
               to={to}
               end={to === '/'}
               className={({ isActive }) =>
-                `nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm ${
+                `whitespace-nowrap px-2.5 py-0.5 rounded text-xs transition-colors ${
                   isActive
-                    ? 'bg-copper-500/15 text-copper-300 border border-copper-500/30'
-                    : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent'
+                    ? 'bg-industrial-amber text-black font-semibold'
+                    : 'text-slate-400 hover:text-white'
                 }`
               }
             >
-              <Icon className="w-4 h-4" />
               {label}
             </NavLink>
           ))}
-        </nav>
-        <div className="p-4 text-[11px] text-slate-500 border-t border-white/10">
-          Predict → Explain → Simulate → Recommend → Visualize
         </div>
-      </aside>
+      </header>
 
-      <div className="flex-1 min-w-0 flex flex-col">
-        <header className="sticky top-0 z-40 border-b border-white/10 bg-ink-950/80 backdrop-blur-md">
-          <div className="px-4 lg:px-6 py-3 flex flex-col xl:flex-row xl:items-center justify-between gap-3">
-            <div className="lg:hidden">
-              <div className="text-[11px] tracking-[0.22em] uppercase text-copper-400 font-semibold">SIH 2026 · PS 26009</div>
-              <div className="font-semibold">GeoProduction AI</div>
-            </div>
-            <div className="flex flex-wrap items-center gap-2">
-              <div className="flex items-center bg-ink-800 rounded-xl p-1 border border-white/10">
-                <span className="text-xs text-slate-400 px-2 flex items-center gap-1">
-                  <Layers className="w-3.5 h-3.5" /> Block
-                </span>
-                <select
-                  value={selectedBlock}
-                  onChange={(e) => setSelectedBlock(e.target.value)}
-                  className="bg-ink-900 text-white text-xs font-semibold py-1.5 px-2 rounded-lg border border-white/10 focus:outline-none"
-                >
-                  <option value="BLOCK_A">Block A — High-grade pit</option>
-                  <option value="BLOCK_B">Block B — East extension</option>
-                  <option value="BLOCK_C">Block C — South strip</option>
-                </select>
-              </div>
-              <div className="flex items-center bg-ink-800 rounded-xl p-1 border border-white/10">
-                <span className="text-xs text-slate-400 px-2">Horizon</span>
-                {[7, 15, 30].map((days) => (
-                  <button
-                    key={days}
-                    onClick={() => setHorizonDays(days)}
-                    className={`soft-btn text-xs font-semibold px-2.5 py-1.5 rounded-lg ${
-                      horizonDays === days ? 'bg-copper-500 text-ink-950' : 'text-slate-400 hover:text-white'
-                    }`}
-                  >
-                    {days}d
-                  </button>
-                ))}
-              </div>
-              <button
-                onClick={() => setShowWatermark(!showWatermark)}
-                className={`soft-btn flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-xl border ${
-                  showWatermark
-                    ? 'bg-amber-950/70 border-amber-700/70 text-amber-300'
-                    : 'bg-ink-800 border-white/10 text-slate-400'
-                }`}
-              >
-                <ShieldAlert className="w-3.5 h-3.5" />
-                Synthetic
-              </button>
-              <button
-                onClick={loadDashboardData}
-                disabled={loading}
-                className="soft-btn p-2 rounded-xl bg-ink-800 border border-white/10 text-slate-300 disabled:opacity-50"
-              >
-                <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-copper-400' : ''}`} />
-              </button>
-            </div>
-          </div>
-          <nav className="lg:hidden flex overflow-x-auto gap-1 px-3 pb-3">
-            {links.map(({ to, label }) => (
-              <NavLink
-                key={to}
-                to={to}
-                end={to === '/'}
-                className={({ isActive }) =>
-                  `whitespace-nowrap px-3 py-1.5 rounded-full text-xs border ${
-                    isActive ? 'bg-copper-500/20 text-copper-300 border-copper-500/40' : 'text-slate-400 border-white/10'
-                  }`
-                }
-              >
-                {label}
-              </NavLink>
-            ))}
-          </nav>
-        </header>
-
-        {showWatermark && (
-          <div className="bg-amber-950/50 border-b border-amber-800/50 px-4 py-2 text-xs text-amber-200/90">
-            <strong>[SYNTHETIC DEMO DATA]</strong> Parametric synthetic models and public geological context for SIH 2026 PS 26009. No proprietary MOIL data is shown.
+      {/* 2. MAIN WORKSPACE CONTAINER */}
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 py-4">
+        {error && (
+          <div className="mb-4 p-3 text-xs font-mono text-rose-300 border border-rose-800/80 bg-rose-950/30 rounded">
+            [SYSTEM ERROR] {error}. Ensure FastAPI backend service is operational on port 8000.
           </div>
         )}
+        {loading && !error && (
+          <div className="mb-3 text-xs font-mono text-industrial-amber flex items-center gap-2">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-industrial-amber animate-pulse"></span>
+            Synchronizing mine telemetry & inference pipeline...
+          </div>
+        )}
+        <Outlet />
+      </main>
 
-        <main className="flex-1 px-4 lg:px-6 py-5">
-          {error && (
-            <div className="mb-4 panel p-4 text-sm text-red-300 border-red-900/60">
-              {error}. Start the FastAPI backend, then refresh.
-            </div>
-          )}
-          {loading && !error && (
-            <div className="mb-4 text-xs text-slate-400 animate-pulse">Refreshing live inference…</div>
-          )}
-          <Outlet />
-        </main>
-      </div>
+      {/* 3. QUIET INDUSTRIAL FOOTER */}
+      <footer className="border-t border-technical bg-[#05070a] py-2.5 text-slate-500 text-[11px] font-mono">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-white">TATTVA</span>
+            <span className="text-slate-700">|</span>
+            <span>Central India Manganese Belt Spatial Decision Support</span>
+          </div>
+          <div className="flex items-center gap-3 text-slate-500">
+            <span>EPSG:32644 (UTM 44N)</span>
+            <span>·</span>
+            <span>10 MOIL Mines</span>
+            <span>·</span>
+            <span className="text-emerald-400">● Online</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
+
+

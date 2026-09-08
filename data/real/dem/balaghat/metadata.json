@@ -1,0 +1,37 @@
+{
+  "provider": "European Space Agency (ESA) & Airbus Defence and Space under the Copernicus Programme",
+  "dataset_name": "Copernicus Digital Elevation Model GLO-30",
+  "dataset_version": "GLO-30 (Public 30-meter Global DEM)",
+  "tile_name": "Copernicus_DSM_COG_10_N21_00_E080_00_DEM",
+  "source_url": "https://registry.opendata.aws/copernicus-dem/",
+  "download_url": "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N21_00_E080_00_DEM/Copernicus_DSM_COG_10_N21_00_E080_00_DEM.tif",
+  "access_method": "Windowed Cloud-Optimized GeoTIFF (COG) HTTP range read via AWS Open Data",
+  "credentials_required": false,
+  "native_crs": "EPSG:4326 (WGS84)",
+  "native_resolution": "1 arc-second (~30 meters, 0.00027778 degrees)",
+  "processing_crs": "EPSG:32644 (UTM Zone 44N)",
+  "processing_resolution_m": 30.0,
+  "vertical_units": "meters",
+  "vertical_datum": "EGM2008 Geoid",
+  "horizontal_units": "meters (projected UTM)",
+  "nodata_value": -9999.0,
+  "aoi": {
+    "target": "MOIL_BALAGHAT",
+    "center_wgs84": [
+      80.2281,
+      21.8464
+    ],
+    "bbox_wgs84": [
+      80.2039,
+      21.8239,
+      80.2523,
+      21.8689
+    ],
+    "dimensions_km": [
+      5.0,
+      5.0
+    ]
+  },
+  "bhuvan_cartodem_investigation": "ISRO Bhuvan NRSC CartoDEM was investigated as the primary Indian national candidate. Automated API access is restricted on bhuvan-app1.nrsc.gov.in (requires interactive Indian mobile SMS OTP authentication and Captcha session). Copernicus DEM GLO-30 was selected as the verified, zero-credential authoritative 30m public alternative.",
+  "scientific_disclaimer": "These terrain layers (elevation, slope, aspect, hillshade) represent real physical topographical measurements. They are NOT, by themselves, evidence of manganese mineralization."
+}

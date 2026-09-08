@@ -6,13 +6,15 @@ import { useDashboard } from '../context/DashboardContext';
 export default function ExplainPage() {
   const { explanation } = useDashboard();
   return (
-    <div className="page-enter">
+    <div className="page-enter space-y-3">
       <PageHeader
-        kicker="Explain"
-        title="Shortfall root-cause attribution"
-        subtitle="SHAP TreeExplainer groups model drivers into operational factors. Attribution is not physical causation."
+        kicker="ROOT CAUSE ATTRIBUTION · SHAP"
+        title="Root Cause"
+        subtitle="Operational feature contributions for forecasted production shortfall. Attributed model drivers, not verified physical causation."
       />
       <ExplainabilityPanel explanation={explanation} />
     </div>
   );
 }
+
+

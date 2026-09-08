@@ -6,11 +6,11 @@ import { useDashboard } from '../context/DashboardContext';
 export default function SimulatePage() {
   const { selectedBlock, horizonDays, forecast, activePreset, setActivePreset } = useDashboard();
   return (
-    <div className="page-enter">
+    <div className="page-enter space-y-3">
       <PageHeader
-        kicker="Simulate"
-        title="What-if operations sandbox"
-        subtitle="Perturb availability, blasting delay, and rainfall, then re-score the trained production model."
+        kicker="SCENARIO SIMULATOR"
+        title="Simulator"
+        subtitle="Perturb equipment availability, blasting delays, and rainfall to simulate LightGBM model responses."
       />
       <WhatIfSandbox
         selectedBlock={selectedBlock}
@@ -22,3 +22,5 @@ export default function SimulatePage() {
     </div>
   );
 }
+
+
