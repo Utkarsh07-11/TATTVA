@@ -1,0 +1,59 @@
+{
+  "elevation.tif": {
+    "units": "meters above sea level (EGM2008)",
+    "valid_pixel_count": 27662,
+    "nodata_pixel_count": 562,
+    "min": 295.8512878417969,
+    "max": 559.4283447265625,
+    "mean": 312.76416015625,
+    "median": 304.98968505859375,
+    "std": 25.831321716308594
+  },
+  "slope.tif": {
+    "units": "degrees (0-90)",
+    "valid_pixel_count": 27662,
+    "nodata_pixel_count": 562,
+    "min": 0.0027635907754302025,
+    "max": 89.70140075683594,
+    "mean": 4.210925579071045,
+    "median": 0.9950727224349976,
+    "std": 12.370583534240723
+  },
+  "aspect.tif": {
+    "units": "degrees (0-360, flat = -1)",
+    "valid_pixel_count": 27662,
+    "nodata_pixel_count": 562,
+    "min": 0.0,
+    "max": 359.9999694824219,
+    "mean": 172.5388641357422,
+    "median": 160.4814453125,
+    "std": 114.26524353027344
+  },
+  "hillshade.tif": {
+    "units": "shaded relief intensity (0-255)",
+    "valid_pixel_count": 27662,
+    "nodata_pixel_count": 562,
+    "min": 0.0,
+    "max": 242.7539520263672,
+    "mean": 178.48019409179688,
+    "median": 180.5465087890625,
+    "std": 19.596832275390625
+  },
+  "metadata": {
+    "dem_source": "Copernicus DEM GLO-30 (ESA / Airbus / AWS Open Data)",
+    "tile_id": "Copernicus_DSM_COG_10_N21_00_E080_00_DEM",
+    "grid_resolution_m": 30.0,
+    "grid_dimensions": [
+      168,
+      168
+    ],
+    "crs": "EPSG:32644",
+    "nodata_value": -9999.0,
+    "vertical_datum": "EGM2008 Geoid",
+    "formulas": {
+      "slope": "arctan(sqrt((dz/dx)^2 + (dz/dy)^2)) * 180 / pi [Horn's 3x3 method]",
+      "aspect": "(90 - arctan2(dz/dy, -dz/dx) * 180 / pi) mod 360 [flat cells = -1]",
+      "hillshade": "255 * (cos(zenith)*cos(slope) + sin(zenith)*sin(slope)*cos(azimuth - aspect)) [Azimuth=315 deg, Altitude=45 deg]"
+    }
+  }
+}

@@ -56,4 +56,53 @@ export const api = {
   getResourceEstimate: async (cutoffGrade = 20.0) =>
     handleResponse(await fetch(`${API_BASE_URL}/prospectivity/resource-estimate?cutoff_grade_pct=${cutoffGrade}`)),
   getEquipment: async () => handleResponse(await fetch(`${API_BASE_URL}/mine/equipment`)),
+
+  // Real Data Services (Phase 7 / Phase 11)
+  getRealMines: async () => handleResponse(await fetch(`${API_BASE_URL}/real/mines`)),
+  getRealMineDetail: async (mineId) => handleResponse(await fetch(`${API_BASE_URL}/real/mines/${encodeURIComponent(mineId)}`)),
+  getRealMineDashboard: async (mineId) => handleResponse(await fetch(`${API_BASE_URL}/real/mine-dashboard/${encodeURIComponent(mineId)}`)),
+  getRealMineLayers: async (mineId) => handleResponse(await fetch(`${API_BASE_URL}/real/mines/${encodeURIComponent(mineId)}/layers`)),
+  getRealProduction: async (params = {}) => {
+    const query = new URLSearchParams();
+    if (params.period) query.append('period', params.period);
+    if (params.period_type) query.append('period_type', params.period_type);
+    if (params.company) query.append('company', params.company);
+    if (params.state) query.append('state', params.state);
+    if (params.commodity) query.append('commodity', params.commodity);
+    const qs = query.toString();
+    return handleResponse(await fetch(`${API_BASE_URL}/real/production${qs ? `?${qs}` : ''}`));
+  },
+  getRealRastersSummary: async () => handleResponse(await fetch(`${API_BASE_URL}/real/rasters/summary`)),
+
+  // Real Prospectivity Experiment Services (Phase 9B / Phase 10)
+  getRealProspectivityMeta: async (mineId = 'MOIL_BALAGHAT') =>
+    handleResponse(await fetch(`${API_BASE_URL}/real/prospectivity/${encodeURIComponent(mineId)}`)),
+  getRealProspectivityGeoJson: async (mineId = 'MOIL_BALAGHAT') =>
+    handleResponse(await fetch(`${API_BASE_URL}/real/prospectivity/${encodeURIComponent(mineId)}/geojson`)),
+  getRealMineralizationEvidence: async (mineId = 'MOIL_BALAGHAT') =>
+    handleResponse(await fetch(`${API_BASE_URL}/real/prospectivity/${encodeURIComponent(mineId)}/evidence`)),
+
+  // Phase 12 Production Intelligence & Reconciliation
+  getProductionReconciliation: async (params = {}) => {
+    const query = new URLSearchParams();
+    if (params.mine_block_id) query.append('mine_block_id', params.mine_block_id);
+    if (params.horizon_days) query.append('horizon_days', params.horizon_days);
+    if (params.target_tonnes != null) query.append('target_tonnes', params.target_tonnes);
+    if (params.equipment_availability_pct != null) query.append('equipment_availability_pct', params.equipment_availability_pct);
+    if (params.blasting_delay_flag != null) query.append('blasting_delay_flag', params.blasting_delay_flag);
+    if (params.rainfall_mm != null) query.append('rainfall_mm', params.rainfall_mm);
+    const qs = query.toString();
+    return handleResponse(await fetch(`${API_BASE_URL}/real/production/reconciliation${qs ? `?${qs}` : ''}`));
+  },
+  postProductionReconciliation: async (body = {}) => {
+    const res = await fetch(`${API_BASE_URL}/real/production/reconciliation`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    return handleResponse(res);
+  },
 };
+
+
+

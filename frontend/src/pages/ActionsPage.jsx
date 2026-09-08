@@ -9,11 +9,11 @@ export default function ActionsPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="page-enter">
+    <div className="page-enter space-y-3">
       <PageHeader
-        kicker="Recommend"
-        title="Constrained intervention plan"
-        subtitle="PuLP ranks feasible actions by recovery, cost, risk, and feasibility. Simulate a card to see the forecast move."
+        kicker="DECISION OPTIMIZATION · MILP"
+        title="Actions"
+        subtitle="Constrained optimization ranking operational interventions by expected recovery, cost, and feasibility."
       />
       <RecommendationsPanel
         recommendations={recommendations}
@@ -25,3 +25,5 @@ export default function ActionsPage() {
     </div>
   );
 }
+
+

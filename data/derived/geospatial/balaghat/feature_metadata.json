@@ -1,0 +1,165 @@
+{
+  "dataset_id": "balaghat_real_geospatial_feature_grid_30m",
+  "data_status": "derived",
+  "extraction_timestamp": "2026-09-07T05:53:59.204109+00:00",
+  "crs": "EPSG:32644",
+  "grid_resolution_m": 30.0,
+  "aoi": {
+    "target": "MOIL_BALAGHAT",
+    "anchor_wgs84": [
+      80.2281,
+      21.8464
+    ],
+    "anchor_projected_utm44n": [
+      420236.56,
+      2416025.7
+    ],
+    "bounds_utm44n": {
+      "min_x": 417722.89,
+      "min_y": 2413543.9,
+      "max_x": 422752.89,
+      "max_y": 2418503.9
+    },
+    "dimensions_km": [
+      5.03,
+      4.96
+    ],
+    "total_cells": 27720
+  },
+  "sampling_method": "Exact cell-center sampling on regular 30.0m projected grid without spatial interpolation distortion",
+  "features": {
+    "cell_id": {
+      "type": "string",
+      "description": "Unique deterministic grid identifier (GRID-00001 to GRID-27720)"
+    },
+    "x": {
+      "type": "float",
+      "units": "meters",
+      "crs": "EPSG:32644",
+      "description": "UTM Zone 44N Easting coordinate"
+    },
+    "y": {
+      "type": "float",
+      "units": "meters",
+      "crs": "EPSG:32644",
+      "description": "UTM Zone 44N Northing coordinate"
+    },
+    "longitude": {
+      "type": "float",
+      "units": "degrees",
+      "crs": "EPSG:4326",
+      "description": "WGS84 Longitude coordinate"
+    },
+    "latitude": {
+      "type": "float",
+      "units": "degrees",
+      "crs": "EPSG:4326",
+      "description": "WGS84 Latitude coordinate"
+    },
+    "B02": {
+      "type": "float",
+      "units": "DN",
+      "source": "Sentinel-2A L2A B02 (Blue 492nm)",
+      "status": "real"
+    },
+    "B03": {
+      "type": "float",
+      "units": "DN",
+      "source": "Sentinel-2A L2A B03 (Green 560nm)",
+      "status": "real"
+    },
+    "B04": {
+      "type": "float",
+      "units": "DN",
+      "source": "Sentinel-2A L2A B04 (Red 665nm)",
+      "status": "real"
+    },
+    "B08": {
+      "type": "float",
+      "units": "DN",
+      "source": "Sentinel-2A L2A B08 (NIR 833nm)",
+      "status": "real"
+    },
+    "B11": {
+      "type": "float",
+      "units": "DN",
+      "source": "Sentinel-2A L2A B11 (SWIR1 1610nm)",
+      "status": "real"
+    },
+    "B12": {
+      "type": "float",
+      "units": "DN",
+      "source": "Sentinel-2A L2A B12 (SWIR2 2186nm)",
+      "status": "real"
+    },
+    "NDVI": {
+      "type": "float",
+      "units": "ratio",
+      "source": "Normalized Difference Vegetation Index (B08-B04)/(B08+B04)",
+      "status": "derived"
+    },
+    "NDWI": {
+      "type": "float",
+      "units": "ratio",
+      "source": "Normalized Difference Water Index (B03-B08)/(B03+B08)",
+      "status": "derived"
+    },
+    "red_nir_ratio": {
+      "type": "float",
+      "units": "ratio",
+      "source": "Red/NIR Ratio (B04/B08)",
+      "status": "derived"
+    },
+    "swir_nir_ratio": {
+      "type": "float",
+      "units": "ratio",
+      "source": "SWIR1/NIR Ratio (B11/B08)",
+      "status": "derived"
+    },
+    "elevation": {
+      "type": "float",
+      "units": "meters",
+      "source": "Copernicus GLO-30 DEM",
+      "status": "derived_reprojected"
+    },
+    "slope": {
+      "type": "float",
+      "units": "degrees",
+      "source": "Horn's Slope algorithm on Copernicus DEM",
+      "status": "derived"
+    },
+    "aspect": {
+      "type": "float",
+      "units": "degrees",
+      "source": "Aspect azimuth (0-360\u00b0) on Copernicus DEM",
+      "status": "derived"
+    },
+    "hillshade": {
+      "type": "float",
+      "units": "grayscale_0_255",
+      "source": "Analytical Hillshade (azimuth 315\u00b0, altitude 45\u00b0)",
+      "status": "derived"
+    },
+    "distance_to_moil_balaghat_m": {
+      "type": "float",
+      "units": "meters",
+      "description": "Euclidean distance to audited MOIL Balaghat mine anchor in UTM 44N",
+      "status": "derived_spatial"
+    },
+    "valid_feature_fraction": {
+      "type": "float",
+      "units": "fraction_0_1",
+      "description": "Fraction of the 14 raster features containing valid numerical data"
+    },
+    "feature_quality": {
+      "type": "string",
+      "values": [
+        "valid",
+        "partial",
+        "invalid"
+      ],
+      "description": "Row-level data quality classification"
+    }
+  },
+  "scientific_disclaimer": "These features represent real physical remote sensing and terrain measurements. They are NOT classified as manganese signatures or mineralization probabilities."
+}

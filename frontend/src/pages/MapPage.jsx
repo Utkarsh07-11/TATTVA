@@ -6,11 +6,11 @@ import { useDashboard } from '../context/DashboardContext';
 export default function MapPage() {
   const { prospectivityGeoJson, drillholesGeoJson, blocksGeoJson, equipmentList, selectedBlock } = useDashboard();
   return (
-    <div className="page-enter">
+    <div className="page-enter space-y-3">
       <PageHeader
-        kicker="Visualize"
-        title="Digital mine map"
-        subtitle="Prospectivity surface, collar assays, block boundaries, and fleet positions on the Balaghat manganese belt."
+        kicker="GEOSPATIAL WORKSPACE · BALAGHAT"
+        title="Digital Mine"
+        subtitle="Sentinel-2 multispectral rasters, Copernicus DEM topography, and unsupervised exploration priority heuristic."
       />
       <DigitalMineMap
         prospectivityGeoJson={prospectivityGeoJson}
@@ -22,3 +22,5 @@ export default function MapPage() {
     </div>
   );
 }
+
+

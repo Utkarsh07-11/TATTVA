@@ -26,6 +26,8 @@ class Settings(BaseSettings):
     BASE_DIR: Path = BASE_DIR
     DATA_DIR: Path = BASE_DIR / "data"
     RAW_DATA_DIR: Path = BASE_DIR / "data" / "raw"
+    REAL_DATA_DIR: Path = BASE_DIR / "data" / "real"
+    DERIVED_DATA_DIR: Path = BASE_DIR / "data" / "derived"
     PROCESSED_DATA_DIR: Path = BASE_DIR / "data" / "processed"
     SYNTHETIC_DATA_DIR: Path = BASE_DIR / "data" / "synthetic"
     MODELS_DIR: Path = BASE_DIR / "data" / "models"
@@ -57,6 +59,8 @@ settings = Settings()
 for directory in [
     settings.DATA_DIR,
     settings.RAW_DATA_DIR,
+    settings.REAL_DATA_DIR,
+    settings.DERIVED_DATA_DIR,
     settings.PROCESSED_DATA_DIR,
     settings.SYNTHETIC_DATA_DIR,
     settings.MODELS_DIR,

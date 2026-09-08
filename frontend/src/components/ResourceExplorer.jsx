@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Database, AlertTriangle, Layers, Award } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 import { api } from '../services/api';
 
 export default function ResourceExplorer() {
@@ -23,79 +23,73 @@ export default function ResourceExplorer() {
   }, [cutoffGrade]);
 
   return (
-    <div className="panel p-5">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
-        <div className="flex items-center gap-2">
-          <Database className="w-5 h-5 text-purple-400" />
-          <h2 className="text-base font-bold text-white">
-            Geological Resource Estimation & Grade Modeling
-          </h2>
-        </div>
+    <div className="panel p-4 space-y-4 max-w-4xl mx-auto">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-technical">
+        <h2 className="text-xs sm:text-sm font-bold text-white font-mono uppercase tracking-wide">
+          Geostatistical Resource Modeling
+        </h2>
 
         {/* Cutoff Grade Selector */}
-        <div className="flex items-center gap-2 text-xs bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-700">
-          <span className="text-slate-300 font-medium">Cutoff Grade:</span>
+        <div className="flex items-center gap-1.5 text-xs font-mono bg-[#080b10] px-2 py-1 rounded border border-technical">
+          <span className="text-slate-400">Cutoff:</span>
           {[15, 20, 25, 30].map((grade) => (
             <button
               key={grade}
               onClick={() => setCutoffGrade(grade)}
-              className={`px-2 py-0.5 rounded font-semibold transition-all ${
+              className={`px-2 py-0.5 rounded transition-colors ${
                 cutoffGrade === grade
-                  ? 'bg-purple-600 text-white shadow-sm'
+                  ? 'bg-industrial-amber text-black font-bold'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              {grade}% Mn
+              {grade}%
             </button>
           ))}
         </div>
       </div>
 
-      <p className="text-xs text-slate-400 mb-4">
-        Inverse Distance Weighting (IDW) and Ordinary Kriging geostatistical interpolation across 240 assay collars.
-      </p>
-
       {/* Resource Metrics Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
-        <div className="bg-slate-800/80 p-3.5 rounded-lg border border-slate-700">
-          <div className="text-xs text-slate-400">Total Inferred Tonnage</div>
-          <div className="text-xl font-black text-purple-300 mt-1">
-            {resource ? `${resource.total_inferred_tonnes.toLocaleString()} t` : 'Loading...'}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+        <div className="bg-[#080b10] p-3 rounded border border-technical">
+          <div className="text-[10px] font-mono text-slate-400 uppercase">Inferred Tonnage</div>
+          <div className="text-xl font-bold font-mono text-white mt-1">
+            {resource ? `${resource.total_inferred_tonnes.toLocaleString()} t` : '...'}
           </div>
-          <div className="text-[11px] text-slate-400 mt-0.5">
-            Specific gravity: 3.6 t/m³ (Gondite/Mansar)
-          </div>
-        </div>
-
-        <div className="bg-slate-800/80 p-3.5 rounded-lg border border-slate-700">
-          <div className="text-xs text-slate-400">Average Ore Grade</div>
-          <div className="text-xl font-black text-pink-400 mt-1">
-            {resource ? `${resource.average_grade_pct}% Mn` : 'Loading...'}
-          </div>
-          <div className="text-[11px] text-slate-400 mt-0.5">
-            Thickness-weighted mean grade
+          <div className="text-[10px] font-mono text-slate-500 mt-1">
+            Specific gravity: 3.6 t/m³
           </div>
         </div>
 
-        <div className="bg-slate-800/80 p-3.5 rounded-lg border border-slate-700">
-          <div className="text-xs text-slate-400">Estimated In-Situ Volume</div>
-          <div className="text-xl font-black text-indigo-400 mt-1">
-            {resource ? `${resource.ore_volume_m3.toLocaleString()} m³` : 'Loading...'}
+        <div className="bg-[#080b10] p-3 rounded border border-technical">
+          <div className="text-[10px] font-mono text-slate-400 uppercase">Average Grade</div>
+          <div className="text-xl font-bold font-mono text-white mt-1">
+            {resource ? `${resource.average_grade_pct}% Mn` : '...'}
           </div>
-          <div className="text-[11px] text-slate-400 mt-0.5">
-            Active mineralized cells: {resource?.cell_count || 0}
+          <div className="text-[10px] font-mono text-slate-500 mt-1">
+            Thickness-weighted
+          </div>
+        </div>
+
+        <div className="bg-[#080b10] p-3 rounded border border-technical">
+          <div className="text-[10px] font-mono text-slate-400 uppercase">In-Situ Volume</div>
+          <div className="text-xl font-bold font-mono text-white mt-1">
+            {resource ? `${resource.ore_volume_m3.toLocaleString()} m³` : '...'}
+          </div>
+          <div className="text-[10px] font-mono text-slate-500 mt-1">
+            Sampled cells: {resource?.cell_count || 0}
           </div>
         </div>
       </div>
 
       {/* Strict Caveat Callout */}
-      <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-slate-400 flex items-start gap-2.5">
-        <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+      <div className="bg-[#0e0c08] border border-amber-900/40 rounded p-2.5 text-[11px] text-amber-300/90 flex items-start gap-2">
+        <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
         <div>
-          <span className="font-bold text-slate-300">Reserve vs. Resource Caveat: </span>
+          <span className="font-bold">Reserve vs. Resource Caveat: </span>
           {resource?.caveat || 'Illustrative geostatistical toy resource estimate, not a certified reserve. Requires dense infill drilling and engineering feasibility.'}
         </div>
       </div>
     </div>
   );
 }
+

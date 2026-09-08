@@ -4,13 +4,15 @@ import ResourceExplorer from '../components/ResourceExplorer';
 
 export default function ResourcesPage() {
   return (
-    <div className="page-enter">
+    <div className="page-enter space-y-3">
       <PageHeader
-        kicker="Reserve intelligence"
-        title="Illustrative resource estimate"
-        subtitle="IDW grade interpolation from collar assays. Explicitly a toy geostatistical model — not JORC or UNFC compliant."
+        kicker="GEOSTATISTICAL MODEL"
+        title="Resources"
+        subtitle="Inverse Distance Weighting (IDW) interpolation from collar assays. Experimental demonstration."
       />
       <ResourceExplorer />
     </div>
   );
 }
+
+

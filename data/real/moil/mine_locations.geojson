@@ -1,0 +1,232 @@
+{
+  "type": "FeatureCollection",
+  "name": "MOIL_Audited_Mine_Locations",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [80.2281, 21.8464]
+      },
+      "properties": {
+        "mine_id": "MOIL_BALAGHAT",
+        "mine_name": "Balaghat",
+        "company": "MOIL Limited",
+        "state": "Madhya Pradesh",
+        "district": "Balaghat",
+        "mineral": "Manganese Ore",
+        "verification_status": "verified_statutory_record",
+        "coordinate_interpretation": "mine/site point",
+        "coordinate_precision": "mine/site point",
+        "source_title": "MoEFCC PARIVESH Environmental Clearance & GSI Bulletin Series A No. 22",
+        "source_url": "https://parivesh.nic.in",
+        "page_section": "Bharweli Lease Section; Toposheet 64 C/1",
+        "evidence_notes": "Explicit coordinate 21°50'47\"N 80°13'41\"E (21°50'N 80°14'E) cited in Bharweli shaft filings and GSI Memoir."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [80.4667, 21.9667]
+      },
+      "properties": {
+        "mine_id": "MOIL_UKWA",
+        "mine_name": "Ukwa",
+        "company": "MOIL Limited",
+        "state": "Madhya Pradesh",
+        "district": "Balaghat",
+        "mineral": "Manganese Ore",
+        "verification_status": "verified_map_derived",
+        "coordinate_interpretation": "map-derived approximate location",
+        "coordinate_precision": "approximate mine location",
+        "source_title": "Survey of India Toposheet 64 C/5 & GSI Sausar Group Manganese Belt Quadrangle",
+        "source_url": "https://onlinemaps.surveyofindia.gov.in",
+        "page_section": "Sheet 64 C/5; Baihar Tehsil",
+        "evidence_notes": "Map-derived grid intersection at 21°58'00\"N 80°28'00\"E corresponding to the Ukwa plateau opencast/underground mining lease."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [79.7000, 21.6833]
+      },
+      "properties": {
+        "mine_id": "MOIL_TIRODI",
+        "mine_name": "Tirodi",
+        "company": "MOIL Limited",
+        "state": "Madhya Pradesh",
+        "district": "Balaghat",
+        "mineral": "Manganese Ore",
+        "verification_status": "verified_statutory_record",
+        "coordinate_interpretation": "mine/site point",
+        "coordinate_precision": "mine/site point",
+        "source_title": "Indian Bureau of Mines (IBM) MCDR Inspection Report (Mine Code 39MPR01026)",
+        "source_url": "https://ibm.gov.in",
+        "page_section": "Section 1: General Information; Katangi Tehsil",
+        "evidence_notes": "Explicitly recorded at 21°41'00\"N 79°42'00\"E in IBM regional inspection and waste dump management records for Tirodi mine."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [79.6667, 21.7000]
+      },
+      "properties": {
+        "mine_id": "MOIL_SITAPATORE",
+        "mine_name": "Sitapatore",
+        "company": "MOIL Limited",
+        "state": "Madhya Pradesh",
+        "district": "Balaghat",
+        "mineral": "Manganese Ore",
+        "verification_status": "verified_statutory_record",
+        "coordinate_interpretation": "lease boundary centroid",
+        "coordinate_precision": "lease boundary centroid",
+        "source_title": "MoEFCC Forest Clearance Portal (Proposal No. FP/MP/MIN/38555/2019)",
+        "source_url": "https://forestsclearance.nic.in",
+        "page_section": "Part-I Form A; Lease 43.353 Ha; Toposheet 55 O/10",
+        "evidence_notes": "Explicit statutory text: Location of the project: Latitude 21° 42' 00\" N and Longitude 79° 40' 00\" E on Survey of India Toposheet No. 55 O/10."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [79.7500, 21.5500]
+      },
+      "properties": {
+        "mine_id": "MOIL_CHIKLA",
+        "mine_name": "Chikla",
+        "company": "MOIL Limited",
+        "state": "Maharashtra",
+        "district": "Bhandara",
+        "mineral": "Manganese Ore",
+        "verification_status": "verified_map_derived",
+        "coordinate_interpretation": "map-derived approximate location",
+        "coordinate_precision": "approximate mine location",
+        "source_title": "Survey of India Toposheet 55 O/10 & IBM Maharashtra Mineral Directory",
+        "source_url": "https://onlinemaps.surveyofindia.gov.in",
+        "page_section": "Sheet 55 O/10; Tumsar Taluka",
+        "evidence_notes": "Map-derived coordinates at 21°33'00\"N 79°45'00\"E located on the Chikla-Sitasaongi manganese horizon in Bhandara district."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [79.6833, 21.5500]
+      },
+      "properties": {
+        "mine_id": "MOIL_DONGRI_BUZURG",
+        "mine_name": "Dongri Buzurg",
+        "company": "MOIL Limited",
+        "state": "Maharashtra",
+        "district": "Bhandara",
+        "mineral": "Manganese Ore",
+        "verification_status": "verified_map_derived",
+        "coordinate_interpretation": "map-derived approximate location",
+        "coordinate_precision": "approximate mine location",
+        "source_title": "Survey of India Toposheet 55 O/10 & MoEFCC EC Compliance Filing",
+        "source_url": "https://parivesh.nic.in",
+        "page_section": "Sheet 55 O/10; Dongri Buzurg Pit",
+        "evidence_notes": "Map-derived coordinates at 21°33'00\"N 79°41'00\"E identifying the main opencast pit and electrolytic manganese dioxide (EMD) plant lease."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [79.3000, 21.4500]
+      },
+      "properties": {
+        "mine_id": "MOIL_BELDONGRI",
+        "mine_name": "Beldongri",
+        "company": "MOIL Limited",
+        "state": "Maharashtra",
+        "district": "Nagpur",
+        "mineral": "Manganese Ore",
+        "verification_status": "verified_map_derived",
+        "coordinate_interpretation": "map-derived approximate location",
+        "coordinate_precision": "approximate mine location",
+        "source_title": "Survey of India Toposheet 55 O/7 & GSI Central Region Mineral Memoir",
+        "source_url": "https://onlinemaps.surveyofindia.gov.in",
+        "page_section": "Sheet 55 O/7; Ramtek Taluka",
+        "evidence_notes": "Map-derived coordinates at 21°27'00\"N 79°18'00\"E representing the Beldongri manganese horizon centroid in Nagpur district."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [79.2667, 21.4167]
+      },
+      "properties": {
+        "mine_id": "MOIL_KANDRI",
+        "mine_name": "Kandri",
+        "company": "MOIL Limited",
+        "state": "Maharashtra",
+        "district": "Nagpur",
+        "mineral": "Manganese Ore",
+        "verification_status": "verified_map_derived",
+        "coordinate_interpretation": "map-derived approximate location",
+        "coordinate_precision": "approximate mine location",
+        "source_title": "Survey of India Toposheet 55 O/7 & IBM Nagpur Regional Lease Record",
+        "source_url": "https://ibm.gov.in",
+        "page_section": "Sheet 55 O/7; Kandri Pit",
+        "evidence_notes": "Map-derived coordinates at 21°25'00\"N 79°16'00\"E marking the historic Kandri opencast-to-underground deposit."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [79.2833, 21.4000]
+      },
+      "properties": {
+        "mine_id": "MOIL_MUNSAR",
+        "mine_name": "Munsar",
+        "company": "MOIL Limited",
+        "state": "Maharashtra",
+        "district": "Nagpur",
+        "mineral": "Manganese Ore",
+        "verification_status": "verified_map_derived",
+        "coordinate_interpretation": "map-derived approximate location",
+        "coordinate_precision": "approximate mine location",
+        "source_title": "Survey of India Toposheet 55 O/7 & MoEFCC Public Hearing Summary",
+        "source_url": "https://parivesh.nic.in",
+        "page_section": "Sheet 55 O/7; Munsar Mine Hill",
+        "evidence_notes": "Map-derived coordinates at 21°24'00\"N 79°17'00\"E marking the Munsar mine lease boundary area in Ramtek taluka."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [78.9833, 21.4000]
+      },
+      "properties": {
+        "mine_id": "MOIL_GUMGAON",
+        "mine_name": "Gumgaon",
+        "company": "MOIL Limited",
+        "state": "Maharashtra",
+        "district": "Nagpur",
+        "mineral": "Manganese Ore",
+        "verification_status": "verified_map_derived",
+        "coordinate_interpretation": "map-derived approximate location",
+        "coordinate_precision": "approximate mine location",
+        "source_title": "Survey of India Toposheet 55 K/15 & Maharashtra Pollution Control Board (MPCB) EIA Notice",
+        "source_url": "https://mpcb.gov.in",
+        "page_section": "Sheet 55 K/15; Saoner Taluka",
+        "evidence_notes": "Map-derived coordinates at 21°24'00\"N 78°59'00\"E representing the Gumgaon underground shaft lease area in Saoner taluka."
+      }
+    }
+  ]
+}

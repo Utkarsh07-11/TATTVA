@@ -1,0 +1,53 @@
+{
+  "ndvi.tif": {
+    "valid_pixel_count": 249488,
+    "nodata_pixel_count": 0,
+    "min": -0.30451303720474243,
+    "max": 0.8877384662628174,
+    "mean": 0.514706015586853,
+    "median": 0.5162761211395264,
+    "std": 0.19097742438316345
+  },
+  "ndwi.tif": {
+    "valid_pixel_count": 249488,
+    "nodata_pixel_count": 0,
+    "min": -0.8135313987731934,
+    "max": 0.4057507812976837,
+    "mean": -0.498598575592041,
+    "median": -0.5058377981185913,
+    "std": 0.12577396631240845
+  },
+  "red_nir_ratio.tif": {
+    "valid_pixel_count": 249488,
+    "nodata_pixel_count": 0,
+    "min": 0.059468824416399,
+    "max": 1.8756829500198364,
+    "mean": 0.3431042432785034,
+    "median": 0.31902098655700684,
+    "std": 0.18240000307559967
+  },
+  "swir_nir_ratio.tif": {
+    "valid_pixel_count": 249488,
+    "nodata_pixel_count": 0,
+    "min": 0.33483654260635376,
+    "max": 4.483649253845215,
+    "mean": 0.9338133335113525,
+    "median": 0.9836567640304565,
+    "std": 0.3116014301776886
+  },
+  "metadata": {
+    "scene_id": "S2A_44QMK_20240417_0_L2A",
+    "acquisition_date": "2024-04-17",
+    "aoi_dimensions_pixels": [
+      496,
+      503
+    ],
+    "grid_resolution_m": 10.0,
+    "formulas": {
+      "ndvi": "(B08_NIR - B04_RED) / (B08_NIR + B04_RED)",
+      "ndwi": "(B03_GREEN - B08_NIR) / (B03_GREEN + B08_NIR) [McFeeters 1996]",
+      "red_nir_ratio": "B04_RED / B08_NIR",
+      "swir_nir_ratio": "B11_SWIR1 / B08_NIR (B11 bilinearly resampled 20m -> 10m)"
+    }
+  }
+}
