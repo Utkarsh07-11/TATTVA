@@ -1093,6 +1093,19 @@ export default function DigitalMineMap({
                   <span className="text-[10px] px-1.5 py-0.2 rounded bg-[#101726] text-industrial-amber border border-technical font-mono">
                     {mineDashboard.mine_id}
                   </span>
+                  {mineDashboard.capability_tier && (
+                    <span className={`text-[9px] px-1.5 py-0.5 rounded font-mono font-bold border ${
+                      mineDashboard.capability_tier === 'LEVEL_A'
+                        ? 'bg-emerald-950 text-emerald-300 border-emerald-700'
+                        : mineDashboard.capability_tier === 'LEVEL_B'
+                        ? 'bg-cyan-950 text-cyan-300 border-cyan-700'
+                        : mineDashboard.capability_tier === 'LEVEL_C'
+                        ? 'bg-amber-950 text-amber-300 border-amber-700'
+                        : 'bg-slate-900 text-slate-300 border-slate-700'
+                    }`}>
+                      {mineDashboard.capability_tier}
+                    </span>
+                  )}
                 </div>
                 <div className="text-[11px] font-mono text-slate-400">
                   {mineDashboard.district ? `${mineDashboard.district}, ` : ''}{mineDashboard.state} · {mineDashboard.mineral}
@@ -1100,7 +1113,7 @@ export default function DigitalMineMap({
               </div>
               <button
                 onClick={() => setShowOverviewCard(false)}
-                className="text-slate-400 hover:text-white p-1 rounded hover:bg-slate-800"
+                className="text-slate-400 hover:text-white p-1 rounded hover:bg-slate-800 cursor-pointer"
                 title="Hide Overview"
               >
                 ✕
@@ -1139,7 +1152,7 @@ export default function DigitalMineMap({
                       ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800'
                       : 'bg-slate-900 text-slate-500 border border-slate-800'
                   }`}>
-                    {mineDashboard.exploration_available ? 'REAL DATA' : 'UNAVAILABLE'}
+                    {mineDashboard.exploration_available ? 'REAL DATA' : 'UNAVAILABLE_FOR_MINE'}
                   </span>
                 </div>
 
@@ -1159,15 +1172,19 @@ export default function DigitalMineMap({
                       ? 'bg-rose-950/80 text-rose-300 border border-rose-800'
                       : 'bg-slate-900 text-slate-500 border border-slate-800'
                   }`}>
-                    {mineDashboard.exploration_available ? 'EXPERIMENTAL' : 'UNAVAILABLE'}
+                    {mineDashboard.exploration_available ? 'EXPERIMENTAL' : 'UNAVAILABLE_FOR_MINE'}
                   </span>
                 </div>
 
                 {/* 4. Simulation */}
                 <div className="flex items-center justify-between p-1.5 rounded bg-[#0b0f17] border border-technical">
                   <span className="text-slate-300">TATTVA Operational Sim</span>
-                  <span className="px-1.5 py-0.2 rounded bg-purple-950/80 text-purple-300 border border-purple-800 font-bold uppercase">
-                    SIMULATION
+                  <span className={`px-1.5 py-0.2 rounded font-bold uppercase ${
+                    mineDashboard.simulation_available
+                      ? 'bg-purple-950/80 text-purple-300 border border-purple-800'
+                      : 'bg-slate-900 text-slate-500 border border-slate-800'
+                  }`}>
+                    {mineDashboard.simulation_available ? 'SIMULATION' : 'UNAVAILABLE_FOR_MINE'}
                   </span>
                 </div>
 

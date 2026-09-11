@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { RefreshCw } from 'lucide-react';
+import { RefreshCw, Sparkles } from 'lucide-react';
 import { useDashboard } from '../context/DashboardContext';
+import DemoPresenterHUD from '../components/DemoPresenterHUD';
 
 const navItems = [
   { to: '/', label: 'Overview' },
@@ -23,6 +24,8 @@ export default function AppShell() {
     loadDashboardData,
     error,
   } = useDashboard();
+
+  const [showDemoHUD, setShowDemoHUD] = useState(false);
 
   return (
     <div className="min-h-screen text-slate-200 flex flex-col bg-[#07090d]">
@@ -74,6 +77,19 @@ export default function AppShell() {
 
             {/* Quick Status Bar */}
             <div className="flex items-center gap-2 font-mono text-[10px] shrink-0">
+              <button
+                onClick={() => setShowDemoHUD(!showDemoHUD)}
+                className={`flex items-center gap-1 px-2.5 py-1 rounded border text-[11px] font-sans font-semibold transition-colors cursor-pointer ${
+                  showDemoHUD
+                    ? 'bg-amber-950/80 border-industrial-amber text-industrial-amber shadow-sm shadow-amber-950/40'
+                    : 'bg-[#0b0e14] border-amber-900/60 text-amber-300 hover:bg-amber-950/40 hover:text-amber-200'
+                }`}
+                title="Toggle Live Presentation Stepper HUD"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-industrial-amber" />
+                <span>Demo Tour</span>
+              </button>
+
               <div className="hidden sm:flex items-center gap-1 px-2 py-0.5 rounded bg-[#0b0e14] border border-technical">
                 <span className="text-slate-500">BLOCK:</span>
                 <select
@@ -157,6 +173,9 @@ export default function AppShell() {
         )}
         <Outlet />
       </main>
+
+      {/* Floating Demo Presenter HUD */}
+      {showDemoHUD && <DemoPresenterHUD onClose={() => setShowDemoHUD(false)} />}
 
       {/* 3. QUIET INDUSTRIAL FOOTER */}
       <footer className="border-t border-technical bg-[#05070a] py-2.5 text-slate-500 text-[11px] font-mono">
