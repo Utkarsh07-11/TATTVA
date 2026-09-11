@@ -102,7 +102,25 @@ export const api = {
     });
     return handleResponse(res);
   },
+  // Phase 17 & Phase 18 Decision Intelligence & Capability Matrix
+  getCapabilityMatrix: async () => handleResponse(await fetch(`${API_BASE_URL}/real/capability-matrix`)),
+  getDecisionWorkflow: async (mineId = 'MOIL_BALAGHAT', params = {}) => {
+    const query = new URLSearchParams();
+    if (params.horizon_days) query.append('horizon_days', params.horizon_days);
+    if (params.custom_target != null) query.append('custom_target', params.custom_target);
+    if (params.equipment_availability_pct != null) query.append('equipment_availability_pct', params.equipment_availability_pct);
+    if (params.blasting_delay_flag != null) query.append('blasting_delay_flag', params.blasting_delay_flag);
+    if (params.rainfall_mm != null) query.append('rainfall_mm', params.rainfall_mm);
+    const qs = query.toString();
+    return handleResponse(await fetch(`${API_BASE_URL}/real/decision/${encodeURIComponent(mineId)}${qs ? `?${qs}` : ''}`));
+  },
+
+  // Phase 19 Live Demonstration & Preflight Health
+  getDemoConfig: async () => handleResponse(await fetch(`${API_BASE_URL}/real/demo/config`)),
+  getDemoPreflight: async () => handleResponse(await fetch(`${API_BASE_URL}/real/demo/preflight`)),
+  getDemoStep: async (stepId) => handleResponse(await fetch(`${API_BASE_URL}/real/demo/step/${encodeURIComponent(stepId)}`)),
 };
+
 
 
 

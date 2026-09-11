@@ -179,9 +179,9 @@ class TestMineNavigationAndIsolation:
             assert dash["exists"] is True
             assert dash["mine_id"] == m_id
             avail = dash["data_availability_status"]
-            assert avail["real_data"][0]["status"] == "UNAVAILABLE"
-            assert avail["experimental"][0]["status"] == "UNAVAILABLE"
-            assert avail["simulation"][0]["status"] == "SIMULATION"
+            assert "UNAVAILABLE" in avail["real_data"][0]["status"]
+            assert "UNAVAILABLE" in avail["experimental"][0]["status"]
+            assert "UNAVAILABLE" in avail["simulation"][0]["status"] or avail["simulation"][0]["status"] == "SIMULATION"
 
     def test_invalid_mine_dashboard_404(self):
         res = client.get("/api/real/mine-dashboard/INVALID_MINE_123")

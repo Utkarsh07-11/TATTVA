@@ -66,7 +66,7 @@ class GeostatisticalResourceEstimator:
             elif close_holes >= 2:
                 conf = "Inferred Resource"
             else:
-                conf = "Potential Mineralized Zone"
+                conf = "Reconnaissance Resource (Toy Estimate)"
                 
             interpolated_grades.append(round(w_grade, 2))
             interpolated_thicknesses.append(round(w_thick, 2))
