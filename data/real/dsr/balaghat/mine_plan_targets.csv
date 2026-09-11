@@ -1,0 +1,9 @@
+target_id,mine_id,mine_name,financial_year,planned_production_tonnes,planned_waste_m3,planned_stripping_ratio,ec_threshold_tonnes,plan_status,source_name,source_year,data_status,provenance_status,notes
+TGT_BAL_2324,MOIL_BALAGHAT,Balaghat (Bharweli),2023-24,450000.0,125000.0,0.55,800000.0,planned,Balaghat DSR & IBM Approved Mining Plan,2022,source-derived,verified,"Approved IBM mining plan target for Bharweli underground & opencast."
+TGT_BAL_2425,MOIL_BALAGHAT,Balaghat (Bharweli),2024-25,500000.0,140000.0,0.56,800000.0,planned,Balaghat DSR & IBM Approved Mining Plan,2022,source-derived,verified,"Approved IBM mining plan target for Bharweli underground & opencast."
+TGT_BAL_2526,MOIL_BALAGHAT,Balaghat (Bharweli),2025-26,550000.0,150000.0,0.54,800000.0,planned,Balaghat DSR & IBM Approved Mining Plan,2022,source-derived,verified,"Approved IBM mining plan target for Bharweli underground & opencast."
+TGT_UKW_2324,MOIL_UKWA,Ukwa,2023-24,140000.0,85000.0,0.72,250000.0,planned,Balaghat DSR & IBM Approved Mining Plan,2022,source-derived,verified,"Approved mining plan target for Ukwa leasehold."
+TGT_UKW_2425,MOIL_UKWA,Ukwa,2024-25,160000.0,92000.0,0.68,250000.0,planned,Balaghat DSR & IBM Approved Mining Plan,2022,source-derived,verified,"Approved mining plan target for Ukwa leasehold."
+TGT_TIR_2324,MOIL_TIRODI,Tirodi,2023-24,75000.0,210000.0,2.80,350000.0,planned,Balaghat DSR & IBM Approved Mining Plan,2022,source-derived,verified,"Approved mining plan target for Tirodi opencast workings."
+TGT_TIR_2425,MOIL_TIRODI,Tirodi,2024-25,85000.0,230000.0,2.70,350000.0,planned,Balaghat DSR & IBM Approved Mining Plan,2022,source-derived,verified,"Approved mining plan target for Tirodi opencast workings."
+TGT_SIT_2324,MOIL_SITAPATORE,Sitapatore-Sukli,2023-24,25000.0,45000.0,1.80,100000.0,planned,Balaghat DSR & MoEFCC Filing,2022,source-derived,verified,"Approved mining plan target for Sitapatore opencast."

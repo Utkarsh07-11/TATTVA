@@ -273,7 +273,7 @@ def compute_production_reconciliation_payload(
             mine_block_id=norm_id,
             horizon_days=horizon_days,
         )
-        recommendations = rec_data.get("recommendations", [])
+        recommendations = rec_data.get("options", [])
     except Exception as e:
         recommendations = []
 

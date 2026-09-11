@@ -1,0 +1,186 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "source_name": "Balaghat District Survey Report 2022 & IBM/MoEFCC Statutory Filings",
+    "district": "Balaghat",
+    "state": "Madhya Pradesh",
+    "data_status": "source-derived",
+    "polygon_geometry_status": "unavailable",
+    "point_geometry_status": "available",
+    "crs": "WGS84 (EPSG:4326)",
+    "provenance_audit_phase": "Phase 15.1",
+    "description": "Audited statutory survey and reference points for Balaghat mining leases. Full lease boundary polygons are classified as UNAVAILABLE because complete closed boundary vector cadastre is unreleased in public domain statutory texts."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "POINT_MOIL_BALAGHAT_SHAFT",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [80.2281, 21.8464]
+      },
+      "properties": {
+        "mine_id": "MOIL_BALAGHAT",
+        "lease_id": "ML_BAL_BHARWELI_180",
+        "mine_name": "Balaghat (Bharweli)",
+        "point_type": "shaft_portal",
+        "provenance_category": "REAL / SURVEYED",
+        "reported_lease_area_ha": 180.44,
+        "forest_area_ha": 38.20,
+        "non_forest_area_ha": 142.24,
+        "polygon_geometry_status": "unavailable",
+        "polygon_geometry_reason": "Complete closed GPS boundary pillar schedule not published in public statutory disclosures. Only statutory shaft portal (21°50'47\"N 80°13'41\"E) and lease area breakdown available.",
+        "mining_method": "Underground & Opencast",
+        "source_name": "MoEFCC PARIVESH EC Compliance (EC-MP-MIN-18044) & GSI Bulletin Series A No. 22",
+        "source_year": 2023,
+        "data_status": "real",
+        "provenance_status": "verified",
+        "notes": "Audited Bharweli main haulage shaft portal. Asia's deepest operating manganese mine."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "POINT_MOIL_BALAGHAT_OUTCROP",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [80.2270, 21.8480]
+      },
+      "properties": {
+        "mine_id": "MOIL_BALAGHAT",
+        "lease_id": "ML_BAL_BHARWELI_180",
+        "mine_name": "Bharweli Mansar Reef Outcrop",
+        "point_type": "outcrop_strike_center",
+        "provenance_category": "SOURCE-DERIVED",
+        "reported_lease_area_ha": 180.44,
+        "polygon_geometry_status": "unavailable",
+        "source_name": "Geological Survey of India (GSI Bulletin Series A No. 22)",
+        "source_year": 1965,
+        "data_status": "source-derived",
+        "provenance_status": "verified",
+        "notes": "Manganese reef outcrop strike center in Mansar Formation schists."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "POINT_MOIL_UKWA_CENTROID",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [80.4667, 21.9667]
+      },
+      "properties": {
+        "mine_id": "MOIL_UKWA",
+        "lease_id": "ML_BAL_UKWA_199",
+        "mine_name": "Ukwa",
+        "point_type": "lease_centroid",
+        "provenance_category": "SOURCE-DERIVED",
+        "reported_core_lease_area_ha": 199.07,
+        "reported_forest_area_ha": 85.40,
+        "reported_non_forest_area_ha": 113.67,
+        "reported_consolidated_lease_area_ha": 247.63,
+        "reported_historical_lease_area_ha": 272.634,
+        "area_discrepancy_status": "Reconciled by statutory components: 199.07 Ha core grant (85.40 Ha forest + 113.67 Ha non-forest), 247.63 Ha consolidated operational leasehold with 48.56 Ha safety extension, 272.634 Ha historical composite application.",
+        "polygon_geometry_status": "unavailable",
+        "polygon_geometry_reason": "Boundary polygon vector cadastre not published in public domain. Maintained as statutory lease centroid.",
+        "mining_method": "Opencast & Underground",
+        "source_name": "Survey of India Toposheet 64 C/5 & MOIL Statutory Disclosures",
+        "source_year": 2022,
+        "data_status": "source-derived",
+        "provenance_status": "verified",
+        "notes": "Ukwa plateau syncline leasehold centroid (21°58'00\"N 80°28'00\"E)."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "POINT_MOIL_TIRODI_REF",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [79.7000, 21.6833]
+      },
+      "properties": {
+        "mine_id": "MOIL_TIRODI",
+        "lease_id": "ML_BAL_TIRODI_165",
+        "mine_name": "Tirodi",
+        "point_type": "mine_site_reference",
+        "provenance_category": "REAL / SURVEYED",
+        "reported_lease_area_ha": 165.73,
+        "composite_lease_area_ha": 214.20,
+        "polygon_geometry_status": "unavailable",
+        "polygon_geometry_reason": "Discontiguous multi-hill opencast pit geometry (West Tirodi + East Tirodi). Maintained as statutory site reference point.",
+        "source_name": "Balaghat District Survey Report & IBM MCDR",
+        "source_year": 2022,
+        "data_status": "real",
+        "provenance_status": "verified",
+        "notes": "Statutory site reference point (21°41'00\"N 79°42'00\"E) in IBM inspection records."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "POINT_MOIL_SITAPATORE_REF",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [79.6667, 21.7000]
+      },
+      "properties": {
+        "mine_id": "MOIL_SITAPATORE",
+        "lease_id": "ML_BAL_SITAPATORE_43",
+        "mine_name": "Sitapatore-Sukli",
+        "point_type": "lease_centroid",
+        "provenance_category": "REAL / SURVEYED",
+        "reported_lease_area_ha": 43.353,
+        "forest_area_ha": 12.50,
+        "non_forest_area_ha": 30.853,
+        "polygon_geometry_status": "unavailable",
+        "polygon_geometry_reason": "Boundary polygon vector cadastre not published in public text. Maintained as statutory lease centroid.",
+        "source_name": "Balaghat District Survey Report & MoEFCC FC",
+        "source_year": 2022,
+        "data_status": "real",
+        "provenance_status": "verified",
+        "notes": "Statutory lease centroid (21°42'00\"N 79°40'00\"E) on Toposheet 55 O/10."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "POINT_DSR_RAMRAMA_REF",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [79.9167, 21.8500]
+      },
+      "properties": {
+        "mine_id": "DSR_RAMRAMA",
+        "lease_id": "ML_BAL_RAMRAMA_62",
+        "mine_name": "Ramrama",
+        "point_type": "lease_centroid",
+        "provenance_category": "REFERENCE",
+        "reported_lease_area_ha": 62.40,
+        "polygon_geometry_status": "unavailable",
+        "source_name": "Balaghat District Survey Report & GSI DRM",
+        "source_year": 2022,
+        "data_status": "source-derived",
+        "provenance_status": "verified",
+        "notes": "Regional occurrence centroid in Waraseoni Tehsil."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "POINT_DSR_MIRAGPUR_REF",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [79.8333, 21.8000]
+      },
+      "properties": {
+        "mine_id": "DSR_MIRAGPUR",
+        "lease_id": "ML_BAL_MIRAGPUR_28",
+        "mine_name": "Miragpur",
+        "point_type": "mine_site_reference",
+        "provenance_category": "REFERENCE",
+        "reported_lease_area_ha": 28.50,
+        "polygon_geometry_status": "unavailable",
+        "source_name": "Balaghat District Survey Report & GSI Bulletin 22",
+        "source_year": 2022,
+        "data_status": "source-derived",
+        "provenance_status": "verified",
+        "notes": "Historical prospecting trench reference in Katangi Tehsil."
+      }
+    }
+  ]
+}

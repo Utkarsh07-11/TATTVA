@@ -1,0 +1,177 @@
+{
+  "manifest_name": "Balaghat District Survey Report (DSR 2022) & Mining Source Manifest",
+  "district": "Balaghat",
+  "state": "Madhya Pradesh",
+  "publication_reference": "District Survey Report of Balaghat District (Minor & Major Mineral Concession Data, 2022), Directorate of Geology and Mining, Madhya Pradesh",
+  "authority": "Directorate of Geology & Mining, Government of Madhya Pradesh / District Collectorate Balaghat",
+  "publication_year": 2022,
+  "audit_version": "Phase 15.1 (Data Provenance & Lease Geometry Correction Audit)",
+  "provenance_rules": {
+    "REAL": "Direct statutory measurement or publication by authoritative government agency (e.g. MOIL Statutory Annual Report, ESA Copernicus).",
+    "SOURCE-DERIVED": "Extracted and structured from authentic government reports, mining plans, or district survey publications (e.g. Balaghat DSR 2022).",
+    "SOURCE-DERIVED / PARTIAL": "Authoritative tabular or descriptive source information where complete spatial cadastre or vector geometry is unreleased.",
+    "DERIVED": "Deterministically calculated via mathematical or projected geospatial transformations from REAL or SOURCE-DERIVED data.",
+    "REFERENCE": "Statutory or published reference point (centroid, village grid, prospecting trench) marking regional context.",
+    "SIMULATION": "Artificially generated operational telemetry, block dispatch logs, or synthetic assays used for software demonstration.",
+    "EXPERIMENTAL": "Machine learning rankings, unsupervised anomaly scores, and relative exploration heuristics.",
+    "UNAVAILABLE": "Features or cadastre where no authentic spatial vector source exists in the public domain."
+  },
+  "sources": [
+    {
+      "source_id": "DSR_BALAGHAT_2022",
+      "source_name": "Balaghat District Survey Report",
+      "source_type": "District Survey Report",
+      "source_year": 2022,
+      "publisher": "Directorate of Geology and Mining, Government of Madhya Pradesh",
+      "data_status": "source-derived",
+      "provenance_status": "verified",
+      "coverage": "Balaghat District, MP",
+      "notes": "Official statutory survey of operating and non-operating mining leases, khasra details, lease areas, stratigraphy, and production in Balaghat district."
+    },
+    {
+      "source_id": "IBM_MCDR_MPR01026_2023",
+      "source_name": "Indian Bureau of Mines MCDR Review of Mining Plan (Balaghat & Tirodi Mines)",
+      "source_type": "Statutory Mining Plan Inspection",
+      "source_year": 2023,
+      "publisher": "Indian Bureau of Mines, Ministry of Mines, Government of India",
+      "data_status": "source-derived",
+      "provenance_status": "verified",
+      "coverage": "MOIL Balaghat (Bharweli) and Tirodi Mining Leases",
+      "notes": "Verified statutory mine locations, shaft portal coordinates, drillhole summaries, and UNFC reserve categories."
+    },
+    {
+      "source_id": "MOEFCC_PARIVESH_EC_18044",
+      "source_name": "MoEFCC Environmental Clearance Compliance Filing - Bharweli Mine (180.44 Ha)",
+      "source_type": "Statutory Environmental Clearance",
+      "source_year": 2023,
+      "publisher": "Ministry of Environment, Forest & Climate Change (MoEFCC)",
+      "data_status": "real",
+      "provenance_status": "verified",
+      "coverage": "Bharweli Lease Area (180.44 Ha)",
+      "notes": "Audited shaft portal coordinate (21°50'47\"N 80°13'41\"E), environmental clearance caps, clean ore recovery ratios, and hydraulic stowing requirements."
+    },
+    {
+      "source_id": "GSI_MEMOIR_BULL22_VII",
+      "source_name": "The Geology and Manganese-Ore Deposits of the Balaghat-Ukwa Area (GSI Bulletin Series A No. 22)",
+      "source_type": "Geological Survey Memoir",
+      "source_year": 1965,
+      "publisher": "Geological Survey of India (GSI)",
+      "data_status": "source-derived",
+      "provenance_status": "partial",
+      "coverage": "Sausar Group belt in Balaghat District",
+      "notes": "Stratigraphic sequence of Sausar Group formations (Bichua, Junewani, Chorbaoli, Mansar, Lohangi, Sitasaongi, Tirodi Gneiss) and manganese reef petrology."
+    }
+  ],
+  "datasets": [
+    {
+      "dataset_id": "dsr_balaghat_mine_registry",
+      "dataset_name": "Balaghat DSR Mine & Leasehold Registry",
+      "file": "mine_registry.csv",
+      "data_status": "source-derived",
+      "provenance_category": "SOURCE-DERIVED",
+      "provenance_status": "verified",
+      "geometry_type": "Point",
+      "temporal_scope": "2022-2024",
+      "notes": "Tabular records of major manganese mining leases in Balaghat district with tehsil, village, khasra, area, and operational status."
+    },
+    {
+      "dataset_id": "dsr_balaghat_lease_areas",
+      "dataset_name": "Balaghat Leasehold Area & Statutory Grant Breakdown",
+      "file": "lease_areas.csv",
+      "data_status": "source-derived",
+      "provenance_category": "SOURCE-DERIVED",
+      "provenance_status": "verified",
+      "geometry_type": "None (Tabular)",
+      "temporal_scope": "2022-2023",
+      "notes": "Detailed breakdown of forest vs non-forest lease area, grant periods, EC statutory capacities, and reconciled area discrepancy notes."
+    },
+    {
+      "dataset_id": "dsr_balaghat_boundary_pillars",
+      "dataset_name": "Balaghat Surveyed Lease Reference Points & Survey Pillars",
+      "file": "boundary_pillars.csv",
+      "data_status": "source-derived",
+      "provenance_category": "SOURCE-DERIVED / PARTIAL",
+      "provenance_status": "verified",
+      "geometry_type": "Point",
+      "temporal_scope": "2022-2023",
+      "notes": "Audited statutory survey points (shaft portals, lease centroids, site references) with WGS84 and projected UTM Zone 44N metric coordinates."
+    },
+    {
+      "dataset_id": "dsr_balaghat_boundaries_geojson",
+      "dataset_name": "Balaghat Validated Statutory Points & Lease Boundary Metadata",
+      "file": "boundaries.geojson",
+      "data_status": "source-derived",
+      "provenance_category": "SOURCE-DERIVED / PARTIAL",
+      "provenance_status": "verified",
+      "geometry_type": "FeatureCollection (Points; Polygons UNAVAILABLE)",
+      "temporal_scope": "2022-2023",
+      "notes": "Audited statutory survey and reference points for Balaghat mining leases. Boundary polygons are classified as UNAVAILABLE because complete closed boundary vector cadastre is unreleased in public domain statutory texts."
+    },
+    {
+      "dataset_id": "dsr_balaghat_geology_reference",
+      "dataset_name": "Balaghat Sausar Group Stratigraphy & Ore Bed Reference",
+      "file": "geology_reference.csv",
+      "data_status": "source-derived",
+      "provenance_category": "SOURCE-DERIVED / PARTIAL",
+      "provenance_status": "verified",
+      "geometry_type": "None (Structured Reference)",
+      "temporal_scope": "Historical & 2022",
+      "notes": "Stratigraphic formation descriptions, lithologies, ore mineralogy, structural strike/dip. Maintained purely as structured reference without fabricating unverified spatial polygons."
+    },
+    {
+      "dataset_id": "dsr_balaghat_grade_reference",
+      "dataset_name": "Balaghat Manganese Grade & Assay Distribution Reference",
+      "file": "grade_reference.csv",
+      "data_status": "source-derived",
+      "provenance_category": "SOURCE-DERIVED",
+      "provenance_status": "verified",
+      "geometry_type": "None (Statistical Reference)",
+      "temporal_scope": "2022",
+      "notes": "Reported chemical grade distributions (Mn %, Fe %, SiO2 %, P %) by mine and ore category. Kept strictly as statistical distributions without fabricating synthetic drillhole collars."
+    },
+    {
+      "dataset_id": "dsr_balaghat_exploration_evidence",
+      "dataset_name": "Balaghat Exploration Drilling & UNFC Reserve Evidence",
+      "file": "exploration_evidence.csv",
+      "data_status": "source-derived",
+      "provenance_category": "SOURCE-DERIVED",
+      "provenance_status": "verified",
+      "geometry_type": "None (Aggregate Reference)",
+      "temporal_scope": "2022-2023",
+      "notes": "Aggregate borehole counts, total meterage, exploration agencies, and UNFC reserve estimates."
+    },
+    {
+      "dataset_id": "dsr_balaghat_production_reference",
+      "dataset_name": "Balaghat District & Mine Reported Historical Production",
+      "file": "production_reference.csv",
+      "data_status": "source-derived",
+      "provenance_category": "SOURCE-DERIVED",
+      "provenance_status": "verified",
+      "geometry_type": "None (Timeseries)",
+      "temporal_scope": "FY 2018-19 to FY 2022-23",
+      "notes": "District aggregate and mine-level reported production explicitly tagged with production_status."
+    },
+    {
+      "dataset_id": "dsr_balaghat_mine_plan_targets",
+      "dataset_name": "Balaghat Approved Mine Plan & EC Production Targets",
+      "file": "mine_plan_targets.csv",
+      "data_status": "source-derived",
+      "provenance_category": "SOURCE-DERIVED",
+      "provenance_status": "verified",
+      "geometry_type": "None (Tabular Targets)",
+      "temporal_scope": "Five-Year Plan Period",
+      "notes": "Statutory approved planned production capacities strictly isolated from actual historical output."
+    },
+    {
+      "dataset_id": "dsr_balaghat_constraints",
+      "dataset_name": "Balaghat Mining & Operational Optimization Constraints",
+      "file": "constraints.csv",
+      "data_status": "source-derived",
+      "provenance_category": "SOURCE-DERIVED",
+      "provenance_status": "verified",
+      "geometry_type": "None (Tabular Constraints)",
+      "temporal_scope": "2022-2023",
+      "notes": "Engineering and environmental constraint parameters (bench height, stripping ratio, recovery %, stowing, water discharge limits)."
+    }
+  ]
+}

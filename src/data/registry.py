@@ -1,7 +1,7 @@
 """
 Real Data Registry for TATTVA
 Provides centralized discovery, metadata tracking, and filesystem inspection
-for authoritative (real), derived, and synthetic datasets.
+for authoritative (real), source-derived (DSR 2022), derived, and synthetic datasets.
 """
 
 from dataclasses import dataclass
@@ -16,14 +16,15 @@ from config.settings import settings
 class DatasetDescriptor:
     dataset_id: str
     name: str
-    dataset_type: str  # "tabular", "geojson", "raster_cog", "raster_geotiff"
-    data_status: str   # "real", "derived", "synthetic"
+    dataset_type: str  # "tabular", "geojson", "raster_cog", "raster_geotiff", "json_manifest"
+    data_status: str   # "real", "source-derived", "derived", "simulation", "experimental"
     path: Path
     coverage: str
     crs: str
     resolution: str
     source_organization: str
     description: str
+    provenance_status: str = "verified"
 
     @property
     def is_available(self) -> bool:
@@ -40,6 +41,7 @@ class RealDataRegistry:
     def _register_known_datasets(self) -> None:
         real_dir = settings.REAL_DATA_DIR
         derived_dir = settings.DERIVED_DATA_DIR
+        dsr_dir = real_dir / "dsr" / "balaghat"
 
         # 1. MOIL Mines Registry
         self.register(DatasetDescriptor(
@@ -52,7 +54,7 @@ class RealDataRegistry:
             crs="WGS84 (EPSG:4326)",
             resolution="Mine Portal Centroid Point",
             source_organization="Indian Bureau of Mines & Ministry of Mines",
-            description="Audited statutory coordinates and metadata for MOIL's 10 operating mines."
+            description="Audited statutory coordinates, point_type classifications, and metadata for MOIL's 10 operating mines."
         ))
 
         self.register(DatasetDescriptor(
@@ -65,7 +67,7 @@ class RealDataRegistry:
             crs="WGS84 (EPSG:4326)",
             resolution="Mine Portal Centroid Point",
             source_organization="Indian Bureau of Mines & MOIL Limited",
-            description="GeoJSON FeatureCollection with statutory provenance tags."
+            description="GeoJSON FeatureCollection with statutory provenance and point_type tags."
         ))
 
         # 2. MOIL Reported Production
@@ -181,6 +183,161 @@ class RealDataRegistry:
             resolution="30.0m regular grid (27,720 cells)",
             source_organization="TATTVA Feature Extraction Pipeline (ESA Sentinel-2 + Copernicus DEM)",
             description="ML-ready regular feature dataset sampling 14 real remote-sensing and terrain layers."
+        ))
+
+        # 8. DSR 2022 Balaghat Source-Derived Datasets
+        self.register(DatasetDescriptor(
+            dataset_id="dsr_balaghat_manifest",
+            name="Balaghat DSR Source Manifest",
+            dataset_type="json_manifest",
+            data_status="source-derived",
+            path=dsr_dir / "source_manifest.json",
+            coverage="Balaghat District",
+            crs="N/A",
+            resolution="District / Tehsil / Lease Level",
+            source_organization="Directorate of Geology and Mining, Madhya Pradesh",
+            description="Comprehensive provenance citations for Balaghat DSR 2022 and cross-referenced statutory records.",
+            provenance_status="verified"
+        ))
+
+        self.register(DatasetDescriptor(
+            dataset_id="dsr_balaghat_mines",
+            name="Balaghat DSR Mine Registry",
+            dataset_type="tabular",
+            data_status="source-derived",
+            path=dsr_dir / "mine_registry.csv",
+            coverage="Balaghat District Mining Leases",
+            crs="WGS84 (EPSG:4326)",
+            resolution="Lease / Shaft / Point Coordinates",
+            source_organization="Directorate of Geology and Mining MP & IBM",
+            description="Mines and leases in Balaghat district with Tehsil, Village, Khasra, Area (Ha), and point_type classifications.",
+            provenance_status="verified"
+        ))
+
+        self.register(DatasetDescriptor(
+            dataset_id="dsr_balaghat_lease_areas",
+            name="Balaghat DSR Lease Areas & Clearances",
+            dataset_type="tabular",
+            data_status="source-derived",
+            path=dsr_dir / "lease_areas.csv",
+            coverage="Balaghat District Leases",
+            crs="N/A",
+            resolution="Leasehold breakdown",
+            source_organization="DGM MP & MoEFCC PARIVESH",
+            description="Forest vs non-forest area breakdown, lease validity periods, and EC capacity thresholds.",
+            provenance_status="verified"
+        ))
+
+        self.register(DatasetDescriptor(
+            dataset_id="dsr_balaghat_boundary_pillars",
+            name="Balaghat DSR Statutory Survey & Reference Points",
+            dataset_type="tabular",
+            data_status="source-derived",
+            path=dsr_dir / "boundary_pillars.csv",
+            coverage="Balaghat Mining Leases (Bharweli, Ukwa, Tirodi, Sitapatore)",
+            crs="WGS84 (EPSG:4326) & UTM Zone 44N",
+            resolution="Surveyed Statutory Point Coordinates",
+            source_organization="IBM MCDR Mining Plan & MOIL Survey Records",
+            description="Audited statutory survey points (shaft portals, lease centroids, site references) with WGS84 and projected UTM Zone 44N metric coordinates.",
+            provenance_status="verified"
+        ))
+
+        self.register(DatasetDescriptor(
+            dataset_id="dsr_balaghat_boundaries_geojson",
+            name="Balaghat DSR Validated Statutory Points & Lease Boundary Metadata (GeoJSON)",
+            dataset_type="geojson",
+            data_status="source-derived",
+            path=dsr_dir / "boundaries.geojson",
+            coverage="Balaghat Leases (Bharweli, Ukwa, Tirodi, Sitapatore)",
+            crs="WGS84 (EPSG:4326)",
+            resolution="Statutory Survey and Reference Points",
+            source_organization="IBM MCDR & Balaghat DSR 2022",
+            description="Validated statutory point geometries for Balaghat mining leases. Boundary polygons are classified as UNAVAILABLE pending release of authoritative vector cadastre in public statutory records.",
+            provenance_status="verified"
+        ))
+
+        self.register(DatasetDescriptor(
+            dataset_id="dsr_balaghat_geology",
+            name="Balaghat DSR Geology Reference",
+            dataset_type="tabular",
+            data_status="source-derived",
+            path=dsr_dir / "geology_reference.csv",
+            coverage="Sausar Group Stratigraphy in Balaghat District",
+            crs="N/A",
+            resolution="Stratigraphic Formation",
+            source_organization="GSI & DGM MP (DSR 2022)",
+            description="Sausar Group formations (Bichua, Junewani, Chorbaoli, Mansar, Lohangi, Sitasaongi, Tirodi Gneiss) and manganese reef associations.",
+            provenance_status="verified"
+        ))
+
+        self.register(DatasetDescriptor(
+            dataset_id="dsr_balaghat_grade",
+            name="Balaghat DSR Grade Distribution Reference",
+            dataset_type="tabular",
+            data_status="source-derived",
+            path=dsr_dir / "grade_reference.csv",
+            coverage="Balaghat Operating Mines",
+            crs="N/A",
+            resolution="Chemical Grade Category",
+            source_organization="MOIL Product Specifications & DSR 2022",
+            description="Chemical assay distributions (% Mn, % Fe, % SiO2, % P) by ore type and size fraction.",
+            provenance_status="verified"
+        ))
+
+        self.register(DatasetDescriptor(
+            dataset_id="dsr_balaghat_exploration",
+            name="Balaghat DSR Exploration Evidence",
+            dataset_type="tabular",
+            data_status="source-derived",
+            path=dsr_dir / "exploration_evidence.csv",
+            coverage="Balaghat Mining Leases",
+            crs="N/A",
+            resolution="Mine / Deposit Level Aggregate",
+            source_organization="IBM, MECL, GSI & MOIL",
+            description="Documented borehole counts, total meterage, UNFC reserve estimates (111, 121, 122, 221, 333), and average grades.",
+            provenance_status="verified"
+        ))
+
+        self.register(DatasetDescriptor(
+            dataset_id="dsr_balaghat_production",
+            name="Balaghat DSR Production Reference",
+            dataset_type="tabular",
+            data_status="source-derived",
+            path=dsr_dir / "production_reference.csv",
+            coverage="Balaghat District & Mine Timeline (FY19-FY23)",
+            crs="N/A",
+            resolution="Annual District and Mine Grain",
+            source_organization="Balaghat DSR 2022 & IBM MCDR",
+            description="District-level reported production and mine-level reported figures tagged strictly by production_status.",
+            provenance_status="verified"
+        ))
+
+        self.register(DatasetDescriptor(
+            dataset_id="dsr_balaghat_mine_plan",
+            name="Balaghat DSR Mine Plan Targets",
+            dataset_type="tabular",
+            data_status="source-derived",
+            path=dsr_dir / "mine_plan_targets.csv",
+            coverage="Balaghat Mining Leases (Five-Year Plan)",
+            crs="N/A",
+            resolution="Annual Planned Target",
+            source_organization="IBM Approved Mining Plans & MoEFCC",
+            description="Statutory approved planned production capacities strictly isolated from actual historical output.",
+            provenance_status="verified"
+        ))
+
+        self.register(DatasetDescriptor(
+            dataset_id="dsr_balaghat_constraints",
+            name="Balaghat DSR Operational Constraints",
+            dataset_type="tabular",
+            data_status="source-derived",
+            path=dsr_dir / "constraints.csv",
+            coverage="Balaghat Operating Mines",
+            crs="N/A",
+            resolution="Engineering & Environmental Constraints",
+            source_organization="DGMS, IBM, MoEFCC & MOIL Engineering",
+            description="Mining, environmental, and optimization constraints (bench height, stripping ratio, recovery %, stowing, dewatering).",
+            provenance_status="verified"
         ))
 
     def register(self, descriptor: DatasetDescriptor) -> None:

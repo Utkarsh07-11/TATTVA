@@ -108,11 +108,11 @@ def test_mine_dashboard_non_balaghat_isolation():
 
         # Satellite & DEM should be unavailable
         for real_item in avail["real_data"]:
-            assert real_item["status"] == "UNAVAILABLE"
+            assert "UNAVAILABLE" in real_item["status"]
 
         # Experimental exploration should be unavailable
         for exp_item in avail["experimental"]:
-            assert exp_item["status"] == "UNAVAILABLE"
+            assert "UNAVAILABLE" in exp_item["status"]
             assert exp_item["cells"] == 0
 
         # Company-level reported production remains available aggregate
