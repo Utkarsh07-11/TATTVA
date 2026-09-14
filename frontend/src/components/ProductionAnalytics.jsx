@@ -242,30 +242,30 @@ export default function ProductionAnalytics({ forecast, selectedBlock }) {
           <div className="flex flex-wrap items-center bg-[#080b10] p-0.5 rounded border border-technical gap-1">
             <button
               onClick={() => setActiveTab('operational_sim')}
-              className={`px-3 py-1 rounded text-xs font-sans transition-colors ${
+              className={`px-3 py-1 rounded text-xs font-sans transition-all duration-200 cursor-pointer ${
                 activeTab === 'operational_sim'
-                  ? 'bg-story-accent text-black font-bold'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-amber-500 text-slate-950 font-bold border border-amber-400 shadow-sm'
+                  : 'text-slate-400 hover:text-amber-300 hover:bg-amber-500/10'
               }`}
             >
               Extraction Forecast
             </button>
             <button
               onClick={() => setActiveTab('moil_reported')}
-              className={`px-3 py-1 rounded text-xs font-sans transition-colors ${
+              className={`px-3 py-1 rounded text-xs font-sans transition-all duration-200 cursor-pointer ${
                 activeTab === 'moil_reported'
-                  ? 'bg-story-accent text-black font-bold'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-amber-500 text-slate-950 font-bold border border-amber-400 shadow-sm'
+                  : 'text-slate-400 hover:text-amber-300 hover:bg-amber-500/10'
               }`}
             >
               Statutory Benchmark
             </button>
             <button
               onClick={() => setActiveTab('reconciliation_sandbox')}
-              className={`px-3 py-1 rounded text-xs font-sans transition-colors ${
+              className={`px-3 py-1 rounded text-xs font-sans transition-all duration-200 cursor-pointer ${
                 activeTab === 'reconciliation_sandbox'
-                  ? 'bg-story-accent text-black font-bold'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-amber-500 text-slate-950 font-bold border border-amber-400 shadow-sm'
+                  : 'text-slate-400 hover:text-amber-300 hover:bg-amber-500/10'
               }`}
             >
               Scenario Reconciliation
@@ -603,10 +603,10 @@ export default function ProductionAnalytics({ forecast, selectedBlock }) {
                     setCurrentBlock(bId);
                     setCustomTarget(BLOCK_TARGETS[bId]);
                   }}
-                  className={`px-3 py-1 rounded text-xs font-semibold transition-all cursor-pointer ${
+                  className={`px-3 py-1 rounded text-xs font-semibold transition-all duration-200 cursor-pointer ${
                     currentBlock === bId
-                      ? 'bg-story-accent text-black font-bold shadow'
-                      : 'bg-[#121722] border border-technical text-slate-300 hover:bg-[#1a2233]'
+                      ? 'bg-amber-500 text-slate-950 font-bold border border-amber-400 shadow-md shadow-amber-500/25'
+                      : 'bg-[#121722] border border-technical text-slate-300 hover:text-amber-300 hover:border-amber-500/80 hover:bg-amber-500/10'
                   }`}
                 >
                   {bId.replace('_', ' ')} ({BLOCK_TARGETS[bId].toLocaleString()} t)
@@ -620,10 +620,10 @@ export default function ProductionAnalytics({ forecast, selectedBlock }) {
                 <button
                   key={h}
                   onClick={() => setHorizonDays(h)}
-                  className={`px-2 py-0.5 rounded text-xs font-sans transition-all cursor-pointer ${
+                  className={`px-2 py-0.5 rounded text-xs font-sans transition-all duration-200 cursor-pointer ${
                     horizonDays === h
-                      ? 'bg-white text-slate-900 font-bold'
-                      : 'bg-[#121722] border border-technical text-slate-400 hover:text-white'
+                      ? 'bg-amber-500 text-slate-950 font-bold border border-amber-400'
+                      : 'bg-[#121722] border border-technical text-slate-400 hover:text-amber-300 hover:border-amber-500/60'
                   }`}
                 >
                   {h}d
@@ -723,7 +723,7 @@ export default function ProductionAnalytics({ forecast, selectedBlock }) {
                 </button>
                 <button
                   onClick={handleApplyScenario}
-                  className="flex items-center gap-1 px-3 py-1 rounded bg-story-accent hover:bg-amber-400 text-black font-semibold text-xs font-sans transition-colors shadow cursor-pointer"
+                  className="flex items-center gap-1 px-3 py-1 rounded bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold border border-amber-400 text-xs font-sans transition-colors shadow-md shadow-amber-500/20 cursor-pointer"
                 >
                   <Zap className="w-3 h-3" />
                   Recalculate

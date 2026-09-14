@@ -305,10 +305,10 @@ export default function StoryOverviewPage() {
                 <button
                   key={b}
                   onClick={() => setSelectedBlock(b)}
-                  className={`px-3 py-1 rounded text-xs font-sans transition-all cursor-pointer ${
+                  className={`px-3 py-1 rounded text-xs font-sans transition-all duration-200 cursor-pointer ${
                     selectedBlock === b
-                      ? 'bg-story-accent text-black font-bold shadow'
-                      : 'bg-[#0e1219] text-slate-400 hover:text-white border border-technical'
+                      ? 'bg-amber-500 text-slate-950 font-bold border border-amber-400 shadow-md shadow-amber-500/25'
+                      : 'bg-[#0e1219] text-slate-300 hover:text-amber-300 hover:border-amber-500/80 hover:bg-amber-500/10 border border-white/10'
                   }`}
                 >
                   {b.replace('_', ' ')}
