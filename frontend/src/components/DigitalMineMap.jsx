@@ -928,7 +928,7 @@ export default function DigitalMineMap({
               !isBalaghatSelected
                 ? 'opacity-30 cursor-not-allowed bg-[#0b0e14] border-technical text-slate-600'
                 : showRealProspectivity
-                ? 'bg-[#1a1212] border-rose-900 text-rose-300'
+                ? 'bg-amber-950/40 border-amber-500/60 text-amber-300 font-medium'
                 : 'bg-[#0b0e14] border-technical text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -943,7 +943,7 @@ export default function DigitalMineMap({
               !isBalaghatSelected
                 ? 'opacity-30 cursor-not-allowed bg-[#0b0e14] border-technical text-slate-600'
                 : showEvidenceLayer
-                ? 'bg-[#1a1710] border-amber-900 text-amber-300'
+                ? 'bg-amber-950/40 border-amber-500/60 text-amber-300 font-medium'
                 : 'bg-[#0b0e14] border-technical text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -955,7 +955,7 @@ export default function DigitalMineMap({
             onClick={() => setShowRealMines(!showRealMines)}
             className={`px-2 py-1 rounded border transition-colors cursor-pointer ${
               showRealMines
-                ? 'bg-amber-950/40 border-amber-800 text-amber-300'
+                ? 'bg-amber-950/40 border-amber-500/60 text-amber-300 font-medium'
                 : 'bg-[#0b0e14] border-technical text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -967,7 +967,7 @@ export default function DigitalMineMap({
             onClick={() => setShowOverviewCard(!showOverviewCard)}
             className={`px-2 py-1 rounded border transition-colors cursor-pointer ${
               showOverviewCard
-                ? 'bg-[#161c28] border-slate-600 text-white'
+                ? 'bg-amber-950/40 border-amber-500/60 text-amber-300 font-medium'
                 : 'bg-[#0b0e14] border-technical text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -978,11 +978,11 @@ export default function DigitalMineMap({
 
       {/* Real Exploration Sub-Bar (Active for Balaghat) */}
       {isBalaghatSelected ? (
-        <div className="bg-slate-950 border-b border-red-950/60 px-3 py-1 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-300">
+        <div className="bg-[#080c14] border-b border-technical px-3 py-1.5 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-300">
           {/* Left: Model Dimension Tabs */}
           <div className="flex items-center flex-wrap gap-1.5">
             <span className="text-[10px] font-bold text-slate-400 flex items-center gap-1 uppercase tracking-wider font-mono">
-              <Target className="w-3 h-3 text-red-400" />
+              <Target className="w-3 h-3 text-amber-400" />
               Layer:
             </span>
 
@@ -992,10 +992,10 @@ export default function DigitalMineMap({
                 <button
                   key={layer.id}
                   onClick={() => setActiveScoreLayer(layer.id)}
-                  className={`px-2 py-0.5 rounded text-[10px] font-mono font-semibold transition-all border ${
+                  className={`px-2.5 py-1 rounded text-[10px] font-mono font-semibold transition-all border cursor-pointer ${
                     isActive
-                      ? 'bg-red-950/90 border-red-500 text-white shadow-md shadow-red-950/40'
-                      : 'bg-slate-900 border-technical text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+                      ? 'bg-amber-500 text-slate-950 font-bold border-amber-400 shadow-sm shadow-amber-500/20'
+                      : 'bg-[#0b0e14] border-technical text-slate-400 hover:text-amber-300 hover:border-amber-500/50'
                   }`}
                   title={layer.description}
                 >
@@ -1008,9 +1008,9 @@ export default function DigitalMineMap({
           {/* Right: Score Cutoff Filter & Metadata Drawer Toggle */}
           <div className="flex items-center flex-wrap gap-2">
             {/* Cutoff Slider */}
-            <div className="flex items-center gap-1.5 bg-slate-900 px-2 py-0.5 rounded border border-technical">
-              <Sliders className="w-3 h-3 text-red-400" />
-              <span className="text-slate-300 font-medium text-[11px]">Cutoff:</span>
+            <div className="flex items-center gap-1.5 bg-[#0b0e14] px-2 py-1 rounded border border-technical">
+              <Sliders className="w-3 h-3 text-amber-400" />
+              <span className="text-slate-400 font-medium text-[11px]">Cutoff:</span>
               <input
                 type="range"
                 min="0.00"
@@ -1018,21 +1018,22 @@ export default function DigitalMineMap({
                 step="0.05"
                 value={realScoreCutoff}
                 onChange={(e) => setRealScoreCutoff(parseFloat(e.target.value))}
-                className="w-20 accent-red-500 cursor-pointer"
+                className="w-20 accent-amber-500 cursor-pointer"
               />
-              <span className="font-mono text-red-300 font-bold w-10 text-right">
+              <span className="font-mono text-amber-400 font-bold w-10 text-right">
                 {realScoreCutoff > 0 ? `≥ ${realScoreCutoff.toFixed(2)}` : 'ALL'}
               </span>
             </div>
 
             {/* Scientific Limitations & Provenance Drawer Toggle */}
             <button
+              type="button"
               onClick={() => setShowLimitationsDrawer(!showLimitationsDrawer)}
-              className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-900 hover:bg-slate-800 rounded-lg border border-slate-700 text-amber-300 text-[11px] font-medium transition-all"
+              className="flex items-center gap-1.5 px-2.5 py-1 bg-[#0b0e14] hover:bg-[#141b26] rounded border border-technical text-amber-300 text-[11px] font-medium transition-colors cursor-pointer"
             >
               <FileText className="w-3.5 h-3.5 text-amber-400" />
               <span>Methodology and Limitations</span>
-              <ChevronDown className={`w-3 h-3 transition-transform ${showLimitationsDrawer ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-3 h-3 text-slate-400 transition-transform ${showLimitationsDrawer ? 'rotate-180' : ''}`} />
             </button>
           </div>
         </div>
