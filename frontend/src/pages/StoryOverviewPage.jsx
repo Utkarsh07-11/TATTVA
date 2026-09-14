@@ -204,15 +204,15 @@ export default function StoryOverviewPage() {
                   <span className="text-slate-400 block text-[10px]">INPUT</span>
                   <span className="font-semibold text-white text-xs">Historical Data</span>
                 </div>
-                <span className="text-amber-400 font-bold">→</span>
+                <span className="text-slate-500 font-bold text-xs">→</span>
                 <div className="flex-1 p-2.5 rounded bg-[#10141e] border border-white/10 text-center">
                   <span className="text-slate-400 block text-[10px]">ANALYSIS</span>
                   <span className="font-semibold text-white text-xs">Identify Patterns</span>
                 </div>
-                <span className="text-amber-400 font-bold">→</span>
-                <div className="flex-1 p-2.5 rounded bg-[#1e0f13] border border-rose-900/60 text-center">
-                  <span className="text-rose-400 block text-[10px]">OUTPUT</span>
-                  <span className="font-semibold text-rose-300 text-xs">Predict Shortfall</span>
+                <span className="text-slate-500 font-bold text-xs">→</span>
+                <div className="flex-1 p-2.5 rounded bg-[#10141e] border border-white/10 text-center">
+                  <span className="text-slate-400 block text-[10px]">OUTPUT</span>
+                  <span className="font-semibold text-white text-xs">Predict Shortfall</span>
                 </div>
               </div>
               <p className="text-xs text-slate-300 font-sans leading-relaxed">
@@ -234,19 +234,19 @@ export default function StoryOverviewPage() {
                   <span className="font-semibold text-white text-xs">Real-Time Data</span>
                 </div>
                 <span className="text-slate-500 font-bold text-xs">→</span>
-                <div className="flex-1 p-2 rounded bg-[#1e0f13] border border-rose-900/60 text-center">
-                  <span className="text-rose-400 block text-[10px]">DETECTION</span>
-                  <span className="font-semibold text-rose-300 text-xs">Detect Deficit</span>
+                <div className="flex-1 p-2 rounded bg-[#10141e] border border-white/10 text-center">
+                  <span className="text-slate-400 block text-[10px]">DETECTION</span>
+                  <span className="font-semibold text-white text-xs">Detect Deficit</span>
                 </div>
                 <span className="text-slate-500 font-bold text-xs">→</span>
                 <div className="flex-1 p-2 rounded bg-[#10141e] border border-white/10 text-center">
-                  <span className="text-amber-400 block text-[10px]">DIAGNOSTICS</span>
+                  <span className="text-slate-400 block text-[10px]">DIAGNOSTICS</span>
                   <span className="font-semibold text-white text-xs">Analyze Situation</span>
                 </div>
                 <span className="text-slate-500 font-bold text-xs">→</span>
-                <div className="flex-1 p-2 rounded bg-[#0d1e13] border border-emerald-900/60 text-center">
-                  <span className="text-emerald-400 block text-[10px]">ACTION</span>
-                  <span className="font-semibold text-emerald-300 text-xs">Provide Solution</span>
+                <div className="flex-1 p-2 rounded bg-[#10141e] border border-white/10 text-center">
+                  <span className="text-slate-400 block text-[10px]">ACTION</span>
+                  <span className="font-semibold text-white text-xs">Provide Solution</span>
                 </div>
               </div>
               <p className="text-xs text-slate-300 font-sans leading-relaxed">
@@ -263,11 +263,11 @@ export default function StoryOverviewPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-1">
               <div className="p-4 rounded bg-[#0f1422] border border-white/5 space-y-1.5">
                 <div className="text-amber-400 font-sans font-bold text-xs">01 · DATA FUSION</div>
-                <div className="font-semibold text-white text-sm">Historical + Real-Time</div>
+                <div className="font-semibold text-white text-sm">Historical and Real-Time</div>
                 <p className="text-xs text-slate-300 font-sans">Learns from 10-year mining history while incorporating live underground stope sensors.</p>
               </div>
               <div className="p-4 rounded bg-[#0f1422] border border-white/5 space-y-1.5">
-                <div className="text-rose-400 font-sans font-bold text-xs">02 · SHORTFALL DETECTION</div>
+                <div className="text-amber-400 font-sans font-bold text-xs">02 · SHORTFALL DETECTION</div>
                 <div className="font-semibold text-white text-sm">Quantified Risk Alerts</div>
                 <p className="text-xs text-slate-300 font-sans">Detects potential or current ore deficits days before monthly quotas slip.</p>
               </div>
@@ -277,7 +277,7 @@ export default function StoryOverviewPage() {
                 <p className="text-xs text-slate-300 font-sans">Analyzes equipment availability, blasting delays, and weather impacts.</p>
               </div>
               <div className="p-4 rounded bg-[#0f1422] border border-white/5 space-y-1.5">
-                <div className="text-emerald-400 font-sans font-bold text-xs">04 · DECISION SUPPORT</div>
+                <div className="text-amber-400 font-sans font-bold text-xs">04 · DECISION SUPPORT</div>
                 <div className="font-semibold text-white text-sm">Targeted Solutions</div>
                 <p className="text-xs text-slate-300 font-sans">Delivers solver-optimized haulage schedules and What-If simulation interventions.</p>
               </div>
@@ -437,8 +437,8 @@ export default function StoryOverviewPage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="story-card p-5 relative">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-sans font-bold text-amber-400">06:00 - 08:30</span>
-                <Clock className="w-4 h-4 text-slate-500" />
+                <span className="text-xs font-sans font-bold text-slate-200">06:00 - 08:30</span>
+                <Clock className="w-4 h-4 text-slate-400" />
               </div>
               <div className="font-sans text-white text-base font-bold mb-1">
                 Phase 1 · Telemetric Face Scan
@@ -450,8 +450,8 @@ export default function StoryOverviewPage() {
 
             <div className="story-card p-5 relative">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-sans font-bold text-emerald-400">09:00 - 13:00</span>
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <span className="text-xs font-sans font-bold text-slate-200">09:00 - 13:00</span>
+                <CheckCircle2 className="w-4 h-4 text-slate-400" />
               </div>
               <div className="font-sans text-white text-base font-bold mb-1">
                 Phase 2 · Semi-Auto Mucking
@@ -463,8 +463,8 @@ export default function StoryOverviewPage() {
 
             <div className="story-card p-5 relative">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-sans font-bold text-amber-400">14:00 - 18:00</span>
-                <Cpu className="w-4 h-4 text-amber-400" />
+                <span className="text-xs font-sans font-bold text-slate-200">14:00 - 18:00</span>
+                <Cpu className="w-4 h-4 text-slate-400" />
               </div>
               <div className="font-sans text-white text-base font-bold mb-1">
                 Phase 3 · Dispatch Rebalancing
@@ -476,8 +476,8 @@ export default function StoryOverviewPage() {
 
             <div className="story-card p-5 relative">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-sans font-bold text-emerald-400">19:00 - 23:00</span>
-                <Layers className="w-4 h-4 text-slate-500" />
+                <span className="text-xs font-sans font-bold text-slate-200">19:00 - 23:00</span>
+                <Layers className="w-4 h-4 text-slate-400" />
               </div>
               <div className="font-sans text-white text-base font-bold mb-1">
                 Phase 4 · Reality Reconciliation
