@@ -38,48 +38,6 @@ export default function OperationsSandboxPage() {
         <p className="mt-4 font-sans text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed text-slide-down-d2">
           Underground mining operations cannot rely on uninterpretable algorithms. When telemetry indicates a risk of shortfall at the stope, shift supervisors require three essential capabilities: factor sensitivity diagnostics to isolate bottlenecks, a real-time scenario simulator to model equipment and weather shifts, and linear optimization to dispatch corrective hauling resources.
         </p>
-
-        {/* Workstation Mode Selector */}
-        <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-technical pt-4 text-slide-down-d3">
-          <span className="text-xs font-sans text-slate-400 mr-2 uppercase tracking-wider font-semibold">
-            Operational Tool:
-          </span>
-          <button
-            onClick={() => setActiveTab('simulate')}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded text-xs font-sans font-medium transition-all cursor-pointer ${
-              activeTab === 'simulate'
-                ? 'bg-story-accent text-black font-bold shadow'
-                : 'bg-[#0e1219] text-slate-400 hover:text-white border border-technical'
-            }`}
-          >
-            <Sliders className="w-3.5 h-3.5" />
-            <span>Operational Scenario Simulator</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('explain')}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded text-xs font-sans font-medium transition-all cursor-pointer ${
-              activeTab === 'explain'
-                ? 'bg-story-accent text-black font-bold shadow'
-                : 'bg-[#0e1219] text-slate-400 hover:text-white border border-technical'
-            }`}
-          >
-            <Search className="w-3.5 h-3.5" />
-            <span>Factor Sensitivity Diagnostics</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('actions')}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded text-xs font-sans font-medium transition-all cursor-pointer ${
-              activeTab === 'actions'
-                ? 'bg-story-accent text-black font-bold shadow'
-                : 'bg-[#0e1219] text-slate-400 hover:text-white border border-technical'
-            }`}
-          >
-            <CheckCircle className="w-3.5 h-3.5" />
-            <span>Optimized Dispatch Schedule</span>
-          </button>
-        </div>
       </div>
 
       {/* 2. Formal White Section: Safety Envelope & Operational Reality */}
@@ -118,8 +76,54 @@ export default function OperationsSandboxPage() {
         </div>
       </section>
 
-      {/* 3. Active Tab Content Container */}
-      <div className="story-card p-4 sm:p-6 bg-[#0a0d14] border border-technical">
+      {/* 3. Workstation Mode Selector (Positioned immediately above the operation) */}
+      <div className="space-y-4">
+        <div className="flex flex-wrap items-center gap-2.5">
+          <span className="text-xs font-sans text-slate-400 mr-1 uppercase tracking-wider font-semibold">
+            Operational Tool:
+          </span>
+          <button
+            type="button"
+            onClick={() => setActiveTab('simulate')}
+            className={`flex items-center gap-2 px-4 py-2 rounded text-xs font-sans font-semibold transition-all duration-200 cursor-pointer ${
+              activeTab === 'simulate'
+                ? 'bg-amber-500 text-slate-950 font-bold border border-amber-400 shadow-md shadow-amber-500/25'
+                : 'bg-[#0e1219] text-slate-300 hover:text-amber-300 hover:border-amber-500/80 hover:bg-amber-500/10 border border-white/10'
+            }`}
+          >
+            <Sliders className={`w-3.5 h-3.5 ${activeTab === 'simulate' ? 'text-slate-950' : 'text-amber-500'}`} />
+            <span>Operational Scenario Simulator</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab('explain')}
+            className={`flex items-center gap-2 px-4 py-2 rounded text-xs font-sans font-semibold transition-all duration-200 cursor-pointer ${
+              activeTab === 'explain'
+                ? 'bg-amber-500 text-slate-950 font-bold border border-amber-400 shadow-md shadow-amber-500/25'
+                : 'bg-[#0e1219] text-slate-300 hover:text-amber-300 hover:border-amber-500/80 hover:bg-amber-500/10 border border-white/10'
+            }`}
+          >
+            <Search className={`w-3.5 h-3.5 ${activeTab === 'explain' ? 'text-slate-950' : 'text-amber-500'}`} />
+            <span>Factor Sensitivity Diagnostics</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab('actions')}
+            className={`flex items-center gap-2 px-4 py-2 rounded text-xs font-sans font-semibold transition-all duration-200 cursor-pointer ${
+              activeTab === 'actions'
+                ? 'bg-amber-500 text-slate-950 font-bold border border-amber-400 shadow-md shadow-amber-500/25'
+                : 'bg-[#0e1219] text-slate-300 hover:text-amber-300 hover:border-amber-500/80 hover:bg-amber-500/10 border border-white/10'
+            }`}
+          >
+            <CheckCircle className={`w-3.5 h-3.5 ${activeTab === 'actions' ? 'text-slate-950' : 'text-amber-500'}`} />
+            <span>Optimized Dispatch Schedule</span>
+          </button>
+        </div>
+
+        {/* Active Tab Content Container */}
+        <div className="story-card p-4 sm:p-6 bg-[#0a0d14] border border-technical">
         {activeTab === 'simulate' && (
           <div className="space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-white/5">
@@ -191,6 +195,7 @@ export default function OperationsSandboxPage() {
             />
           </div>
         )}
+        </div>
       </div>
 
       {/* 4. OPERATIONAL SIMULATION AND LINEAR DISPATCH FORECAST */}
