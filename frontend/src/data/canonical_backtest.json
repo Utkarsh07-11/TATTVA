@@ -1,0 +1,290 @@
+{
+  "series": "MOIL company-wide manganese ore production (metric tonnes)",
+  "grain": "Indian financial year (April\u2013March)",
+  "n_years": 10,
+  "n_backtest_folds": 6,
+  "methods": {
+    "naive_last_year": {
+      "mae_mt": 145040.3,
+      "mape_pct": 9.95,
+      "directional_accuracy_pct": 0.0
+    },
+    "moving_average_3y": {
+      "mae_mt": 178535.3,
+      "mape_pct": 12.2,
+      "directional_accuracy_pct": 50.0
+    },
+    "ridge_linear_trend": {
+      "mae_mt": 143597.8,
+      "mape_pct": 9.9,
+      "directional_accuracy_pct": 66.7
+    },
+    "holt_linear_trend": {
+      "mae_mt": 193999.8,
+      "mape_pct": 13.49,
+      "directional_accuracy_pct": 50.0
+    }
+  },
+  "winner": "ridge_linear_trend",
+  "folds": [
+    {
+      "fiscal_year": "2018-19",
+      "train_years": [
+        "2014-15",
+        "2015-16",
+        "2016-17",
+        "2017-18"
+      ],
+      "actual_mt": 1301191.0,
+      "naive_last_year_mt": 1201113.0,
+      "moving_average_3y_mt": 1079411.0,
+      "ridge_trend_mt": 1127355.8,
+      "holt_linear_mt": 1012655.4,
+      "naive_error_mt": -100078.0,
+      "ridge_error_mt": -173835.2,
+      "holt_error_mt": -288535.6,
+      "event_tag": "Expansion",
+      "event_description": "Mechanization upgrades in Balaghat and Dongri Buzurg"
+    },
+    {
+      "fiscal_year": "2019-20",
+      "train_years": [
+        "2014-15",
+        "2015-16",
+        "2016-17",
+        "2017-18",
+        "2018-19"
+      ],
+      "actual_mt": 1277444.0,
+      "naive_last_year_mt": 1301191.0,
+      "moving_average_3y_mt": 1169049.7,
+      "ridge_trend_mt": 1270145.5,
+      "holt_linear_mt": 1162101.6,
+      "naive_error_mt": 23747.0,
+      "ridge_error_mt": -7298.5,
+      "holt_error_mt": -115342.4,
+      "event_tag": "Late-FY Shock",
+      "event_description": "Early pandemic supply chain friction in March 2020"
+    },
+    {
+      "fiscal_year": "2020-21",
+      "train_years": [
+        "2014-15",
+        "2015-16",
+        "2016-17",
+        "2017-18",
+        "2018-19",
+        "2019-20"
+      ],
+      "actual_mt": 1143570.0,
+      "naive_last_year_mt": 1277444.0,
+      "moving_average_3y_mt": 1259916.0,
+      "ridge_trend_mt": 1319623.7,
+      "holt_linear_mt": 1221472.9,
+      "naive_error_mt": 133874.0,
+      "ridge_error_mt": 176053.7,
+      "holt_error_mt": 77902.9,
+      "event_tag": "COVID Shock",
+      "event_description": "Severe Q1 national lockdown and mine closure"
+    },
+    {
+      "fiscal_year": "2021-22",
+      "train_years": [
+        "2014-15",
+        "2015-16",
+        "2016-17",
+        "2017-18",
+        "2018-19",
+        "2019-20",
+        "2020-21"
+      ],
+      "actual_mt": 1231264.0,
+      "naive_last_year_mt": 1143570.0,
+      "moving_average_3y_mt": 1240735.0,
+      "ridge_trend_mt": 1267419.5,
+      "holt_linear_mt": 1155548.7,
+      "naive_error_mt": -87694.0,
+      "ridge_error_mt": 36155.5,
+      "holt_error_mt": -75715.3,
+      "event_tag": "Recovery",
+      "event_description": "Post-COVID mining restart and underground capacity expansion"
+    },
+    {
+      "fiscal_year": "2022-23",
+      "train_years": [
+        "2014-15",
+        "2015-16",
+        "2016-17",
+        "2017-18",
+        "2018-19",
+        "2019-20",
+        "2020-21",
+        "2021-22"
+      ],
+      "actual_mt": 1302217.0,
+      "naive_last_year_mt": 1231264.0,
+      "moving_average_3y_mt": 1217426.0,
+      "ridge_trend_mt": 1277240.7,
+      "holt_linear_mt": 1190881.3,
+      "naive_error_mt": -70953.0,
+      "ridge_error_mt": -24976.3,
+      "holt_error_mt": -111335.7,
+      "event_tag": "Steady Growth",
+      "event_description": "Higher production of ferro-grade and electrolytic manganese dioxide"
+    },
+    {
+      "fiscal_year": "2023-24",
+      "train_years": [
+        "2014-15",
+        "2015-16",
+        "2016-17",
+        "2017-18",
+        "2018-19",
+        "2019-20",
+        "2020-21",
+        "2021-22",
+        "2022-23"
+      ],
+      "actual_mt": 1756113.0,
+      "naive_last_year_mt": 1302217.0,
+      "moving_average_3y_mt": 1225683.7,
+      "ridge_trend_mt": 1312845.6,
+      "holt_linear_mt": 1260946.4,
+      "naive_error_mt": -453896.0,
+      "ridge_error_mt": -443267.4,
+      "holt_error_mt": -495166.6,
+      "event_tag": "All-Time Record",
+      "event_description": "35% YoY surge; high-speed vertical shaft sinking & capex acceleration"
+    }
+  ],
+  "projections": [
+    {
+      "fiscal_year": "2024-25 (Projected)",
+      "projected_production_mt": 1514839.0,
+      "confidence_interval_80": [
+        1265413.0,
+        1764264.0
+      ],
+      "method": "Ridge Trend + Empirical Residual Error"
+    },
+    {
+      "fiscal_year": "2025-26 (Projected)",
+      "projected_production_mt": 1565006.0,
+      "confidence_interval_80": [
+        1315580.0,
+        1814431.0
+      ],
+      "method": "Ridge Trend + Empirical Residual Error"
+    }
+  ],
+  "domain_bridge": {
+    "corporate_company": {
+      "entity": "MOIL Limited (All Mines Consolidated)",
+      "active_mines_count": 10,
+      "annual_tonnes_fy24": 1756113,
+      "scope": "Macro corporate disclosure & parliamentary review"
+    },
+    "flagship_mine": {
+      "mine_name": "Balaghat Mine Complex (MP)",
+      "share_of_company_pct": 38.0,
+      "approx_annual_tonnes": 667000,
+      "role": "Deepest and largest underground/open-cast manganese mine in Asia"
+    },
+    "active_section_demo": {
+      "section_id": "BLOCK_A (High Grade Section)",
+      "monthly_quota_tonnes": 10000,
+      "annualized_quota_tonnes": 120000,
+      "share_of_balaghat_pct": 18.0,
+      "share_of_company_pct": 6.8,
+      "governed_by": "LightGBM Quantile Forecaster + PuLP Optimization Engine"
+    },
+    "disclaimer": "The micro decision-support platform operates at the pit block level (10,000 t/mo). This macro module benchmarks corporate trajectory stability."
+  },
+  "history": [
+    {
+      "fiscal_year": "2014-15",
+      "production_mt": 1139156,
+      "source": "Lok Sabha Unstarred Q.1774 (02/03/2020) Table-1 cited to MOIL Ltd.",
+      "source_url": "https://steel.gov.in/sites/default/files/2025-04/lu1774.pdf",
+      "event_tag": "Baseline",
+      "event_description": "Baseline operations across Maharashtra and MP clusters"
+    },
+    {
+      "fiscal_year": "2015-16",
+      "production_mt": 1032275,
+      "source": "Lok Sabha Unstarred Q.1774 (02/03/2020) Table-1 cited to MOIL Ltd.",
+      "source_url": "https://steel.gov.in/sites/default/files/2025-04/lu1774.pdf",
+      "event_tag": "Global Slump",
+      "event_description": "Global commodity downcycle and subdued steel consumption"
+    },
+    {
+      "fiscal_year": "2016-17",
+      "production_mt": 1004845,
+      "source": "Lok Sabha Unstarred Q.1774 (02/03/2020) Table-1 cited to MOIL Ltd.",
+      "source_url": "https://steel.gov.in/sites/default/files/2025-04/lu1774.pdf",
+      "event_tag": "Trough",
+      "event_description": "Pre-modernization trough; exploration and shaft planning initiated"
+    },
+    {
+      "fiscal_year": "2017-18",
+      "production_mt": 1201113,
+      "source": "Lok Sabha Unstarred Q.1774 (02/03/2020) Table-1; also MOIL Annual Report 2018-19",
+      "source_url": "https://steel.gov.in/sites/default/files/2025-04/lu1774.pdf",
+      "event_tag": "Rebound",
+      "event_description": "National Steel Policy 2017 demand surge"
+    },
+    {
+      "fiscal_year": "2018-19",
+      "production_mt": 1301191,
+      "source": "MOIL Annual Report 2023-24 five-year highlights; Lok Sabha Q.1774",
+      "source_url": "https://moil.nic.in/userfiles/file/InvRel/Financials/Annual_Report_2023-24.pdf",
+      "event_tag": "Expansion",
+      "event_description": "Mechanization upgrades in Balaghat and Dongri Buzurg"
+    },
+    {
+      "fiscal_year": "2019-20",
+      "production_mt": 1277444,
+      "source": "MOIL Annual Report 2023-24 five-year highlights",
+      "source_url": "https://moil.nic.in/userfiles/file/InvRel/Financials/Annual_Report_2023-24.pdf",
+      "event_tag": "Late-FY Shock",
+      "event_description": "Early pandemic supply chain friction in March 2020"
+    },
+    {
+      "fiscal_year": "2020-21",
+      "production_mt": 1143570,
+      "source": "MOIL Annual Report 2023-24 five-year highlights; BSE annual report 2020-21",
+      "source_url": "https://moil.nic.in/userfiles/file/InvRel/Financials/Annual_Report_2023-24.pdf",
+      "event_tag": "COVID Shock",
+      "event_description": "Severe Q1 national lockdown and mine closure"
+    },
+    {
+      "fiscal_year": "2021-22",
+      "production_mt": 1231264,
+      "source": "MOIL Annual Report 2023-24 five-year highlights",
+      "source_url": "https://moil.nic.in/userfiles/file/InvRel/Financials/Annual_Report_2023-24.pdf",
+      "event_tag": "Recovery",
+      "event_description": "Post-COVID mining restart and underground capacity expansion"
+    },
+    {
+      "fiscal_year": "2022-23",
+      "production_mt": 1302217,
+      "source": "MOIL Annual Report 2023-24 five-year highlights",
+      "source_url": "https://moil.nic.in/userfiles/file/InvRel/Financials/Annual_Report_2023-24.pdf",
+      "event_tag": "Steady Growth",
+      "event_description": "Higher production of ferro-grade and electrolytic manganese dioxide"
+    },
+    {
+      "fiscal_year": "2023-24",
+      "production_mt": 1756113,
+      "source": "MOIL Annual Report 2023-24 (highest-ever production stated as 17.56 lakh t)",
+      "source_url": "https://moil.nic.in/userfiles/file/InvRel/Financials/Annual_Report_2023-24.pdf",
+      "event_tag": "All-Time Record",
+      "event_description": "35% YoY surge; high-speed vertical shaft sinking & capex acceleration"
+    }
+  ],
+  "limitations": [
+    "Public filings report company annual totals, not daily pit production, fleet availability, or blast delays.",
+    "This backtest checks whether trend and autoregressive methods track published MOIL yearly tonnes. It does not replace the daily LightGBM shortfall model.",
+    "FY 2020-21 is a severe COVID shock (-10.5%); FY 2023-24 is an unprecedented 35% YoY step-up driven by high-speed shaft sinking. Both test model resilience."
+  ]
+}

@@ -119,6 +119,10 @@ export const api = {
   getDemoConfig: async () => handleResponse(await fetch(`${API_BASE_URL}/real/demo/config`)),
   getDemoPreflight: async () => handleResponse(await fetch(`${API_BASE_URL}/real/demo/preflight`)),
   getDemoStep: async (stepId) => handleResponse(await fetch(`${API_BASE_URL}/real/demo/step/${encodeURIComponent(stepId)}`)),
+
+  // Historical / Reality Check Backtest
+  getHistoricalBacktest: async () => handleResponse(await fetch(`${API_BASE_URL}/historical/backtest`)),
+  getHistoricalSeries: async () => handleResponse(await fetch(`${API_BASE_URL}/historical/series`)),
 };
 
 

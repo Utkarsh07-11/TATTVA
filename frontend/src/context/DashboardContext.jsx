@@ -1,6 +1,17 @@
 import React, { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react';
 import { api } from '../services/api';
 
+import {
+  getFallbackForecast,
+  getFallbackMineOverview,
+  getFallbackExplanation,
+  getFallbackRecommendations,
+  getFallbackEquipment,
+  getFallbackMineBlocks,
+  getFallbackDrillholes,
+  getFallbackProspectivityMap,
+} from '../services/fallbackData';
+
 const DashboardContext = createContext(null);
 
 export function DashboardProvider({ children }) {
@@ -8,17 +19,17 @@ export function DashboardProvider({ children }) {
   const [horizonDays, setHorizonDays] = useState(30);
   const [showWatermark, setShowWatermark] = useState(true);
   const [activePreset, setActivePreset] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const [overview, setOverview] = useState(null);
-  const [forecast, setForecast] = useState(null);
-  const [explanation, setExplanation] = useState(null);
-  const [recommendations, setRecommendations] = useState(null);
-  const [prospectivityGeoJson, setProspectivityGeoJson] = useState(null);
-  const [drillholesGeoJson, setDrillholesGeoJson] = useState(null);
-  const [blocksGeoJson, setBlocksGeoJson] = useState(null);
-  const [equipmentList, setEquipmentList] = useState([]);
+  const [overview, setOverview] = useState(() => getFallbackMineOverview('BLOCK_A'));
+  const [forecast, setForecast] = useState(() => getFallbackForecast('BLOCK_A', 30));
+  const [explanation, setExplanation] = useState(() => getFallbackExplanation('BLOCK_A', 30));
+  const [recommendations, setRecommendations] = useState(() => getFallbackRecommendations('BLOCK_A', 30));
+  const [prospectivityGeoJson, setProspectivityGeoJson] = useState(() => getFallbackProspectivityMap());
+  const [drillholesGeoJson, setDrillholesGeoJson] = useState(() => getFallbackDrillholes());
+  const [blocksGeoJson, setBlocksGeoJson] = useState(() => getFallbackMineBlocks());
+  const [equipmentList, setEquipmentList] = useState(() => getFallbackEquipment().fleet || []);
 
   const loadDashboardData = useCallback(async () => {
     setLoading(true);

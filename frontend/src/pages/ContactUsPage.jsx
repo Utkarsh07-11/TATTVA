@@ -1,0 +1,286 @@
+import React, { useState } from 'react';
+import { Mail, Phone, Send, CheckCircle2, ExternalLink } from 'lucide-react';
+import BlockRevealImage from '../components/BlockRevealImage';
+
+// Authentic Field Photography
+import bbcFeature from '../assets/bbc/feature-1.jpg';
+
+export default function ContactUsPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    organization: '',
+    email: '',
+    subject: 'telemetry_access',
+    priority: 'standard',
+    message: '',
+  });
+
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [ticketId, setTicketId] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) return;
+
+    setSubmitting(true);
+    setTimeout(() => {
+      setSubmitting(false);
+      setSubmitted(true);
+      setTicketId(`MOIL-BLG-${Math.floor(100000 + Math.random() * 900000)}`);
+    }, 800);
+  };
+
+  return (
+    <div className="space-y-14 pb-20 max-w-7xl mx-auto px-4 sm:px-6 pt-6">
+      {/* 1. Header */}
+      <div className="border-b border-technical pb-6">
+        <div className="text-xs font-sans tracking-wider text-amber-500 uppercase font-semibold mb-2 flex items-center gap-2 text-slide-down">
+          <Mail className="w-3.5 h-3.5 text-amber-500" />
+          <span>TECHNICAL AND OPERATIONAL INQUIRY</span>
+        </div>
+        <h1 className="font-editorial text-3xl sm:text-5xl text-white font-bold tracking-tight text-slide-down-d1">
+          Connect with the Field Operations and Technical Directorate
+        </h1>
+        <p className="mt-4 font-sans text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed text-slide-down-d2">
+          Whether you are an operational engineer requesting real-time telemetry access, an academic researcher examining backtest models, or an industry partner inquiring about ore allocations, our direct communication channels bridge the underground face to the surface.
+        </p>
+      </div>
+
+      {/* 2. Interactive Transmission & Inquiry Form */}
+      <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="lg:col-span-7 story-card p-6 sm:p-8">
+          <div className="mb-6">
+            <span className="text-xs font-sans tracking-wider text-amber-500 uppercase font-semibold">
+              DISPATCH TRANSMISSION
+            </span>
+            <h3 className="font-sans text-2xl text-white font-bold mt-1">
+              Submit Operational Inquiry or Telemetry Request
+            </h3>
+            <p className="text-xs text-slate-400 font-sans mt-1">
+              Inquiries are routed immediately to the Surface Dispatch or Technical Engineering Cell.
+            </p>
+          </div>
+
+          {submitted ? (
+            <div className="p-6 bg-emerald-950/30 border border-emerald-700/60 rounded-sm text-center space-y-3">
+              <CheckCircle2 className="w-10 h-10 text-emerald-400 mx-auto" />
+              <h4 className="font-sans text-xl font-bold text-white">
+                Transmission Successfully Dispatched
+              </h4>
+              <p className="text-xs font-sans text-slate-300">
+                Assigned Reference ID: <span className="text-amber-400 font-bold">{ticketId}</span>
+              </p>
+              <p className="text-xs text-slate-400 max-w-md mx-auto font-sans">
+                Our shift telemetry controller will review your submission and contact you at {formData.email} within 2 to 4 business hours.
+              </p>
+              <button
+                onClick={() => {
+                  setSubmitted(false);
+                  setFormData({
+                    name: '',
+                    organization: '',
+                    email: '',
+                    subject: 'telemetry_access',
+                    priority: 'standard',
+                    message: '',
+                  });
+                }}
+                className="mt-4 px-4 py-1.5 rounded-sm bg-story-card border border-technical text-xs font-sans text-slate-300 hover:text-white cursor-pointer"
+              >
+                Send Another Transmission
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4 font-sans text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-slate-300 font-medium block">
+                    Full Name <span className="text-rose-400">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="e.g. S. K. Mukherjee"
+                    className="w-full px-3 py-2 bg-[#07090d] border border-technical rounded-sm text-white focus:outline-none focus:border-amber-500"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-slate-300 font-medium block">
+                    Organization / Mine Division
+                  </label>
+                  <input
+                    type="text"
+                    name="organization"
+                    value={formData.organization}
+                    onChange={handleChange}
+                    placeholder="e.g. Central Mining Division"
+                    className="w-full px-3 py-2 bg-[#07090d] border border-technical rounded-sm text-white focus:outline-none focus:border-amber-500"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-slate-300 font-medium block">
+                    Official Email Address <span className="text-rose-400">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="officer@organization.gov.in"
+                    className="w-full px-3 py-2 bg-[#07090d] border border-technical rounded-sm text-white focus:outline-none focus:border-amber-500"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-slate-300 font-medium block">
+                    Inquiry Scope
+                  </label>
+                  <select
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 bg-[#07090d] border border-technical rounded-sm text-white focus:outline-none focus:border-amber-500 cursor-pointer"
+                  >
+                    <option value="telemetry_access">Underground Stope Telemetry Access</option>
+                    <option value="backtest_audit">Historical Backtest Data Verification</option>
+                    <option value="model_integration">RESTful API Engine Integration</option>
+                    <option value="field_visit">Technical Reconnaissance Inquiries</option>
+                    <option value="other">General Operational Communication</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-slate-300 font-medium block">
+                  Priority Status
+                </label>
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    { id: 'standard', label: 'Standard (Routine)', color: 'text-slate-300' },
+                    { id: 'urgent', label: 'Operational Priority', color: 'text-amber-400' },
+                    { id: 'emergency', label: 'Critical / Shortfall Alert', color: 'text-rose-400' },
+                  ].map((p) => (
+                    <label
+                      key={p.id}
+                      className={`flex items-center gap-2 p-2.5 rounded-sm border cursor-pointer transition-all ${
+                        formData.priority === p.id
+                          ? 'bg-white/5 border-amber-500/80 text-white font-semibold'
+                          : 'bg-[#07090d] border-technical text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="priority"
+                        value={p.id}
+                        checked={formData.priority === p.id}
+                        onChange={handleChange}
+                        className="accent-amber-500"
+                      />
+                      <span className={`text-[11px] ${p.color}`}>{p.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-slate-300 font-medium block">
+                  Detailed Operational Query <span className="text-rose-400">*</span>
+                </label>
+                <textarea
+                  name="message"
+                  required
+                  rows={4}
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Specify mine block, equipment telemetry parameters, or statutory reconciliation requirements..."
+                  className="w-full px-3 py-2 bg-[#07090d] border border-technical rounded-sm text-white focus:outline-none focus:border-amber-500"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="w-full py-3 bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs uppercase tracking-wider rounded-sm flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50"
+              >
+                {submitting ? (
+                  <span>Dispatching Telemetric Packet...</span>
+                ) : (
+                  <>
+                    <Send className="w-3.5 h-3.5" />
+                    <span>Transmit Encrypted Query to Control Room</span>
+                  </>
+                )}
+              </button>
+            </form>
+          )}
+        </div>
+
+        {/* Right Info Box: Direct Telemetry Access */}
+        <div className="lg:col-span-5 space-y-6">
+          <BlockRevealImage
+            src={bbcFeature}
+            alt="Technical Facility and Haul Road"
+            aspectRatio="aspect-[16/10]"
+            blockColor="bg-[#d4a574]"
+          />
+
+          <div className="story-card p-6 border-l-2 border-l-amber-500 space-y-3">
+            <h4 className="font-sans text-lg text-white font-bold">
+              Direct RESTful API Access
+            </h4>
+            <p className="text-xs text-slate-400 leading-relaxed font-sans">
+              All spatial rasters, quantile forecast distributions, and historical walk-forward holdouts are available via programmatic REST endpoints for integrated enterprise dispatch systems.
+            </p>
+
+            <div className="bg-[#07090d] p-3 rounded-sm border border-technical font-sans text-xs space-y-1.5 text-slate-300">
+              <div className="text-amber-400 font-bold"># Live Endpoint Examples:</div>
+              <div>GET /api/forecast/production</div>
+              <div>GET /api/historical/backtest</div>
+              <div>GET /api/prospectivity/map</div>
+              <div>POST /api/simulate/scenario</div>
+            </div>
+
+            <div className="pt-2">
+              <a
+                href="/docs"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-sans text-amber-400 hover:underline"
+              >
+                <span>View Complete OpenAPI Specification</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+
+          <div className="story-card p-6 space-y-2">
+            <h4 className="font-sans text-lg text-white font-bold">
+              Emergency Surface Dispatch
+            </h4>
+            <p className="text-xs text-slate-400 font-sans leading-relaxed">
+              In case of stope geological instabilities or critical equipment failure during an active underground cycle, bypass the digital form and contact the shaft control room directly.
+            </p>
+            <div className="pt-2 flex items-center gap-2 text-rose-400 font-sans text-xs font-bold">
+              <Phone className="w-3.5 h-3.5" />
+              <span>Emergency Dispatch Hotline: +91 7632 245 999</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

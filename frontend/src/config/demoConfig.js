@@ -19,10 +19,10 @@ export const DEMO_PRESENTATION_DEFAULTS = {
 
 export const SCREEN_ROUTE_MAP = {
   overview: '/',
-  mine_map: '/mine-map',
-  forecast: '/forecast',
-  explain: '/explain',
-  simulate: '/simulate',
-  actions: '/actions',
-  resources: '/resources',
+  mine_map: '/digital-mine',
+  forecast: '/production',
+  explain: '/operations',
+  simulate: '/operations',
+  actions: '/operations',
+  resources: '/digital-mine',
 };

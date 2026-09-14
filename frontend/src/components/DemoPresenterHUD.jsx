@@ -263,7 +263,7 @@ export default function DemoPresenterHUD({ onClose }) {
             >
               <span className="flex items-center gap-1.5 font-semibold text-cyan-300">
                 <HelpCircle className="w-3 h-3 text-cyan-400" />
-                Juror Defense & Scientific Backing
+                Juror Defense and Scientific Backing
               </span>
               <span>{showJurorDefense ? '▲ Hide' : '▼ View Q&A Defense'}</span>
             </button>
@@ -289,7 +289,7 @@ export default function DemoPresenterHUD({ onClose }) {
             <button
               onClick={handleResetDemo}
               className="px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-technical text-slate-400 hover:text-white text-[10px] flex items-center gap-1 cursor-pointer transition-colors"
-              title="Reset presentation to Step 1 & initial state"
+              title="Reset presentation to Step 1 and initial state"
             >
               <RotateCcw className="w-3 h-3" />
               Reset Demo

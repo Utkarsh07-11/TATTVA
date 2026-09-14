@@ -62,26 +62,26 @@ export default function WhatIfSandbox({ selectedBlock, horizonDays = 30, baselin
   const newDeficit = Math.max(0, targetTonnes - simTonnes);
 
   return (
-    <div className="space-y-3 max-w-4xl mx-auto">
+    <div className="space-y-3 max-w-4xl mx-auto font-sans">
       {/* 1. SCENARIO OUTPUT BANNER */}
       <div className="bg-[#080b10] border border-technical p-4 sm:p-5 rounded flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-1">
-          <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
-            Scenario Output ({horizonDays}d Horizon)
+          <div className="text-xs font-sans uppercase tracking-wider text-amber-500 font-bold">
+            What Happens If An Ore Shortfall Occurs? · Output Analysis ({horizonDays}d Horizon)
           </div>
-          <div className="text-xl sm:text-2xl font-bold font-mono text-white flex items-center gap-2">
+          <div className="text-xl sm:text-2xl font-bold font-sans text-white flex items-center gap-2">
             <span className="text-slate-400 font-normal">{Math.round(baseTonnes).toLocaleString()}</span>
             <span className="text-slate-600">→</span>
             <span>{Math.round(simTonnes).toLocaleString()} t</span>
           </div>
-          <div className="text-xs text-slate-400 font-mono">
-            Target: {targetTonnes.toLocaleString()} t
+          <div className="text-xs text-slate-300 font-sans">
+            Stope Target: {targetTonnes.toLocaleString()} t
           </div>
         </div>
 
-        <div className="flex items-center gap-6 sm:border-l sm:border-technical sm:pl-5 font-mono">
+        <div className="flex items-center gap-6 sm:border-l sm:border-technical sm:pl-5 font-sans">
           <div>
-            <div className="text-[10px] uppercase tracking-wider text-slate-400">
+            <div className="text-[11px] uppercase tracking-wider text-slate-400">
               Recovery Delta
             </div>
             <div className="text-xl sm:text-2xl font-bold text-emerald-400">
@@ -90,7 +90,7 @@ export default function WhatIfSandbox({ selectedBlock, horizonDays = 30, baselin
           </div>
 
           <div>
-            <div className="text-[10px] uppercase tracking-wider text-slate-400">
+            <div className="text-[11px] uppercase tracking-wider text-slate-400">
               Residual Deficit
             </div>
             <div className="text-xl sm:text-2xl font-bold text-amber-400">
@@ -103,12 +103,12 @@ export default function WhatIfSandbox({ selectedBlock, horizonDays = 30, baselin
       {/* 2. SCENARIO INPUT LEVERS */}
       <div className="panel p-4 space-y-4">
         <div className="flex items-center justify-between pb-2 border-b border-technical">
-          <h2 className="text-xs sm:text-sm font-bold text-white font-mono uppercase tracking-wide">
+          <h2 className="text-xs sm:text-sm font-bold text-white font-sans uppercase tracking-wide">
             Operational Levers ({selectedBlock})
           </h2>
           <button
             onClick={handleReset}
-            className="flex items-center gap-1 text-[11px] font-mono text-slate-400 hover:text-white px-2 py-0.5 rounded bg-[#101622] border border-technical transition-colors cursor-pointer"
+            className="flex items-center gap-1 text-xs font-sans text-slate-400 hover:text-white px-2 py-0.5 rounded bg-[#101622] border border-technical transition-colors cursor-pointer"
           >
             <RotateCcw className="w-3 h-3 text-slate-400" />
             <span>Reset Defaults</span>
@@ -119,8 +119,8 @@ export default function WhatIfSandbox({ selectedBlock, horizonDays = 30, baselin
           {/* Lever 1: Fleet Availability */}
           <div className="bg-[#080b10] p-3 rounded border border-technical space-y-2">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-300 font-mono">Equipment Availability</span>
-              <span className="text-white font-bold font-mono">{availability.toFixed(1)}%</span>
+              <span className="text-slate-300 font-sans">Equipment Availability</span>
+              <span className="text-white font-bold font-sans">{availability.toFixed(1)}%</span>
             </div>
             <input
               type="range"
@@ -131,7 +131,7 @@ export default function WhatIfSandbox({ selectedBlock, horizonDays = 30, baselin
               onChange={(e) => setAvailability(parseFloat(e.target.value))}
               className="w-full accent-amber-400 cursor-pointer"
             />
-            <div className="flex justify-between text-[10px] font-mono text-slate-500">
+            <div className="flex justify-between text-[10px] font-sans text-slate-400">
               <span>50% (Degraded)</span>
               <span>98% (Nominal)</span>
             </div>
@@ -140,15 +140,15 @@ export default function WhatIfSandbox({ selectedBlock, horizonDays = 30, baselin
           {/* Lever 2: Blasting Delay */}
           <div className="bg-[#080b10] p-3 rounded border border-technical space-y-2">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-300 font-mono">Blasting Stoppage</span>
-              <span className={`font-mono text-[11px] font-bold ${blastingDelay ? 'text-rose-400' : 'text-emerald-400'}`}>
+              <span className="text-slate-300 font-sans">Blasting Stoppage</span>
+              <span className={`font-sans text-xs font-bold ${blastingDelay ? 'text-rose-400' : 'text-emerald-400'}`}>
                 {blastingDelay ? 'Active Delay' : 'Cleared'}
               </span>
             </div>
             <div className="flex items-center gap-2 pt-1">
               <button
                 onClick={() => setBlastingDelay(1)}
-                className={`flex-1 py-1 text-xs font-mono rounded border transition-colors ${
+                className={`flex-1 py-1 text-xs font-sans rounded border transition-colors ${
                   blastingDelay === 1
                     ? 'bg-[#221010] text-rose-300 border-rose-800 font-bold'
                     : 'bg-[#0b0e14] text-slate-400 border-technical'
@@ -158,7 +158,7 @@ export default function WhatIfSandbox({ selectedBlock, horizonDays = 30, baselin
               </button>
               <button
                 onClick={() => setBlastingDelay(0)}
-                className={`flex-1 py-1 text-xs font-mono rounded border transition-colors ${
+                className={`flex-1 py-1 text-xs font-sans rounded border transition-colors ${
                   blastingDelay === 0
                     ? 'bg-[#102216] text-emerald-300 border-emerald-800 font-bold'
                     : 'bg-[#0b0e14] text-slate-400 border-technical'
@@ -172,8 +172,8 @@ export default function WhatIfSandbox({ selectedBlock, horizonDays = 30, baselin
           {/* Lever 3: Rainfall Inundation */}
           <div className="bg-[#080b10] p-3 rounded border border-technical space-y-2">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-300 font-mono">Rainfall Inundation</span>
-              <span className="text-white font-bold font-mono">{rainfall.toFixed(1)} mm</span>
+              <span className="text-slate-300 font-sans">Rainfall Inundation</span>
+              <span className="text-white font-bold font-sans">{rainfall.toFixed(1)} mm</span>
             </div>
             <input
               type="range"
@@ -184,7 +184,7 @@ export default function WhatIfSandbox({ selectedBlock, horizonDays = 30, baselin
               onChange={(e) => setRainfall(parseFloat(e.target.value))}
               className="w-full accent-amber-400 cursor-pointer"
             />
-            <div className="flex justify-between text-[10px] font-mono text-slate-500">
+            <div className="flex justify-between text-[10px] font-sans text-slate-400">
               <span>0 mm (Dry)</span>
               <span>60 mm (Wet Pit)</span>
             </div>
@@ -194,5 +194,3 @@ export default function WhatIfSandbox({ selectedBlock, horizonDays = 30, baselin
     </div>
   );
 }
-
-

@@ -121,6 +121,7 @@ export default function DigitalMineMap({
 
   // Selected cell / entity inspection details
   const [selectedEntity, setSelectedEntity] = useState(null);
+  const [isLegendVisible, setIsLegendVisible] = useState(true);
 
   // Dynamic Color Mapping for Real Prospectivity Layers
   const getRealScoreColor = (score, layerId) => {
@@ -182,18 +183,19 @@ export default function DigitalMineMap({
     let isMounted = true;
     api.getRealMines()
       .then((res) => {
-        if (isMounted && res && res.mines) {
-          setRealMines(res.mines);
+        if (!isMounted) return;
+        const list = res?.mines || (Array.isArray(res) ? res : []);
+        if (list.length > 0) {
+          setRealMines(list);
 
           // Parse URL search params (?mine=MOIL_BALAGHAT)
           const urlParams = new URLSearchParams(window.location.search);
           const mineParam = urlParams.get('mine');
           if (mineParam) {
-            const match = res.mines.find((m) => m.mine_id.toUpperCase() === mineParam.toUpperCase());
+            const match = list.find((m) => (m.mine_id || m.id || '').toUpperCase() === mineParam.toUpperCase());
             if (match) {
-              setSelectedRealMineId(match.mine_id);
+              setSelectedRealMineId(match.mine_id || match.id);
             } else {
-              // Safe fallback for invalid URL parameter
               setSelectedRealMineId('MOIL_BALAGHAT');
             }
           }
@@ -353,31 +355,74 @@ export default function DigitalMineMap({
   useEffect(() => {
     if (!mapContainerRef.current) return;
 
-    if (!mapInstanceRef.current) {
-      const map = L.map(mapContainerRef.current, {
-        center: [21.8464, 80.2281], // Centered at Balaghat Bharweli audited portal
-        zoom: 13,
-        zoomControl: true,
-        preferCanvas: true, // Hardware-accelerated canvas rendering
-      });
-
-      mapInstanceRef.current = map;
-
-      // Survey of India Sovereign Boundary Vector Layer
-      const indiaLayer = L.geoJSON(indiaBoundaryGeoJson, {
-        style: {
-          color: '#818cf8',
-          weight: 1.8,
-          opacity: 0.9,
-          fillColor: '#818cf8',
-          fillOpacity: 0.02,
-          dashArray: 'none',
-        },
-        interactive: false,
-      }).addTo(map);
-
-      layersRef.current.indiaBoundary = indiaLayer;
+    // Clean up any stale map instance
+    if (mapInstanceRef.current) {
+      mapInstanceRef.current.remove();
+      mapInstanceRef.current = null;
     }
+
+    if (mapContainerRef.current._leaflet_id) {
+      mapContainerRef.current._leaflet_id = null;
+    }
+
+    const map = L.map(mapContainerRef.current, {
+      center: [21.8464, 80.2281], // Centered at Balaghat Bharweli audited portal
+      zoom: 13,
+      zoomControl: true,
+      preferCanvas: true, // Hardware-accelerated canvas rendering
+    });
+
+    mapInstanceRef.current = map;
+
+    // Attach basemap tile layer immediately upon creation
+    applyBasemap(currentBasemap);
+
+    // Survey of India Sovereign Boundary Vector Layer (safely wrapped)
+    try {
+      if (indiaBoundaryGeoJson) {
+        const indiaLayer = L.geoJSON(indiaBoundaryGeoJson, {
+          style: {
+            color: '#818cf8',
+            weight: 1.8,
+            opacity: 0.9,
+            fillColor: '#818cf8',
+            fillOpacity: 0.02,
+            dashArray: 'none',
+          },
+          interactive: false,
+        }).addTo(map);
+
+        layersRef.current.indiaBoundary = indiaLayer;
+      }
+    } catch (e) {
+      console.warn('India boundary layer notice:', e);
+    }
+
+    // Ensure Leaflet recalculates viewport bounds to prevent blank/grey tiles
+    const resizeTimer = setTimeout(() => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.invalidateSize();
+      }
+    }, 150);
+
+    return () => {
+      clearTimeout(resizeTimer);
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+      layersRef.current = {
+        baseLayers: null,
+        blocks: null,
+        prospectivity: null,
+        drillholes: null,
+        equipment: null,
+        realMines: null,
+        indiaBoundary: null,
+        realProspectivity: null,
+        realEvidence: null,
+      };
+    };
   }, []);
 
   // Update Basemap when state changes
@@ -406,8 +451,12 @@ export default function DigitalMineMap({
     const t0 = performance.now();
     const canvasRenderer = L.canvas({ padding: 0.5 });
 
-    const filteredFeatures = realProspectivityData.features.filter((f) => {
-      const score = f.properties[activeScoreLayer];
+    const rawFeatures = Array.isArray(realProspectivityData?.features)
+      ? realProspectivityData.features
+      : (Array.isArray(realProspectivityData) ? realProspectivityData : []);
+
+    const filteredFeatures = rawFeatures.filter((f) => {
+      const score = f?.properties?.[activeScoreLayer];
       return typeof score === 'number' && score >= realScoreCutoff;
     });
 
@@ -492,9 +541,14 @@ export default function DigitalMineMap({
     }
 
     const markers = [];
-    realEvidenceData.features.forEach((feat) => {
+    const evidenceFeatures = Array.isArray(realEvidenceData?.features)
+      ? realEvidenceData.features
+      : (Array.isArray(realEvidenceData) ? realEvidenceData : []);
+
+    evidenceFeatures.forEach((feat) => {
+      if (!feat?.geometry?.coordinates) return;
       const [lon, lat] = feat.geometry.coordinates;
-      const p = feat.properties;
+      const p = feat.properties || {};
       const isShaftAnchor = p.evidence_id === 'EVID_MOIL_BALAGHAT_BHARWELI_01';
       const isOutcrop = p.evidence_id === 'EVID_GSI_BHARWELI_OUTCROP_02';
 
@@ -901,7 +955,7 @@ export default function DigitalMineMap({
             onClick={() => setShowRealMines(!showRealMines)}
             className={`px-2 py-1 rounded border transition-colors cursor-pointer ${
               showRealMines
-                ? 'bg-[#101720] border-cyan-900 text-cyan-300'
+                ? 'bg-amber-950/40 border-amber-800 text-amber-300'
                 : 'bg-[#0b0e14] border-technical text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -977,7 +1031,7 @@ export default function DigitalMineMap({
               className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-900 hover:bg-slate-800 rounded-lg border border-slate-700 text-amber-300 text-[11px] font-medium transition-all"
             >
               <FileText className="w-3.5 h-3.5 text-amber-400" />
-              <span>Methodology & Limitations</span>
+              <span>Methodology and Limitations</span>
               <ChevronDown className={`w-3 h-3 transition-transform ${showLimitationsDrawer ? 'rotate-180' : ''}`} />
             </button>
           </div>
@@ -1006,7 +1060,7 @@ export default function DigitalMineMap({
                 </span>
               </div>
               <p className="text-slate-400 text-[11px] leading-relaxed">
-                27,720 real 30m Sentinel-2 & DEM cells covering the Balaghat mining lease AOI (5.03 km × 4.96 km).
+                27,720 real 30m Sentinel-2 and DEM cells covering the Balaghat mining lease AOI (5.03 km × 4.96 km).
                 Prioritizes candidate exploration targets through unsupervised anomaly detection and positive-anchor similarity.
               </p>
             </div>
@@ -1038,7 +1092,7 @@ export default function DigitalMineMap({
             <div className="p-3 rounded-lg bg-slate-950/80 border border-slate-800">
               <div className="font-bold text-indigo-300 mb-2 flex items-center gap-1.5 text-[11px] uppercase tracking-wide">
                 <Database className="w-3.5 h-3.5 text-indigo-400" />
-                Data Provenance & Anchor Role
+                Data Provenance and Anchor Role
               </div>
               <div className="space-y-2 text-[11px] text-slate-300">
                 <div>
@@ -1089,12 +1143,12 @@ export default function DigitalMineMap({
             <div className="flex items-center justify-between pb-2 mb-2 border-b border-technical">
               <div>
                 <div className="flex items-center gap-1.5">
-                  <h3 className="font-bold uppercase font-condensed tracking-wider text-white text-base">{mineDashboard.mine_name} Mine</h3>
+                  <h3 className="font-bold uppercase font-sans tracking-wider text-white text-base">{mineDashboard.mine_name} Mine</h3>
                   <span className="text-[10px] px-1.5 py-0.2 rounded bg-[#101726] text-industrial-amber border border-technical font-mono">
                     {mineDashboard.mine_id}
                   </span>
                   {mineDashboard.capability_tier && (
-                    <span className={`text-[9px] px-1.5 py-0.5 rounded font-mono font-bold border ${
+                    <span className={`text-[10px] px-1.5 py-0.2 rounded border font-mono font-bold ${
                       mineDashboard.capability_tier === 'LEVEL_A'
                         ? 'bg-emerald-950 text-emerald-300 border-emerald-700'
                         : mineDashboard.capability_tier === 'LEVEL_B'
@@ -1138,7 +1192,7 @@ export default function DigitalMineMap({
 
             {/* 5-Category Data Availability Framework */}
             <div className="mb-2.5 space-y-1.5">
-              <div className="font-bold font-condensed text-slate-300 text-xs uppercase tracking-widest flex items-center gap-1">
+              <div className="font-bold font-sans text-slate-300 text-xs uppercase tracking-widest flex items-center gap-1">
                 <Layers className="w-3.5 h-3.5 text-industrial-amber" />
                 <span>Data Availability Framework</span>
               </div>
@@ -1146,7 +1200,7 @@ export default function DigitalMineMap({
               <div className="space-y-1 text-[10px] font-mono">
                 {/* 1. Real Data */}
                 <div className="flex items-center justify-between p-1.5 rounded bg-[#0b0f17] border border-technical">
-                  <span className="text-slate-300">Satellite Multispectral & DEM</span>
+                  <span className="text-slate-300">Satellite Multispectral and DEM</span>
                   <span className={`px-1.5 py-0.2 rounded font-bold uppercase ${
                     mineDashboard.exploration_available
                       ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800'
@@ -1206,11 +1260,21 @@ export default function DigitalMineMap({
         )}
 
         {/* Global Sausar Belt Coordinate Quality Legend (Bottom-Left) */}
-        {mapViewMode === 'global_belt' && (
+        {mapViewMode === 'global_belt' && isLegendVisible && (
           <div className="absolute bottom-4 left-4 bg-[#07090d]/95 backdrop-blur-md border border-technical p-3.5 rounded shadow-xl text-xs z-[1000] max-w-xs pointer-events-auto font-mono">
-            <div className="font-bold text-white mb-1.5 flex items-center justify-between font-condensed text-sm uppercase">
-              <span>MOIL 10-Mine Registry</span>
-              <span className="text-[10px] text-emerald-400">Central India Belt</span>
+            <div className="font-bold text-white mb-1.5 flex items-center justify-between font-sans text-sm uppercase">
+              <div className="flex items-center gap-2">
+                <span>MOIL 10-Mine Registry</span>
+                <span className="text-[10px] text-emerald-400">Central India Belt</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsLegendVisible(false)}
+                className="p-1 text-slate-400 hover:text-white transition-colors cursor-pointer rounded hover:bg-white/10"
+                title="Hide map legend"
+              >
+                <EyeOff className="w-3.5 h-3.5" />
+              </button>
             </div>
             <div className="space-y-1.5 text-slate-300 text-[11px]">
               <div className="flex items-center gap-2">
@@ -1218,7 +1282,7 @@ export default function DigitalMineMap({
                 <span>Surveyed / statutory point (~10-50m)</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-cyan-500 border border-white"></span>
+                <span className="w-3 h-3 rounded-full bg-yellow-400 border border-white"></span>
                 <span>Lease centroid (~500m)</span>
               </div>
               <div className="flex items-center gap-2">
@@ -1226,18 +1290,28 @@ export default function DigitalMineMap({
                 <span>Map-derived reference (~1-2km)</span>
               </div>
             </div>
-            <div className="mt-2 pt-1.5 border-t border-technical text-[10px] text-slate-500 leading-tight">
+            <div className="mt-2 pt-1.5 border-t border-technical text-[10px] text-slate-500 leading-tight font-sans">
               Click any mine marker to focus and view Data Availability Framework.
             </div>
           </div>
         )}
 
         {/* Real Exploration Legend (Bottom-Left in Mine Detail View for Balaghat) */}
-        {mapViewMode === 'mine_detail' && isBalaghatSelected && showRealProspectivity && (
+        {mapViewMode === 'mine_detail' && isBalaghatSelected && showRealProspectivity && isLegendVisible && (
           <div className="absolute bottom-4 left-4 bg-[#07090d]/95 backdrop-blur-md border border-technical p-3.5 rounded shadow-xl text-xs z-[1000] max-w-xs pointer-events-auto font-mono">
-            <div className="font-bold text-white mb-1 flex items-center justify-between font-condensed text-sm uppercase">
+            <div className="font-bold text-white mb-1 flex items-center justify-between font-sans text-sm uppercase">
               <span className="text-industrial-amber">{activeModelConfig.name}</span>
-              <span className="text-[10px] text-slate-500">30m Cell</span>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] text-slate-500">30m Cell</span>
+                <button
+                  type="button"
+                  onClick={() => setIsLegendVisible(false)}
+                  className="p-1 text-slate-400 hover:text-white transition-colors cursor-pointer rounded hover:bg-white/10"
+                  title="Hide map legend"
+                >
+                  <EyeOff className="w-3.5 h-3.5" />
+                </button>
+              </div>
             </div>
 
             {/* Gradient Colorbar */}
@@ -1254,7 +1328,7 @@ export default function DigitalMineMap({
                     : 'linear-gradient(to right, #1e293b 0%, #0284c7 40%, #14b8a6 70%, #10b981 100%)'
                 }}
               />
-              <div className="flex justify-between text-[10px] text-slate-500 mt-1">
+              <div className="flex justify-between text-[10px] text-slate-500 mt-1 font-sans">
                 <span>0.0 (Low Target)</span>
                 <span>0.50</span>
                 <span>1.0 (High Target)</span>
@@ -1262,7 +1336,7 @@ export default function DigitalMineMap({
             </div>
 
             {/* Legend Indicators */}
-            <div className="space-y-1.5 text-slate-300 text-[11px] pt-1 border-t border-technical">
+            <div className="space-y-1.5 text-slate-300 text-[11px] pt-1 border-t border-technical font-sans">
               <div className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-none bg-red-600 border border-white/40"></span>
                 <span>High Exploration Priority (&ge;0.80)</span>
@@ -1288,11 +1362,24 @@ export default function DigitalMineMap({
           </div>
         )}
 
+        {/* Unhide Legend Floating Button when hidden */}
+        {!isLegendVisible && (mapViewMode === 'global_belt' || (mapViewMode === 'mine_detail' && isBalaghatSelected && showRealProspectivity)) && (
+          <button
+            type="button"
+            onClick={() => setIsLegendVisible(true)}
+            className="absolute bottom-4 left-4 z-[1000] bg-[#07090d]/90 hover:bg-[#121722] text-slate-300 hover:text-white border border-technical px-3 py-1.5 rounded shadow-lg text-xs font-sans flex items-center gap-1.5 cursor-pointer transition-colors pointer-events-auto"
+            title="Unhide map legend"
+          >
+            <Eye className="w-3.5 h-3.5 text-amber-400" />
+            <span>Show Map Legend</span>
+          </button>
+        )}
+
         {/* Selected Cell Inspection Card (Bottom-Right) */}
         {selectedEntity && selectedEntity.type === 'real_cell' && (
           <div className="absolute bottom-4 right-4 bg-[#07090d]/95 backdrop-blur-md border border-rose-800/80 p-3.5 rounded shadow-2xl text-xs z-[1000] max-w-sm pointer-events-auto animate-in slide-in-from-bottom-2 duration-200 font-mono">
             <div className="flex items-center justify-between pb-1.5 mb-2 border-b border-technical">
-              <span className="font-bold uppercase font-condensed tracking-wider text-white text-sm flex items-center gap-1.5">
+              <span className="font-bold uppercase font-sans tracking-wider text-white text-sm flex items-center gap-1.5">
                 <Target className="w-4 h-4 text-rose-400" />
                 CELL: <span className="text-industrial-amber">{selectedEntity.data.cell_id}</span>
               </span>
