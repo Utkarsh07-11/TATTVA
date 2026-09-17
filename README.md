@@ -94,3 +94,6 @@ docker-compose -f docker/docker-compose.yml up --build
    - Combined Top-2 Projected Recovery: **+1,050 tonnes** (closing ~78% of the deficit).
 6. **What-If Sandbox**: Adjust equipment availability slider from 72% to 90% to observe instant real-time recovery on the forecasting curve.
 7. **Digital Mine Map**: Review drillhole assays with grade popups, toggle prospectivity heatmap cells (probability 0.0 to 1.0), and inspect fleet telemetry markers.
+
+---
+*Developed for SIH 2026 Problem Statement 26009.*
