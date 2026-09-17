@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Mail, Phone, Send, CheckCircle2, ExternalLink } from 'lucide-react';
 import BlockRevealImage from '../components/BlockRevealImage';
 
-// Authentic Field Photography
-import bbcFeature from '../assets/bbc/feature-1.jpg';
+// Authentic Indian Field Photography
+import indianExcavatorFacility from '../assets/indian_mines/excavator-terrace-bench.jpg';
 
 export default function ContactUsPage() {
   const [formData, setFormData] = useState({
@@ -39,44 +39,44 @@ export default function ContactUsPage() {
   return (
     <div className="space-y-14 pb-20 max-w-7xl mx-auto px-4 sm:px-6 pt-6">
       {/* 1. Header */}
-      <div className="border-b border-technical pb-6">
-        <div className="text-xs font-sans tracking-wider text-amber-500 uppercase font-semibold mb-2 flex items-center gap-2 text-slide-down">
-          <Mail className="w-3.5 h-3.5 text-amber-500" />
+      <div className="border-b border-[#DCD5CD] pb-6">
+        <div className="text-xs font-sans tracking-wider text-[#C87A5B] uppercase font-semibold mb-2 flex items-center gap-2 text-slide-down">
+          <Mail className="w-3.5 h-3.5 text-[#C87A5B]" />
           <span>TECHNICAL AND OPERATIONAL INQUIRY</span>
         </div>
-        <h1 className="font-editorial text-3xl sm:text-5xl text-white font-bold tracking-tight text-slide-down-d1">
+        <h1 className="font-editorial text-3xl sm:text-5xl text-[#26211F] font-bold tracking-tight text-slide-down-d1">
           Connect with the Field Operations and Technical Directorate
         </h1>
-        <p className="mt-4 font-sans text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed text-slide-down-d2">
+        <p className="mt-4 font-sans text-base sm:text-lg text-[#5A524F] max-w-3xl leading-relaxed text-slide-down-d2">
           Whether you are an operational engineer requesting real-time telemetry access, an academic researcher examining backtest models, or an industry partner inquiring about ore allocations, our direct communication channels bridge the underground face to the surface.
         </p>
       </div>
 
       {/* 2. Interactive Transmission & Inquiry Form */}
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div className="lg:col-span-7 story-card p-6 sm:p-8">
+        <div className="lg:col-span-7 bg-white border border-[#DCD5CD] p-6 sm:p-8 rounded-xl shadow-sm">
           <div className="mb-6">
-            <span className="text-xs font-sans tracking-wider text-amber-500 uppercase font-semibold">
+            <span className="text-xs font-sans tracking-wider text-[#C87A5B] uppercase font-semibold">
               DISPATCH TRANSMISSION
             </span>
-            <h3 className="font-sans text-2xl text-white font-bold mt-1">
+            <h3 className="font-sans text-2xl text-[#26211F] font-bold mt-1">
               Submit Operational Inquiry or Telemetry Request
             </h3>
-            <p className="text-xs text-slate-400 font-sans mt-1">
+            <p className="text-xs text-[#5A524F] font-sans mt-1">
               Inquiries are routed immediately to the Surface Dispatch or Technical Engineering Cell.
             </p>
           </div>
 
           {submitted ? (
-            <div className="p-6 bg-emerald-950/30 border border-emerald-700/60 rounded-sm text-center space-y-3">
-              <CheckCircle2 className="w-10 h-10 text-emerald-400 mx-auto" />
-              <h4 className="font-sans text-xl font-bold text-white">
+            <div className="p-6 bg-emerald-50 border border-emerald-300 rounded-xl text-center space-y-3">
+              <CheckCircle2 className="w-10 h-10 text-emerald-700 mx-auto" />
+              <h4 className="font-sans text-xl font-bold text-[#26211F]">
                 Transmission Successfully Dispatched
               </h4>
-              <p className="text-xs font-sans text-slate-300">
-                Assigned Reference ID: <span className="text-amber-400 font-bold">{ticketId}</span>
+              <p className="text-xs font-sans text-[#5A524F]">
+                Assigned Reference ID: <span className="text-[#C87A5B] font-bold">{ticketId}</span>
               </p>
-              <p className="text-xs text-slate-400 max-w-md mx-auto font-sans">
+              <p className="text-xs text-[#5A524F] max-w-md mx-auto font-sans">
                 Our shift telemetry controller will review your submission and contact you at {formData.email} within 2 to 4 business hours.
               </p>
               <button
@@ -91,7 +91,7 @@ export default function ContactUsPage() {
                     message: '',
                   });
                 }}
-                className="mt-4 px-4 py-1.5 rounded-sm bg-story-card border border-technical text-xs font-sans text-slate-300 hover:text-white cursor-pointer"
+                className="mt-4 px-4 py-2 rounded-lg bg-white border border-[#DCD5CD] text-xs font-sans text-[#5A524F] hover:text-[#26211F] hover:bg-[#EEE6DD] cursor-pointer shadow-sm"
               >
                 Send Another Transmission
               </button>
@@ -100,8 +100,8 @@ export default function ContactUsPage() {
             <form onSubmit={handleSubmit} className="space-y-4 font-sans text-xs">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-slate-300 font-medium block">
-                    Full Name <span className="text-rose-400">*</span>
+                  <label className="text-[#26211F] font-medium block">
+                    Full Name <span className="text-rose-600">*</span>
                   </label>
                   <input
                     type="text"
@@ -110,12 +110,12 @@ export default function ContactUsPage() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="e.g. S. K. Mukherjee"
-                    className="w-full px-3 py-2 bg-[#07090d] border border-technical rounded-sm text-white focus:outline-none focus:border-amber-500"
+                    className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#DCD5CD] rounded-lg text-[#26211F] focus:outline-none focus:border-[#C87A5B] focus:bg-white"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-slate-300 font-medium block">
+                  <label className="text-[#26211F] font-medium block">
                     Organization / Mine Division
                   </label>
                   <input
@@ -124,15 +124,15 @@ export default function ContactUsPage() {
                     value={formData.organization}
                     onChange={handleChange}
                     placeholder="e.g. Central Mining Division"
-                    className="w-full px-3 py-2 bg-[#07090d] border border-technical rounded-sm text-white focus:outline-none focus:border-amber-500"
+                    className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#DCD5CD] rounded-lg text-[#26211F] focus:outline-none focus:border-[#C87A5B] focus:bg-white"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-slate-300 font-medium block">
-                    Official Email Address <span className="text-rose-400">*</span>
+                  <label className="text-[#26211F] font-medium block">
+                    Official Email Address <span className="text-rose-600">*</span>
                   </label>
                   <input
                     type="email"
@@ -141,19 +141,19 @@ export default function ContactUsPage() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="officer@organization.gov.in"
-                    className="w-full px-3 py-2 bg-[#07090d] border border-technical rounded-sm text-white focus:outline-none focus:border-amber-500"
+                    className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#DCD5CD] rounded-lg text-[#26211F] focus:outline-none focus:border-[#C87A5B] focus:bg-white"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-slate-300 font-medium block">
+                  <label className="text-[#26211F] font-medium block">
                     Inquiry Scope
                   </label>
                   <select
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 bg-[#07090d] border border-technical rounded-sm text-white focus:outline-none focus:border-amber-500 cursor-pointer"
+                    className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#DCD5CD] rounded-lg text-[#26211F] focus:outline-none focus:border-[#C87A5B] focus:bg-white cursor-pointer"
                   >
                     <option value="telemetry_access">Underground Stope Telemetry Access</option>
                     <option value="backtest_audit">Historical Backtest Data Verification</option>
@@ -165,21 +165,21 @@ export default function ContactUsPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-slate-300 font-medium block">
+                <label className="text-[#26211F] font-medium block">
                   Priority Status
                 </label>
                 <div className="grid grid-cols-3 gap-3">
                   {[
-                    { id: 'standard', label: 'Standard (Routine)', color: 'text-slate-300' },
-                    { id: 'urgent', label: 'Operational Priority', color: 'text-amber-400' },
-                    { id: 'emergency', label: 'Critical / Shortfall Alert', color: 'text-rose-400' },
+                    { id: 'standard', label: 'Standard (Routine)', color: 'text-[#5A524F]' },
+                    { id: 'urgent', label: 'Operational Priority', color: 'text-[#C87A5B] font-semibold' },
+                    { id: 'emergency', label: 'Critical / Shortfall Alert', color: 'text-rose-700 font-semibold' },
                   ].map((p) => (
                     <label
                       key={p.id}
-                      className={`flex items-center gap-2 p-2.5 rounded-sm border cursor-pointer transition-all ${
+                      className={`flex items-center gap-2 p-2.5 rounded-lg border cursor-pointer transition-all ${
                         formData.priority === p.id
-                          ? 'bg-white/5 border-amber-500/80 text-white font-semibold'
-                          : 'bg-[#07090d] border-technical text-slate-400 hover:text-white'
+                          ? 'bg-[#EDC7B7]/40 border-[#C87A5B] text-[#26211F] font-semibold shadow-sm'
+                          : 'bg-[#FAF7F2] border-[#DCD5CD] text-[#5A524F] hover:text-[#26211F]'
                       }`}
                     >
                       <input
@@ -188,7 +188,7 @@ export default function ContactUsPage() {
                         value={p.id}
                         checked={formData.priority === p.id}
                         onChange={handleChange}
-                        className="accent-amber-500"
+                        className="accent-[#C87A5B]"
                       />
                       <span className={`text-[11px] ${p.color}`}>{p.label}</span>
                     </label>
@@ -197,8 +197,8 @@ export default function ContactUsPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-slate-300 font-medium block">
-                  Detailed Operational Query <span className="text-rose-400">*</span>
+                <label className="text-[#26211F] font-medium block">
+                  Detailed Operational Query <span className="text-rose-600">*</span>
                 </label>
                 <textarea
                   name="message"
@@ -207,14 +207,14 @@ export default function ContactUsPage() {
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Specify mine block, equipment telemetry parameters, or statutory reconciliation requirements..."
-                  className="w-full px-3 py-2 bg-[#07090d] border border-technical rounded-sm text-white focus:outline-none focus:border-amber-500"
+                  className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#DCD5CD] rounded-lg text-[#26211F] focus:outline-none focus:border-[#C87A5B] focus:bg-white"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full py-3 bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs uppercase tracking-wider rounded-sm flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50"
+                className="w-full py-3 bg-[#C87A5B] hover:bg-[#B85D3B] text-white font-bold text-xs uppercase tracking-wider rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50 shadow-sm"
               >
                 {submitting ? (
                   <span>Dispatching Telemetric Packet...</span>
@@ -232,26 +232,26 @@ export default function ContactUsPage() {
         {/* Right Info Box: Direct Telemetry Access */}
         <div className="lg:col-span-5 space-y-6">
           <BlockRevealImage
-            src={bbcFeature}
-            alt="Technical Facility and Haul Road"
+            src={indianExcavatorFacility}
+            alt="Central India Mining Facility and Terrace Extraction Operations"
             aspectRatio="aspect-[16/10]"
-            blockColor="bg-[#d4a574]"
+            blockColor="bg-[#C87A5B]"
           />
 
-          <div className="story-card p-6 border-l-2 border-l-amber-500 space-y-3">
-            <h4 className="font-sans text-lg text-white font-bold">
+          <div className="bg-white border border-[#DCD5CD] p-6 border-l-4 border-l-[#C87A5B] rounded-xl shadow-sm space-y-3">
+            <h4 className="font-sans text-lg text-[#26211F] font-bold">
               Direct RESTful API Access
             </h4>
-            <p className="text-xs text-slate-400 leading-relaxed font-sans">
+            <p className="text-xs text-[#5A524F] leading-relaxed font-sans">
               All spatial rasters, quantile forecast distributions, and historical walk-forward holdouts are available via programmatic REST endpoints for integrated enterprise dispatch systems.
             </p>
 
-            <div className="bg-[#07090d] p-3 rounded-sm border border-technical font-sans text-xs space-y-1.5 text-slate-300">
-              <div className="text-amber-400 font-bold"># Live Endpoint Examples:</div>
-              <div>GET /api/forecast/production</div>
-              <div>GET /api/historical/backtest</div>
-              <div>GET /api/prospectivity/map</div>
-              <div>POST /api/simulate/scenario</div>
+            <div className="bg-[#FAF7F2] p-3 rounded-lg border border-[#DCD5CD] font-sans text-xs space-y-1.5 text-[#5A524F]">
+              <div className="text-[#C87A5B] font-bold font-mono"># Live Endpoint Examples:</div>
+              <div className="font-mono">GET /api/forecast/production</div>
+              <div className="font-mono">GET /api/historical/backtest</div>
+              <div className="font-mono">GET /api/prospectivity/map</div>
+              <div className="font-mono">POST /api/simulate/scenario</div>
             </div>
 
             <div className="pt-2">
@@ -259,7 +259,7 @@ export default function ContactUsPage() {
                 href="/docs"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-sans text-amber-400 hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-sans text-[#C87A5B] font-semibold hover:underline"
               >
                 <span>View Complete OpenAPI Specification</span>
                 <ExternalLink className="w-3 h-3" />
@@ -267,14 +267,14 @@ export default function ContactUsPage() {
             </div>
           </div>
 
-          <div className="story-card p-6 space-y-2">
-            <h4 className="font-sans text-lg text-white font-bold">
+          <div className="bg-white border border-[#DCD5CD] p-6 rounded-xl shadow-sm space-y-2">
+            <h4 className="font-sans text-lg text-[#26211F] font-bold">
               Emergency Surface Dispatch
             </h4>
-            <p className="text-xs text-slate-400 font-sans leading-relaxed">
+            <p className="text-xs text-[#5A524F] font-sans leading-relaxed">
               In case of stope geological instabilities or critical equipment failure during an active underground cycle, bypass the digital form and contact the shaft control room directly.
             </p>
-            <div className="pt-2 flex items-center gap-2 text-rose-400 font-sans text-xs font-bold">
+            <div className="pt-2 flex items-center gap-2 text-rose-700 font-sans text-xs font-bold">
               <Phone className="w-3.5 h-3.5" />
               <span>Emergency Dispatch Hotline: +91 7632 245 999</span>
             </div>

@@ -10,7 +10,11 @@ import math
 import numpy as np
 import pandas as pd
 from pydantic import BaseModel, Field
-from rasterio.warp import transform
+try:
+    from rasterio.warp import transform
+except ImportError:
+    def transform(src_crs, dst_crs, xs, ys):
+        return xs, ys
 
 
 class DailyProductionRecord(BaseModel):

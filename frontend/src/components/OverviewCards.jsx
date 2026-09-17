@@ -24,77 +24,77 @@ export default function OverviewCards({ forecast, overview, selectedBlock }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
       {/* 1. Monthly Production Target */}
-      <div className="bg-[#0a0d14] border border-technical p-3 sm:p-3.5 rounded flex flex-col justify-between">
+      <div className="bg-white border border-[#DCD5CD] p-3 sm:p-3.5 rounded-xl shadow-sm flex flex-col justify-between">
         <div>
-          <div className="text-[10px] font-mono uppercase text-slate-400 tracking-wider mb-1">
+          <div className="text-[10px] font-mono uppercase text-[#8A817D] tracking-wider mb-1">
             Planned Target
           </div>
-          <div className="text-2xl font-bold font-mono text-white tracking-tight">
+          <div className="text-2xl font-bold font-mono text-[#26211F] tracking-tight">
             {target.toLocaleString()}{' '}
-            <span className="text-xs font-normal text-slate-400">t</span>
+            <span className="text-xs font-normal text-[#8A817D]">t</span>
           </div>
         </div>
-        <div className="text-[10px] text-slate-400 mt-2 pt-2 border-t border-technical flex items-center justify-between font-mono">
-          <span className="text-slate-500">Scheduled</span>
-          <span className="text-slate-200">{selectedBlock}</span>
+        <div className="text-[10px] text-[#5A524F] mt-2 pt-2 border-t border-[#DCD5CD] flex items-center justify-between font-mono">
+          <span className="text-[#8A817D]">Scheduled</span>
+          <span className="text-[#26211F] font-semibold">{selectedBlock}</span>
         </div>
       </div>
 
       {/* 2. Model Production Forecast */}
-      <div className="bg-[#0a0d14] border border-technical p-3 sm:p-3.5 rounded flex flex-col justify-between">
+      <div className="bg-white border border-[#DCD5CD] p-3 sm:p-3.5 rounded-xl shadow-sm flex flex-col justify-between">
         <div>
-          <div className="flex items-center justify-between text-[10px] font-mono uppercase text-slate-400 tracking-wider mb-1">
+          <div className="flex items-center justify-between text-[10px] font-mono uppercase text-[#8A817D] tracking-wider mb-1">
             <span>Forecast (P50)</span>
-            <span className="text-slate-500 text-[9px]">Simulation</span>
+            <span className="text-[#8A817D] text-[9px]">Simulation</span>
           </div>
-          <div className="text-2xl font-bold font-mono text-white tracking-tight">
+          <div className="text-2xl font-bold font-mono text-[#26211F] tracking-tight">
             {p50.toLocaleString()}{' '}
-            <span className="text-xs font-normal text-slate-400">t</span>
+            <span className="text-xs font-normal text-[#8A817D]">t</span>
           </div>
         </div>
-        <div className="text-[10px] text-slate-400 mt-2 pt-2 border-t border-technical flex items-center justify-between font-mono">
-          <span className="text-slate-500">90% Range</span>
-          <span className="text-slate-300">[{p10.toLocaleString()} - {p90.toLocaleString()}]</span>
+        <div className="text-[10px] text-[#5A524F] mt-2 pt-2 border-t border-[#DCD5CD] flex items-center justify-between font-mono">
+          <span className="text-[#8A817D]">90% Range</span>
+          <span className="text-[#5A524F]">[{p10.toLocaleString()} - {p90.toLocaleString()}]</span>
         </div>
       </div>
 
       {/* 3. Expected Shortfall Deficit */}
-      <div className="bg-[#0a0d14] border border-technical p-3 sm:p-3.5 rounded flex flex-col justify-between">
+      <div className="bg-white border border-[#DCD5CD] p-3 sm:p-3.5 rounded-xl shadow-sm flex flex-col justify-between">
         <div>
-          <div className="text-[10px] font-mono uppercase text-slate-400 tracking-wider mb-1">
+          <div className="text-[10px] font-mono uppercase text-[#8A817D] tracking-wider mb-1">
             Expected Shortfall
           </div>
-          <div className="text-2xl font-bold font-mono text-rose-400 tracking-tight">
+          <div className="text-2xl font-bold font-mono text-rose-700 tracking-tight">
             {shortfall > 0 ? `-${shortfall.toLocaleString()}` : '0'}{' '}
-            <span className="text-xs font-normal text-slate-400">t</span>
+            <span className="text-xs font-normal text-[#8A817D]">t</span>
           </div>
         </div>
-        <div className="text-[10px] text-slate-400 mt-2 pt-2 border-t border-technical flex items-center justify-between font-mono">
-          <span className="text-slate-500">Variance</span>
-          <span className="text-rose-300 font-semibold">{shortfall > 0 ? `${shortfallPct}%` : '0%'}</span>
+        <div className="text-[10px] text-[#5A524F] mt-2 pt-2 border-t border-[#DCD5CD] flex items-center justify-between font-mono">
+          <span className="text-[#8A817D]">Variance</span>
+          <span className="text-rose-700 font-semibold">{shortfall > 0 ? `${shortfallPct}%` : '0%'}</span>
         </div>
       </div>
 
       {/* 4. Shortfall Probability & Risk */}
-      <div className="bg-[#0a0d14] border border-technical p-3 sm:p-3.5 rounded flex flex-col justify-between">
+      <div className="bg-white border border-[#DCD5CD] p-3 sm:p-3.5 rounded-xl shadow-sm flex flex-col justify-between">
         <div>
-          <div className="flex items-center justify-between text-[10px] font-mono uppercase text-slate-400 tracking-wider mb-1">
+          <div className="flex items-center justify-between text-[10px] font-mono uppercase text-[#8A817D] tracking-wider mb-1">
             <span>Risk Level</span>
-            <span className="flex items-center gap-1 font-mono text-[10px] text-slate-300 font-semibold">
+            <span className="flex items-center gap-1 font-mono text-[10px] text-[#26211F] font-semibold">
               <span className={`w-1.5 h-1.5 rounded-full ${riskDotColor}`}></span>
               {riskLevel}
             </span>
           </div>
-          <div className="text-2xl font-bold font-mono text-white tracking-tight">
+          <div className="text-2xl font-bold font-mono text-[#26211F] tracking-tight">
             {prob}%{' '}
-            <span className="text-xs font-normal text-slate-400">risk</span>
+            <span className="text-xs font-normal text-[#8A817D]">risk</span>
           </div>
         </div>
-        <div className="text-[10px] text-slate-400 mt-2 pt-2 border-t border-technical flex items-center justify-between font-mono">
-          <span className="text-slate-500">Root Cause</span>
+        <div className="text-[10px] text-[#5A524F] mt-2 pt-2 border-t border-[#DCD5CD] flex items-center justify-between font-mono">
+          <span className="text-[#8A817D]">Root Cause</span>
           <button
             onClick={() => navigate('/explain')}
-            className="text-industrial-amber hover:underline font-semibold flex items-center gap-1 cursor-pointer"
+            className="text-[#C87A5B] hover:underline font-semibold flex items-center gap-1 cursor-pointer"
           >
             <span>Inspect</span>
             <ArrowRight className="w-2.5 h-2.5" />

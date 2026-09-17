@@ -855,219 +855,223 @@ export default function DigitalMineMap({
 
   return (
     <div className="panel overflow-hidden flex flex-col h-[calc(100vh-170px)] min-h-[580px]">
-      {/* Top Map Control Bar */}
-      <div className="bg-[#0a0d14] border-b border-technical px-3 py-1.5 flex flex-wrap items-center justify-between gap-2 text-xs">
-        {/* Left: Mine Selector & View Mode */}
-        <div className="flex items-center flex-wrap gap-2">
-          {/* State-Grouped Mine Selector */}
-          <div className="flex items-center gap-1.5 bg-[#0f141f] px-2.5 py-1 rounded border border-technical">
-            <span className="text-slate-400 font-mono text-[11px]">MINE:</span>
-            <select
-              value={selectedRealMineId}
-              onChange={(e) => handleSelectRealMine(e.target.value)}
-              className="bg-transparent text-industrial-amber font-mono font-bold text-xs focus:outline-none cursor-pointer"
-            >
-              {Object.keys(minesByState).length > 0 ? (
-                Object.entries(minesByState).map(([stateName, minesList]) => (
-                  <optgroup key={stateName} label={stateName} className="bg-[#0a0d14] text-slate-400 font-bold">
-                    {minesList.map((m) => (
-                      <option key={m.mine_id} value={m.mine_id} className="bg-[#0a0d14] text-slate-100">
-                        {m.mine_name} {m.mine_id === 'MOIL_BALAGHAT' ? '★ (Exploration AOI)' : ''}
-                      </option>
-                    ))}
-                  </optgroup>
-                ))
-              ) : (
-                <option value="MOIL_BALAGHAT">Balaghat (Madhya Pradesh)</option>
-              )}
-            </select>
-          </div>
-
-          {/* View Mode Switcher */}
-          <div className="flex items-center bg-[#07090d] p-0.5 rounded border border-technical">
-            <button
-              onClick={() => {
-                setMapViewMode('mine_detail');
-                if (selectedMineObj && mapInstanceRef.current) {
-                  mapInstanceRef.current.flyTo([selectedMineObj.latitude, selectedMineObj.longitude], isBalaghatSelected ? 14 : 13, { duration: 1 });
-                }
-              }}
-              className={`px-2 py-0.5 rounded text-[11px] font-mono transition-colors ${
-                mapViewMode === 'mine_detail'
-                  ? 'bg-industrial-amber text-black font-bold'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Mine View
-            </button>
-            <button
-              onClick={handleFitGlobalBelt}
-              className={`px-2 py-0.5 rounded text-[11px] font-mono transition-colors ${
-                mapViewMode === 'global_belt'
-                  ? 'bg-industrial-amber text-black font-bold'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Belt View
-            </button>
-          </div>
-        </div>
-
-        {/* Right: Layer Toggles & Basemap Selector */}
-        <div className="flex flex-wrap items-center gap-1.5 font-mono text-[11px]">
-          <BasemapSelector
-            currentBasemap={currentBasemap}
-            onSelectBasemap={setCurrentBasemap}
-          />
-
-          {/* Toggle: Exploration (30m Grid) */}
-          <button
-            onClick={() => setShowRealProspectivity(!showRealProspectivity)}
-            disabled={!isBalaghatSelected}
-            className={`px-2 py-1 rounded border transition-colors cursor-pointer ${
-              !isBalaghatSelected
-                ? 'opacity-30 cursor-not-allowed bg-[#0b0e14] border-technical text-slate-600'
-                : showRealProspectivity
-                ? 'bg-amber-950/40 border-amber-500/60 text-amber-300 font-medium'
-                : 'bg-[#0b0e14] border-technical text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            Exploration (30m)
-          </button>
-
-          {/* Toggle: Site Anchors */}
-          <button
-            onClick={() => setShowEvidenceLayer(!showEvidenceLayer)}
-            disabled={!isBalaghatSelected}
-            className={`px-2 py-1 rounded border transition-colors cursor-pointer ${
-              !isBalaghatSelected
-                ? 'opacity-30 cursor-not-allowed bg-[#0b0e14] border-technical text-slate-600'
-                : showEvidenceLayer
-                ? 'bg-amber-950/40 border-amber-500/60 text-amber-300 font-medium'
-                : 'bg-[#0b0e14] border-technical text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            Site Anchors
-          </button>
-
-          {/* Toggle: 10-Mines */}
-          <button
-            onClick={() => setShowRealMines(!showRealMines)}
-            className={`px-2 py-1 rounded border transition-colors cursor-pointer ${
-              showRealMines
-                ? 'bg-amber-950/40 border-amber-500/60 text-amber-300 font-medium'
-                : 'bg-[#0b0e14] border-technical text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            10 Mines
-          </button>
-
-          {/* Mine Overview Drawer Toggle */}
-          <button
-            onClick={() => setShowOverviewCard(!showOverviewCard)}
-            className={`px-2 py-1 rounded border transition-colors cursor-pointer ${
-              showOverviewCard
-                ? 'bg-amber-950/40 border-amber-500/60 text-amber-300 font-medium'
-                : 'bg-[#0b0e14] border-technical text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            Overview
-          </button>
-        </div>
-      </div>
-
-      {/* Real Exploration Sub-Bar (Active for Balaghat) */}
-      {isBalaghatSelected ? (
-        <div className="bg-[#080c14] border-b border-technical px-3 py-1.5 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-300">
-          {/* Left: Model Dimension Tabs */}
-          <div className="flex items-center flex-wrap gap-1.5">
-            <span className="text-[10px] font-bold text-slate-400 flex items-center gap-1 uppercase tracking-wider font-mono">
-              <Target className="w-3 h-3 text-amber-400" />
-              Layer:
-            </span>
-
-            {REAL_PROSPECTIVITY_LAYERS.map((layer) => {
-              const isActive = activeScoreLayer === layer.id;
-              return (
-                <button
-                  key={layer.id}
-                  onClick={() => setActiveScoreLayer(layer.id)}
-                  className={`px-2.5 py-1 rounded text-[10px] font-mono font-semibold transition-all border cursor-pointer ${
-                    isActive
-                      ? 'bg-amber-500 text-slate-950 font-bold border-amber-400 shadow-sm shadow-amber-500/20'
-                      : 'bg-[#0b0e14] border-technical text-slate-400 hover:text-amber-300 hover:border-amber-500/50'
-                  }`}
-                  title={layer.description}
-                >
-                  {layer.shortName}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Right: Score Cutoff Filter & Metadata Drawer Toggle */}
+      {/* Top Map Control Bar - Solid Creamy White Enterprise Panel */}
+      <div id="map-control-bar" className="bg-[#faf8f5] text-stone-900 border-b-2 border-stone-300 shadow-md">
+        <div className="border-b border-stone-200 px-3 py-2 flex flex-wrap items-center justify-between gap-2 text-xs text-stone-800">
+          {/* Left: Mine Selector & View Mode */}
           <div className="flex items-center flex-wrap gap-2">
-            {/* Cutoff Slider */}
-            <div className="flex items-center gap-1.5 bg-[#0b0e14] px-2 py-1 rounded border border-technical">
-              <Sliders className="w-3 h-3 text-amber-400" />
-              <span className="text-slate-400 font-medium text-[11px]">Cutoff:</span>
-              <input
-                type="range"
-                min="0.00"
-                max="0.90"
-                step="0.05"
-                value={realScoreCutoff}
-                onChange={(e) => setRealScoreCutoff(parseFloat(e.target.value))}
-                className="w-20 accent-amber-500 cursor-pointer"
-              />
-              <span className="font-mono text-amber-400 font-bold w-10 text-right">
-                {realScoreCutoff > 0 ? `≥ ${realScoreCutoff.toFixed(2)}` : 'ALL'}
-              </span>
+            {/* State-Grouped Mine Selector */}
+            <div id="tour-mine-selector" className="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-md border border-stone-300 shadow-xs">
+              <span className="text-stone-500 font-mono text-[11px] font-bold">MINE:</span>
+              <select
+                value={selectedRealMineId}
+                onChange={(e) => handleSelectRealMine(e.target.value)}
+                className="bg-transparent text-amber-900 font-mono font-bold text-xs focus:outline-none cursor-pointer"
+              >
+                {Object.keys(minesByState).length > 0 ? (
+                  Object.entries(minesByState).map(([stateName, minesList]) => (
+                    <optgroup key={stateName} label={stateName} className="bg-stone-50 text-stone-700 font-bold">
+                      {minesList.map((m) => (
+                        <option key={m.mine_id} value={m.mine_id} className="bg-white text-stone-900">
+                          {m.mine_name} {m.mine_id === 'MOIL_BALAGHAT' ? '★ (Exploration AOI)' : ''}
+                        </option>
+                      ))}
+                    </optgroup>
+                  ))
+                ) : (
+                  <option value="MOIL_BALAGHAT">Balaghat (Madhya Pradesh)</option>
+                )}
+              </select>
             </div>
 
-            {/* Scientific Limitations & Provenance Drawer Toggle */}
+            {/* View Mode Switcher */}
+            <div className="flex items-center bg-[#EEE6DD] p-0.5 rounded-md border border-[#DCD5CD]">
+              <button
+                onClick={() => {
+                  setMapViewMode('mine_detail');
+                  if (selectedMineObj && mapInstanceRef.current) {
+                    mapInstanceRef.current.flyTo([selectedMineObj.latitude, selectedMineObj.longitude], isBalaghatSelected ? 14 : 13, { duration: 1 });
+                  }
+                }}
+                className={`px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold transition-colors cursor-pointer ${
+                  mapViewMode === 'mine_detail'
+                    ? 'bg-[#C87A5B] text-white font-bold shadow-xs'
+                    : 'text-stone-700 hover:text-stone-950'
+                }`}
+              >
+                Mine View
+              </button>
+              <button
+                onClick={handleFitGlobalBelt}
+                className={`px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold transition-colors cursor-pointer ${
+                  mapViewMode === 'global_belt'
+                    ? 'bg-[#C87A5B] text-white font-bold shadow-xs'
+                    : 'text-stone-700 hover:text-stone-950'
+                }`}
+              >
+                Belt View
+              </button>
+            </div>
+          </div>
+
+          {/* Right: Layer Toggles & Basemap Selector */}
+          <div className="flex flex-wrap items-center gap-1.5 font-mono text-[11px]">
+            <BasemapSelector
+              currentBasemap={currentBasemap}
+              onSelectBasemap={setCurrentBasemap}
+              theme="light"
+            />
+
+            {/* Toggle: Exploration (30m Grid) */}
             <button
-              type="button"
-              onClick={() => setShowLimitationsDrawer(!showLimitationsDrawer)}
-              className="flex items-center gap-1.5 px-2.5 py-1 bg-[#0b0e14] hover:bg-[#141b26] rounded border border-technical text-amber-300 text-[11px] font-medium transition-colors cursor-pointer"
+              id="tour-toggle-exploration"
+              onClick={() => setShowRealProspectivity(!showRealProspectivity)}
+              disabled={!isBalaghatSelected}
+              className={`px-2.5 py-1 rounded-md border text-[11px] font-mono transition-colors cursor-pointer ${
+                !isBalaghatSelected
+                  ? 'opacity-40 cursor-not-allowed bg-stone-100 border-stone-200 text-stone-400'
+                  : showRealProspectivity
+                  ? 'bg-[#C87A5B] text-white border-[#B85D3B] font-semibold shadow-xs'
+                  : 'bg-white border-[#DCD5CD] text-stone-700 hover:bg-stone-50 hover:text-stone-900 shadow-xs font-medium'
+              }`}
             >
-              <FileText className="w-3.5 h-3.5 text-amber-400" />
-              <span>Methodology and Limitations</span>
-              <ChevronDown className={`w-3 h-3 text-slate-400 transition-transform ${showLimitationsDrawer ? 'rotate-180' : ''}`} />
+              Exploration (30m)
+            </button>
+
+            {/* Toggle: Site Anchors */}
+            <button
+              onClick={() => setShowEvidenceLayer(!showEvidenceLayer)}
+              disabled={!isBalaghatSelected}
+              className={`px-2.5 py-1 rounded-md border text-[11px] font-mono transition-colors cursor-pointer ${
+                !isBalaghatSelected
+                  ? 'opacity-40 cursor-not-allowed bg-stone-100 border-stone-200 text-stone-400'
+                  : showEvidenceLayer
+                  ? 'bg-[#C87A5B] text-white border-[#B85D3B] font-semibold shadow-xs'
+                  : 'bg-white border-[#DCD5CD] text-stone-700 hover:bg-stone-50 hover:text-stone-900 shadow-xs font-medium'
+              }`}
+            >
+              Site Anchors
+            </button>
+
+            {/* Toggle: 10-Mines */}
+            <button
+              onClick={() => setShowRealMines(!showRealMines)}
+              className={`px-2.5 py-1 rounded-md border text-[11px] font-mono transition-colors cursor-pointer ${
+                showRealMines
+                  ? 'bg-[#C87A5B] text-white border-[#B85D3B] font-semibold shadow-xs'
+                  : 'bg-white border-[#DCD5CD] text-stone-700 hover:bg-stone-50 hover:text-stone-900 shadow-xs font-medium'
+              }`}
+            >
+              10 Mines
+            </button>
+
+            {/* Mine Overview Drawer Toggle */}
+            <button
+              onClick={() => setShowOverviewCard(!showOverviewCard)}
+              className={`px-2.5 py-1 rounded-md border text-[11px] font-mono transition-colors cursor-pointer ${
+                showOverviewCard
+                  ? 'bg-[#C87A5B] text-white border-[#B85D3B] font-semibold shadow-xs'
+                  : 'bg-white border-[#DCD5CD] text-stone-700 hover:bg-stone-50 hover:text-stone-900 shadow-xs font-medium'
+              }`}
+            >
+              Overview
             </button>
           </div>
         </div>
-      ) : (
-        /* Non-Balaghat Status Banner */
-        <div className="bg-slate-950 border-b border-slate-800 px-4 py-1.5 flex items-center justify-between text-xs text-slate-400">
-          <div className="flex items-center gap-2">
-            <Info className="w-3.5 h-3.5 text-slate-500" />
-            <span>Real exploration-priority experiment is currently available only for <strong className="text-slate-300">{selectedMineObj?.mine_name || 'Balaghat'}</strong>.</span>
+
+        {/* Real Exploration Sub-Bar (Active for Balaghat) */}
+        {isBalaghatSelected ? (
+          <div id="tour-exploration-subbar" className="bg-[#FAF7F2] border-b border-[#DCD5CD] px-3 py-1.5 flex flex-wrap items-center justify-between gap-2 text-xs text-stone-800">
+            {/* Left: Model Dimension Tabs */}
+            <div className="flex items-center flex-wrap gap-1.5">
+              <span className="text-[10px] font-bold text-stone-600 flex items-center gap-1 uppercase tracking-wider font-mono">
+                <Target className="w-3 h-3 text-[#C87A5B]" />
+                Layer:
+              </span>
+
+              {REAL_PROSPECTIVITY_LAYERS.map((layer) => {
+                const isActive = activeScoreLayer === layer.id;
+                return (
+                  <button
+                    key={layer.id}
+                    onClick={() => setActiveScoreLayer(layer.id)}
+                    className={`px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold transition-all border cursor-pointer ${
+                      isActive
+                        ? 'bg-[#C87A5B] text-white font-bold border-[#B85D3B] shadow-xs'
+                        : 'bg-white border-[#DCD5CD] text-stone-700 hover:bg-stone-50 hover:text-stone-900 shadow-xs font-medium'
+                    }`}
+                    title={layer.description}
+                  >
+                    {layer.shortName}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Right: Score Cutoff Filter & Metadata Drawer Toggle */}
+            <div className="flex items-center flex-wrap gap-2">
+              {/* Cutoff Slider */}
+              <div id="tour-cutoff-slider" className="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-md border border-[#DCD5CD] shadow-xs">
+                <Sliders className="w-3 h-3 text-[#C87A5B]" />
+                <span className="text-stone-600 font-medium text-[11px]">Cutoff:</span>
+                <input
+                  type="range"
+                  min="0.00"
+                  max="0.90"
+                  step="0.05"
+                  value={realScoreCutoff}
+                  onChange={(e) => setRealScoreCutoff(parseFloat(e.target.value))}
+                  className="w-20 accent-[#C87A5B] cursor-pointer"
+                />
+                <span className="font-mono text-[#C87A5B] font-bold w-10 text-right">
+                  {realScoreCutoff > 0 ? `≥ ${realScoreCutoff.toFixed(2)}` : 'ALL'}
+                </span>
+              </div>
+
+              {/* Scientific Limitations & Provenance Drawer Toggle */}
+              <button
+                type="button"
+                onClick={() => setShowLimitationsDrawer(!showLimitationsDrawer)}
+                className="flex items-center gap-1.5 px-2.5 py-1 bg-white hover:bg-stone-50 rounded-md border border-[#DCD5CD] text-stone-800 text-[11px] font-medium transition-colors cursor-pointer shadow-xs"
+              >
+                <FileText className="w-3.5 h-3.5 text-[#C87A5B]" />
+                <span>Methodology and Limitations</span>
+                <ChevronDown className={`w-3 h-3 text-stone-500 transition-transform ${showLimitationsDrawer ? 'rotate-180' : ''}`} />
+              </button>
+            </div>
           </div>
-          <span className="text-[10px] text-slate-500 italic">Data Availability Status: Statutory Registry Active (10 MOIL Mines)</span>
-        </div>
-      )}
+        ) : (
+          /* Non-Balaghat Status Banner */
+          <div className="bg-stone-100 border-b border-stone-300 px-4 py-1.5 flex items-center justify-between text-xs text-stone-700">
+            <div className="flex items-center gap-2">
+              <Info className="w-3.5 h-3.5 text-stone-500" />
+              <span>Real exploration-priority experiment is currently available only for <strong className="text-stone-900">{selectedMineObj?.mine_name || 'Balaghat'}</strong>.</span>
+            </div>
+            <span className="text-[10px] text-stone-500 italic">Data Availability Status: Statutory Registry Active (10 MOIL Mines)</span>
+          </div>
+        )}
+      </div>
 
       {/* Expandable Scientific Limitations & Provenance Drawer */}
       {showLimitationsDrawer && realProspectivityMeta && (
-        <div className="bg-slate-900/98 border-b border-amber-900/50 p-4 text-xs text-slate-300 animate-in fade-in duration-200">
+        <div className="bg-[#faf8f5] border-b border-stone-300 p-4 text-xs text-stone-800 animate-in fade-in duration-200">
           <div className="flex items-start justify-between gap-4 mb-3">
             <div>
-              <div className="font-bold text-white text-sm flex items-center gap-2 mb-1">
-                <ShieldCheck className="w-4 h-4 text-amber-400" />
+              <div className="font-bold text-stone-950 text-sm flex items-center gap-2 mb-1">
+                <ShieldCheck className="w-4 h-4 text-amber-700" />
                 <span>Phase 9B Real-Data Prospectivity Experiment — Scientific Governance</span>
-                <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700 text-[10px] font-mono font-bold">
+                <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-mono font-bold">
                   DERIVED FROM REAL DATA
                 </span>
               </div>
-              <p className="text-slate-400 text-[11px] leading-relaxed">
+              <p className="text-stone-600 text-[11px] leading-relaxed">
                 27,720 real 30m Sentinel-2 and DEM cells covering the Balaghat mining lease AOI (5.03 km × 4.96 km).
                 Prioritizes candidate exploration targets through unsupervised anomaly detection and positive-anchor similarity.
               </p>
             </div>
             <button
               onClick={() => setShowLimitationsDrawer(false)}
-              className="text-slate-400 hover:text-white text-xs px-2 py-1 rounded bg-slate-800 border border-slate-700"
+              className="text-stone-600 hover:text-stone-900 text-xs px-2.5 py-1 rounded-md bg-stone-100 border border-stone-300 hover:bg-stone-200 cursor-pointer"
             >
               Close
             </button>
@@ -1075,12 +1079,12 @@ export default function DigitalMineMap({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Left: Scientific Limitations */}
-            <div className="p-3 rounded-lg bg-slate-950/80 border border-amber-900/40">
-              <div className="font-bold text-amber-300 mb-2 flex items-center gap-1.5 text-[11px] uppercase tracking-wide">
-                <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
+            <div className="p-3.5 rounded-lg bg-white border border-stone-300 shadow-xs">
+              <div className="font-bold text-amber-800 mb-2 flex items-center gap-1.5 text-[11px] uppercase tracking-wide">
+                <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
                 Critical Scientific Limitations
               </div>
-              <ul className="space-y-1.5 text-[11px] text-slate-300 list-disc list-inside leading-relaxed">
+              <ul className="space-y-1.5 text-[11px] text-stone-700 list-disc list-inside leading-relaxed">
                 <li><strong>No Confirmed Negative Labels:</strong> In mineral exploration, negative labels require published barren drillhole assay logs, which are not public. Background is strictly unlabeled.</li>
                 <li><strong>Single Positive Spatial Anchor:</strong> Only ONE verified spatial positive deposit anchor exists inside the AOI (Bharweli shaft portal, <code>GRID-13860</code>).</li>
                 <li><strong>Heuristic Ranking, Not Probability:</strong> Exploration priority is a multi-method ranking heuristic. It is NOT a calibrated probability of manganese mineralization.</li>
@@ -1090,12 +1094,12 @@ export default function DigitalMineMap({
             </div>
 
             {/* Right: Data Provenance & Anchor Role */}
-            <div className="p-3 rounded-lg bg-slate-950/80 border border-slate-800">
-              <div className="font-bold text-indigo-300 mb-2 flex items-center gap-1.5 text-[11px] uppercase tracking-wide">
-                <Database className="w-3.5 h-3.5 text-indigo-400" />
+            <div className="p-3.5 rounded-lg bg-white border border-stone-300 shadow-xs">
+              <div className="font-bold text-indigo-900 mb-2 flex items-center gap-1.5 text-[11px] uppercase tracking-wide">
+                <Database className="w-3.5 h-3.5 text-indigo-700" />
                 Data Provenance and Anchor Role
               </div>
-              <div className="space-y-2 text-[11px] text-slate-300">
+              <div className="space-y-2 text-[11px] text-stone-700">
                 <div>
                   <strong>Remote Sensing:</strong> Sentinel-2A Level-2A (B02-B12, NDVI, NDWI, band ratios; 2024-04-17).
                 </div>
@@ -1299,15 +1303,15 @@ export default function DigitalMineMap({
 
         {/* Real Exploration Legend (Bottom-Left in Mine Detail View for Balaghat) */}
         {mapViewMode === 'mine_detail' && isBalaghatSelected && showRealProspectivity && isLegendVisible && (
-          <div className="absolute bottom-4 left-4 bg-[#07090d]/95 backdrop-blur-md border border-technical p-3.5 rounded shadow-xl text-xs z-[1000] max-w-xs pointer-events-auto font-mono">
-            <div className="font-bold text-white mb-1 flex items-center justify-between font-sans text-sm uppercase">
-              <span className="text-industrial-amber">{activeModelConfig.name}</span>
+          <div className="absolute bottom-4 left-4 bg-[#faf8f5]/95 backdrop-blur-md border border-stone-300 p-3.5 rounded shadow-xl text-xs z-[1000] max-w-xs pointer-events-auto font-mono text-stone-800">
+            <div className="font-bold text-stone-900 mb-1 flex items-center justify-between font-sans text-sm uppercase">
+              <span className="text-amber-800">{activeModelConfig.name}</span>
               <div className="flex items-center gap-2">
-                <span className="text-[10px] text-slate-500">30m Cell</span>
+                <span className="text-[10px] text-stone-500 font-normal">30m Cell</span>
                 <button
                   type="button"
                   onClick={() => setIsLegendVisible(false)}
-                  className="p-1 text-slate-400 hover:text-white transition-colors cursor-pointer rounded hover:bg-white/10"
+                  className="p-1 text-stone-500 hover:text-stone-900 transition-colors cursor-pointer rounded hover:bg-stone-200/60"
                   title="Hide map legend"
                 >
                   <EyeOff className="w-3.5 h-3.5" />
@@ -1318,7 +1322,7 @@ export default function DigitalMineMap({
             {/* Gradient Colorbar */}
             <div className="my-2">
               <div
-                className="h-2.5 w-full rounded-none border border-technical"
+                className="h-2.5 w-full rounded-none border border-stone-300"
                 style={{
                   background: activeScoreLayer === 'exploration_priority_score'
                     ? 'linear-gradient(to right, #334155 0%, #06b6d4 35%, #eab308 50%, #f97316 65%, #dc2626 100%)'
@@ -1329,7 +1333,7 @@ export default function DigitalMineMap({
                     : 'linear-gradient(to right, #1e293b 0%, #0284c7 40%, #14b8a6 70%, #10b981 100%)'
                 }}
               />
-              <div className="flex justify-between text-[10px] text-slate-500 mt-1 font-sans">
+              <div className="flex justify-between text-[10px] text-stone-500 mt-1 font-sans">
                 <span>0.0 (Low Target)</span>
                 <span>0.50</span>
                 <span>1.0 (High Target)</span>
@@ -1337,27 +1341,27 @@ export default function DigitalMineMap({
             </div>
 
             {/* Legend Indicators */}
-            <div className="space-y-1.5 text-slate-300 text-[11px] pt-1 border-t border-technical font-sans">
+            <div className="space-y-1.5 text-stone-700 text-[11px] pt-1.5 border-t border-stone-200 font-sans">
               <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-none bg-red-600 border border-white/40"></span>
+                <span className="w-3 h-3 rounded-none bg-red-600 border border-stone-400"></span>
                 <span>High Exploration Priority (&ge;0.80)</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-3 h-3 bg-amber-400 rotate-45 border border-white"></span>
-                <span className="font-bold text-amber-300">Bharweli Shaft Portal (Anchor)</span>
+                <span className="w-3 h-3 bg-amber-500 rotate-45 border border-stone-600"></span>
+                <span className="font-bold text-amber-900">Bharweli Shaft Portal (Anchor)</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-orange-500 border border-white"></span>
+                <span className="w-3 h-3 rounded-full bg-orange-500 border border-stone-400"></span>
                 <span>Mansar Manganese Reef Outcrop</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-3 h-0.5 bg-indigo-400"></span>
-                <span className="text-slate-500 text-[10px]">India Boundary (Survey of India)</span>
+                <span className="w-3 h-0.5 bg-indigo-600"></span>
+                <span className="text-stone-500 text-[10px]">India Boundary (Survey of India)</span>
               </div>
             </div>
 
             {/* Mandatory Scientific Disclaimer */}
-            <div className="mt-2 pt-2 border-t border-technical text-[10px] text-amber-300/90 font-medium leading-tight font-sans">
+            <div className="mt-2.5 p-1.5 rounded bg-amber-50 border border-amber-200 text-[10px] text-amber-900 font-medium leading-tight font-sans">
               ⚠️ Relative ranking heuristic, not probability. No independent negative drillholes available.
             </div>
           </div>

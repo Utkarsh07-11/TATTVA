@@ -15,31 +15,31 @@ export default function RecommendationsPanel({ recommendations, onApplyAction })
     <div className="space-y-3 max-w-4xl mx-auto font-sans">
       {/* 1. DECISION-FIRST DOMINANT RECOMMENDED ACTION */}
       {topRecommended && (
-        <div className="bg-[#080b10] border border-technical p-4 sm:p-5 rounded flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="bg-[#FAF7F2] border border-[#DCD5CD] p-4 sm:p-5 rounded-xl shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
-            <div className="text-xs font-sans uppercase tracking-wider text-slate-400">
+            <div className="text-xs font-sans uppercase tracking-wider text-[#8A817D]">
               Recommended Action · Optimized Dispatch
             </div>
-            <div className="text-xl sm:text-2xl font-bold font-sans text-white">
+            <div className="text-xl sm:text-2xl font-bold font-sans text-[#26211F]">
               {topRecommended.title}
             </div>
-            <p className="text-xs text-slate-400 max-w-xl font-sans">
+            <p className="text-xs text-[#5A524F] max-w-xl font-sans">
               {topRecommended.details}
             </p>
           </div>
 
-          <div className="flex items-center gap-4 sm:border-l sm:border-technical sm:pl-5 shrink-0">
+          <div className="flex items-center gap-4 sm:border-l sm:border-[#DCD5CD] sm:pl-5 shrink-0">
             <div>
-              <div className="text-[11px] font-sans uppercase tracking-wider text-slate-400">
+              <div className="text-[11px] font-sans uppercase tracking-wider text-[#8A817D]">
                 Expected Recovery
               </div>
-              <div className="text-xl sm:text-2xl font-bold font-sans text-emerald-400">
+              <div className="text-xl sm:text-2xl font-bold font-sans text-emerald-700">
                 +{topRecommended.expected_recovery_tonnes.toLocaleString()} t
               </div>
             </div>
             <button
               onClick={() => onApplyAction(topRecommended)}
-              className="px-4 py-2 rounded bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer self-start sm:self-auto"
+              className="px-4 py-2 rounded-lg bg-[#C87A5B] hover:bg-[#B85D3B] text-white font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer self-start sm:self-auto shadow-sm"
             >
               <span>Apply Scenario</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -49,13 +49,13 @@ export default function RecommendationsPanel({ recommendations, onApplyAction })
       )}
 
       {/* 2. RANKED ALTERNATIVE ACTIONS */}
-      <div className="panel p-4 space-y-3">
-        <div className="flex items-center justify-between pb-2 border-b border-technical">
-          <h2 className="text-xs sm:text-sm font-bold text-white font-sans uppercase tracking-wide">
+      <div className="bg-white rounded-xl p-4 space-y-3 border border-[#DCD5CD] shadow-sm">
+        <div className="flex items-center justify-between pb-2 border-b border-[#DCD5CD]">
+          <h2 className="text-xs sm:text-sm font-bold text-[#26211F] font-sans uppercase tracking-wide">
             Ranked Intervention Options
           </h2>
-          <span className="text-xs font-sans text-slate-400">
-            Optimization Engine: <strong className="text-slate-200">{solver_status}</strong>
+          <span className="text-xs font-sans text-[#8A817D]">
+            Optimization Engine: <strong className="text-[#26211F]">{solver_status}</strong>
           </span>
         </div>
 
@@ -63,25 +63,27 @@ export default function RecommendationsPanel({ recommendations, onApplyAction })
           {options.map((opt) => (
             <div
               key={opt.action_id}
-              className={`bg-[#080b10] border rounded p-3 transition-colors ${
-                opt.lp_recommended ? 'border-amber-900/60' : 'border-technical'
+              className={`border rounded-lg p-3 transition-colors ${
+                opt.lp_recommended
+                  ? 'border-[#C87A5B] bg-[#FAF7F2]'
+                  : 'border-[#DCD5CD] bg-white'
               }`}
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div className="flex items-start gap-2.5">
-                  <span className="text-xs font-sans font-bold text-slate-500 mt-0.5">
+                  <span className="text-xs font-sans font-bold text-[#8A817D] mt-0.5">
                     0{opt.rank}
                   </span>
                   <div>
-                    <h3 className="text-xs font-bold text-white flex items-center gap-2">
+                    <h3 className="text-xs font-bold text-[#26211F] flex items-center gap-2">
                       {opt.title}
                       {opt.lp_recommended && (
-                        <span className="text-amber-400 text-[10px] font-sans font-bold">
+                        <span className="text-[#8C3A1E] bg-[#EDC7B7]/40 border border-[#C87A5B] px-1.5 py-0.2 rounded text-[10px] font-sans font-bold">
                           ● SELECTED
                         </span>
                       )}
                     </h3>
-                    <p className="text-xs text-slate-400 mt-0.5 font-sans">
+                    <p className="text-xs text-[#5A524F] mt-0.5 font-sans">
                       {opt.details}
                     </p>
                   </div>
@@ -89,11 +91,11 @@ export default function RecommendationsPanel({ recommendations, onApplyAction })
 
                 <div className="flex items-center gap-3 shrink-0 self-end sm:self-auto font-sans text-xs">
                   <div className="text-right">
-                    <span className="text-emerald-400 font-bold">+{opt.expected_recovery_tonnes.toLocaleString()} t</span>
+                    <span className="text-emerald-700 font-bold font-mono">+{opt.expected_recovery_tonnes.toLocaleString()} t</span>
                   </div>
                   <button
                     onClick={() => onApplyAction(opt)}
-                    className="px-2.5 py-1 rounded bg-[#101622] hover:bg-[#182233] text-slate-200 text-xs border border-technical transition-colors cursor-pointer"
+                    className="px-2.5 py-1 rounded-md bg-[#FAF7F2] hover:bg-[#EEE6DD] text-[#5A524F] hover:text-[#26211F] text-xs border border-[#DCD5CD] transition-colors cursor-pointer"
                   >
                     Simulate
                   </button>

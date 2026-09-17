@@ -1,0 +1,4 @@
+employee_id,full_name,role,mine_id,state,temp_pin,department
+MPB260006,Suresh Patle,MINE_OPERATOR,MOIL_BALAGHAT,Madhya Pradesh,123456,Bharweli Underground
+MHD260005,Ganesh Deshmukh,MINE_OPERATOR,MOIL_DONGRI_BUZURG,Maharashtra,123456,Opencast Operations
+MHN2601005,Vikram Singhal,EXECUTIVE_MANAGEMENT,MOIL_HQ,Maharashtra,654321,Safety Directorate

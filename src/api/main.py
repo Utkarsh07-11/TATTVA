@@ -11,7 +11,8 @@ from fastapi.staticfiles import StaticFiles
 
 from config.settings import settings
 from src.api.deps import get_forecaster, get_optimizer, get_prospectivity_model, get_shap_engine, runtime_status
-from src.api.routes import forecast, explain, recommend, prospectivity, mine, real_data, demo
+from src.api.routes import forecast, explain, recommend, prospectivity, mine, real_data, demo, auth, governance
+from src.data.governance_db import governance_db
 
 logger = logging.getLogger("uvicorn.error")
 
@@ -19,11 +20,13 @@ logger = logging.getLogger("uvicorn.error")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     try:
+        # Verify self-healing governance store
+        _ = governance_db.get_audit_trail(limit=1)
         get_forecaster()
         get_prospectivity_model()
         get_shap_engine()
         get_optimizer()
-        print("[FastAPI] Inference pipelines ready.")
+        print("[FastAPI] Inference pipelines & governance database ready.")
     except Exception as exc:
         print(f"[FastAPI] Models will load on demand: {exc}")
     yield
@@ -71,6 +74,8 @@ app.add_middleware(
 )
 
 api_prefix = settings.API_V1_STR
+app.include_router(auth.router, prefix=api_prefix)
+app.include_router(governance.router, prefix=api_prefix)
 app.include_router(forecast.router, prefix=api_prefix)
 app.include_router(explain.router, prefix=api_prefix)
 app.include_router(recommend.router, prefix=api_prefix)

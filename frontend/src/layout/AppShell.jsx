@@ -3,6 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { RefreshCw, Sparkles } from 'lucide-react';
 import { useDashboard } from '../context/DashboardContext';
 import DemoPresenterHUD from '../components/DemoPresenterHUD';
+import TattvaLogo from '../components/TattvaLogo';
 
 const navItems = [
   { to: '/', label: 'Overview' },
@@ -35,7 +36,8 @@ export default function AppShell() {
           <div className="flex items-center justify-between h-12 gap-3">
             {/* Brand Logo & Current Mine Context */}
             <div className="flex items-center gap-3 shrink-0">
-              <NavLink to="/" className="flex items-center gap-1.5 group">
+              <NavLink to="/" className="flex items-center gap-2 group">
+                <TattvaLogo className="w-6 h-6 shrink-0" />
                 <span className="text-xl font-black font-condensed tracking-wider text-white group-hover:text-industrial-amber transition-colors">
                   TATTVA
                 </span>

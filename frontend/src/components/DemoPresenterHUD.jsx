@@ -139,7 +139,7 @@ export default function DemoPresenterHUD({ onClose }) {
 
   if (loading) {
     return (
-      <div className="fixed bottom-3 right-4 z-[2000] bg-[#07090d]/95 backdrop-blur-md border border-technical p-3 rounded text-xs text-slate-400 font-mono shadow-2xl">
+      <div className="fixed bottom-3 right-4 z-[2000] bg-white/95 backdrop-blur-md border border-[#DCD5CD] p-3 rounded-lg text-xs text-[#5A524F] font-mono shadow-2xl">
         Loading Presenter HUD...
       </div>
     );
@@ -148,25 +148,25 @@ export default function DemoPresenterHUD({ onClose }) {
   if (!currentStep) return null;
 
   return (
-    <div className="fixed bottom-3 left-4 right-4 sm:left-auto sm:right-6 z-[2000] max-w-2xl w-full bg-[#07090d]/95 backdrop-blur-md border border-amber-900/60 rounded shadow-2xl text-xs font-mono pointer-events-auto animate-in slide-in-from-bottom-3 duration-200">
+    <div className="fixed bottom-3 left-4 right-4 sm:left-auto sm:right-6 z-[2000] max-w-2xl w-full bg-white/95 backdrop-blur-md border border-[#DCD5CD] rounded-xl shadow-2xl text-xs font-mono pointer-events-auto animate-in slide-in-from-bottom-3 duration-200">
       {/* 1. COMPACT HUD HEADER */}
-      <div className="flex items-center justify-between px-3.5 py-2 bg-slate-950/90 border-b border-technical">
+      <div className="flex items-center justify-between px-3.5 py-2.5 bg-[#FAF7F2] border-b border-[#DCD5CD] rounded-t-xl">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-industrial-amber animate-pulse"></span>
-          <span className="font-bold uppercase tracking-wider text-white text-[11px] font-sans">
+          <span className="w-2 h-2 rounded-full bg-[#C87A5B] animate-pulse"></span>
+          <span className="font-bold uppercase tracking-wider text-[#26211F] text-[11px] font-sans">
             PRESENTER HUD
           </span>
-          <span className="text-[10px] px-1.5 py-0.2 rounded bg-amber-950/70 border border-amber-800 text-amber-300 font-bold">
+          <span className="text-[10px] px-2 py-0.5 rounded bg-[#EDC7B7]/50 border border-[#C87A5B] text-[#8C3A1E] font-bold">
             Step {currentStep.step_id} of {steps.length}
           </span>
           {preflightStatus?.status === 'PASS' ? (
-            <span className="hidden md:inline-flex items-center gap-1 text-[10px] text-emerald-400 font-sans">
-              <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+            <span className="hidden md:inline-flex items-center gap-1 text-[10px] text-emerald-700 font-sans font-medium">
+              <CheckCircle2 className="w-3 h-3 text-emerald-700" />
               Preflight PASS ({preflightStatus?.performance?.observed_ms}ms)
             </span>
           ) : (
-            <span className="hidden md:inline-flex items-center gap-1 text-[10px] text-amber-400 font-sans">
-              <AlertTriangle className="w-3 h-3 text-amber-400" />
+            <span className="hidden md:inline-flex items-center gap-1 text-[10px] text-[#C87A5B] font-sans">
+              <AlertTriangle className="w-3 h-3 text-[#C87A5B]" />
               Preflight Check
             </span>
           )}
@@ -175,29 +175,29 @@ export default function DemoPresenterHUD({ onClose }) {
         {/* Timer & Controls */}
         <div className="flex items-center gap-2">
           <div
-            className={`flex items-center gap-1 px-2 py-0.5 rounded border text-[11px] cursor-pointer ${
+            className={`flex items-center gap-1 px-2.5 py-1 rounded-md border text-[11px] cursor-pointer ${
               timerSeconds > DEMO_PRESENTATION_DEFAULTS.totalPresentationSeconds
-                ? 'bg-rose-950/80 border-rose-700 text-rose-300'
-                : 'bg-[#0b0f17] border-technical text-industrial-amber'
+                ? 'bg-rose-100 border-rose-300 text-rose-800'
+                : 'bg-white border-[#DCD5CD] text-[#C87A5B]'
             }`}
             onClick={() => setIsTimerRunning(!isTimerRunning)}
             title="Click to pause/play presentation timer"
           >
             <Clock className="w-3 h-3" />
             <span className="font-bold">{formatTime(timerSeconds)}</span>
-            <span className="text-[9px] text-slate-500">/ 05:00</span>
+            <span className="text-[9px] text-[#8A817D]">/ 05:00</span>
           </div>
 
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="p-1 text-slate-400 hover:text-white rounded hover:bg-slate-800 cursor-pointer"
+            className="p-1 text-[#5A524F] hover:text-[#26211F] rounded hover:bg-[#EEE6DD] cursor-pointer"
             title={isExpanded ? 'Collapse HUD' : 'Expand HUD'}
           >
             {isExpanded ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronUp className="w-3.5 h-3.5" />}
           </button>
           <button
             onClick={onClose}
-            className="p-1 text-slate-400 hover:text-rose-400 rounded hover:bg-slate-800 cursor-pointer"
+            className="p-1 text-[#5A524F] hover:text-rose-600 rounded hover:bg-[#EEE6DD] cursor-pointer"
             title="Exit Demo Mode"
           >
             <X className="w-3.5 h-3.5" />
@@ -209,48 +209,48 @@ export default function DemoPresenterHUD({ onClose }) {
       {isExpanded && (
         <div className="p-3.5 space-y-3">
           {/* Step Metadata Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-technical">
+          <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-[#DCD5CD]">
             <div>
-              <div className="text-[10px] uppercase tracking-wider text-slate-500">
-                Target Mine: <strong className="text-white">{currentStep.mine_id}</strong> · Target View:{' '}
-                <strong className="text-industrial-amber">{currentStep.target_screen}</strong>
+              <div className="text-[10px] uppercase tracking-wider text-[#8A817D]">
+                Target Mine: <strong className="text-[#26211F]">{currentStep.mine_id}</strong> · Target View:{' '}
+                <strong className="text-[#C87A5B]">{currentStep.target_screen}</strong>
               </div>
-              <h4 className="text-sm font-bold text-white font-sans mt-0.5">{currentStep.title}</h4>
+              <h4 className="text-sm font-bold text-[#26211F] font-sans mt-0.5">{currentStep.title}</h4>
             </div>
 
             <div className="flex items-center gap-2">
               <span
                 className={`text-[10px] px-2 py-0.5 rounded font-bold border ${
                   currentStep.tier === 'LEVEL_A'
-                    ? 'bg-emerald-950 text-emerald-300 border-emerald-700'
+                    ? 'bg-emerald-100 text-emerald-800 border-emerald-300'
                     : currentStep.tier === 'LEVEL_B'
-                    ? 'bg-cyan-950 text-cyan-300 border-cyan-700'
+                    ? 'bg-blue-100 text-blue-800 border-blue-300'
                     : currentStep.tier === 'LEVEL_C'
-                    ? 'bg-amber-950 text-amber-300 border-amber-700'
-                    : 'bg-slate-900 text-slate-300 border-slate-700'
+                    ? 'bg-[#EDC7B7]/50 text-[#8C3A1E] border-[#C87A5B]'
+                    : 'bg-[#EEE6DD] text-[#5A524F] border-[#DCD5CD]'
                 }`}
               >
                 {currentStep.tier}
               </span>
               <button
                 onClick={() => handleExecuteStep(currentStep)}
-                className="px-2.5 py-1 rounded bg-industrial-amber text-black font-bold text-[11px] font-sans hover:bg-amber-400 transition-colors flex items-center gap-1 cursor-pointer"
+                className="px-3 py-1 rounded-md bg-[#C87A5B] text-white font-bold text-[11px] font-sans hover:bg-[#B85D3B] transition-colors flex items-center gap-1 cursor-pointer shadow-sm"
               >
-                <Play className="w-3 h-3 fill-black" />
+                <Play className="w-3 h-3 fill-white" />
                 Execute Step
               </button>
             </div>
           </div>
 
           {/* Speaker Teleprompter Card */}
-          <div className="p-2.5 rounded bg-[#0b0f17] border border-technical space-y-1.5">
-            <div className="flex items-center justify-between text-[10px] text-slate-400 uppercase tracking-wide font-sans font-semibold">
-              <span className="flex items-center gap-1 text-amber-300">
-                <Sparkles className="w-3 h-3 text-industrial-amber" />
+          <div className="p-2.5 rounded-lg bg-[#FAF7F2] border border-[#DCD5CD] space-y-1.5">
+            <div className="flex items-center justify-between text-[10px] text-[#8A817D] uppercase tracking-wide font-sans font-semibold">
+              <span className="flex items-center gap-1 text-[#C87A5B]">
+                <Sparkles className="w-3 h-3 text-[#C87A5B]" />
                 Speaker Talking Points (Target: ~{currentStep.timing_target_sec}s)
               </span>
             </div>
-            <p className="text-[11px] text-slate-200 leading-relaxed font-sans font-normal italic">
+            <p className="text-[11px] text-[#26211F] leading-relaxed font-sans font-normal italic">
               "{currentStep.speaker_notes}"
             </p>
           </div>
@@ -259,25 +259,25 @@ export default function DemoPresenterHUD({ onClose }) {
           <div>
             <button
               onClick={() => setShowJurorDefense(!showJurorDefense)}
-              className="flex items-center justify-between w-full p-2 rounded bg-slate-950 border border-technical text-[10px] text-slate-300 hover:text-white font-sans transition-colors cursor-pointer"
+              className="flex items-center justify-between w-full p-2.5 rounded-lg bg-[#FAF7F2] border border-[#DCD5CD] text-[10px] text-[#5A524F] hover:text-[#26211F] font-sans transition-colors cursor-pointer"
             >
-              <span className="flex items-center gap-1.5 font-semibold text-cyan-300">
-                <HelpCircle className="w-3 h-3 text-cyan-400" />
+              <span className="flex items-center gap-1.5 font-semibold text-[#C87A5B]">
+                <HelpCircle className="w-3 h-3 text-[#C87A5B]" />
                 Juror Defense and Scientific Backing
               </span>
               <span>{showJurorDefense ? '▲ Hide' : '▼ View Q&A Defense'}</span>
             </button>
 
             {showJurorDefense && (
-              <div className="mt-1.5 p-2.5 rounded bg-cyan-950/20 border border-cyan-800/40 text-[11px] text-slate-300 space-y-1.5 font-sans leading-relaxed">
+              <div className="mt-1.5 p-2.5 rounded-lg bg-[#EEE6DD]/50 border border-[#DCD5CD] text-[11px] text-[#5A524F] space-y-1.5 font-sans leading-relaxed">
                 <div>
-                  <strong className="text-cyan-300 font-mono text-[10px] uppercase block">
+                  <strong className="text-[#C87A5B] font-mono text-[10px] uppercase block">
                     Technical Defense / Objection Answer:
                   </strong>
                   {currentStep.juror_defense_notes}
                 </div>
-                <div className="pt-1 border-t border-cyan-900/40 text-[10px] text-slate-400">
-                  <strong className="text-slate-300">Governance Disclosure: </strong>
+                <div className="pt-1 border-t border-[#DCD5CD] text-[10px] text-[#8A817D]">
+                  <strong className="text-[#26211F]">Governance Disclosure: </strong>
                   {currentStep.governance_disclosure}
                 </div>
               </div>
@@ -285,10 +285,10 @@ export default function DemoPresenterHUD({ onClose }) {
           </div>
 
           {/* Bottom Controls Bar */}
-          <div className="flex items-center justify-between pt-1 border-t border-technical font-sans">
+          <div className="flex items-center justify-between pt-1 border-t border-[#DCD5CD] font-sans">
             <button
               onClick={handleResetDemo}
-              className="px-2 py-1 rounded bg-slate-900 hover:bg-slate-800 border border-technical text-slate-400 hover:text-white text-[10px] flex items-center gap-1 cursor-pointer transition-colors"
+              className="px-2.5 py-1 rounded-md bg-[#FAF7F2] hover:bg-[#EEE6DD] border border-[#DCD5CD] text-[#5A524F] hover:text-[#26211F] text-[10px] flex items-center gap-1 cursor-pointer transition-colors"
               title="Reset presentation to Step 1 and initial state"
             >
               <RotateCcw className="w-3 h-3" />
@@ -299,10 +299,10 @@ export default function DemoPresenterHUD({ onClose }) {
               <button
                 onClick={handlePrevStep}
                 disabled={currentStepIndex === 0}
-                className={`px-2.5 py-1 rounded border text-[11px] flex items-center gap-1 transition-colors ${
+                className={`px-2.5 py-1 rounded-md border text-[11px] flex items-center gap-1 transition-colors ${
                   currentStepIndex === 0
-                    ? 'opacity-30 cursor-not-allowed bg-slate-950 border-technical text-slate-600'
-                    : 'bg-[#0b0f17] border-technical text-slate-300 hover:text-white hover:bg-slate-800 cursor-pointer'
+                    ? 'opacity-30 cursor-not-allowed bg-[#FAF7F2] border-[#DCD5CD] text-[#8A817D]'
+                    : 'bg-white border-[#DCD5CD] text-[#5A524F] hover:text-[#26211F] hover:bg-[#EEE6DD] cursor-pointer'
                 }`}
               >
                 <ChevronLeft className="w-3.5 h-3.5" />
@@ -312,10 +312,10 @@ export default function DemoPresenterHUD({ onClose }) {
               <button
                 onClick={handleNextStep}
                 disabled={currentStepIndex === steps.length - 1}
-                className={`px-3 py-1 rounded border font-semibold text-[11px] flex items-center gap-1 transition-colors ${
+                className={`px-3 py-1 rounded-md border font-semibold text-[11px] flex items-center gap-1 transition-colors ${
                   currentStepIndex === steps.length - 1
-                    ? 'opacity-30 cursor-not-allowed bg-slate-950 border-technical text-slate-600'
-                    : 'bg-industrial-amber/20 border-industrial-amber text-industrial-amber hover:bg-industrial-amber hover:text-black cursor-pointer'
+                    ? 'opacity-30 cursor-not-allowed bg-[#FAF7F2] border-[#DCD5CD] text-[#8A817D]'
+                    : 'bg-[#C87A5B] border-[#B85D3B] text-white hover:bg-[#B85D3B] cursor-pointer shadow-sm'
                 }`}
               >
                 Next

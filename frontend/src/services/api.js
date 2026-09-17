@@ -123,6 +123,14 @@ export const api = {
   // Historical / Reality Check Backtest
   getHistoricalBacktest: async () => handleResponse(await fetch(`${API_BASE_URL}/historical/backtest`)),
   getHistoricalSeries: async () => handleResponse(await fetch(`${API_BASE_URL}/historical/series`)),
+
+  // Governance & Role-Based Operational Services
+  getComplianceMatrix: async (year = 2026, month = 9) =>
+    handleResponse(await fetch(`${API_BASE_URL}/governance/compliance-matrix?year=${year}&month=${month}`)),
+  getAuditTrail: async (limit = 30) =>
+    handleResponse(await fetch(`${API_BASE_URL}/governance/audit-trail?limit=${limit}`)),
+  getAuthPresets: async () =>
+    handleResponse(await fetch(`${API_BASE_URL}/auth/presets`)),
 };
 
 

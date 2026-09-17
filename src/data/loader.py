@@ -96,17 +96,34 @@ class DataLoader:
 
     # --- Real Data Service Access Methods ---
 
-    def load_real_mines_df(self) -> pd.DataFrame:
-        """Loads the audited MOIL 10-mine statutory registry."""
+    def load_real_mines_df(self, include_commissioned: bool = False) -> pd.DataFrame:
+        """Loads the audited MOIL 10-mine statutory registry, optionally including commissioned leases."""
         mines_csv = settings.REAL_DATA_DIR / "moil" / "mines.csv"
         if not mines_csv.exists():
             raise FileNotFoundError(f"Real MOIL mines CSV not found at {mines_csv}")
         df = pd.read_csv(mines_csv)
         df["data_status"] = "real"
+
+        if include_commissioned:
+            try:
+                from src.data.governance_db import governance_db
+                custom_mines = governance_db.get_custom_mines()
+                if custom_mines:
+                    custom_df = pd.DataFrame(custom_mines)
+                    custom_df["data_status"] = "commissioned"
+                    custom_df["verification_status"] = "commissioned_lease"
+                    df = pd.concat([df, custom_df], ignore_index=True)
+            except Exception:
+                pass
+
         return df
 
-    def load_real_mines_geojson(self) -> Dict[str, Any]:
-        """Loads the audited MOIL 10-mine GeoJSON feature collection."""
+    def load_all_active_mines_df(self) -> pd.DataFrame:
+        """Loads both statutory MOIL mines and dynamic commissioned mines."""
+        return self.load_real_mines_df(include_commissioned=True)
+
+    def load_real_mines_geojson(self, include_commissioned: bool = False) -> Dict[str, Any]:
+        """Loads the audited MOIL 10-mine GeoJSON feature collection, optionally augmented with dynamic commissioned mines."""
         geojson_file = settings.REAL_DATA_DIR / "moil" / "mine_locations.geojson"
         if not geojson_file.exists():
             raise FileNotFoundError(f"Real MOIL mine locations GeoJSON not found at {geojson_file}")
@@ -114,7 +131,43 @@ class DataLoader:
             data = json.load(f)
         data.setdefault("metadata", {})
         data["metadata"]["data_status"] = "real"
+
+        if include_commissioned:
+            try:
+                from src.data.governance_db import governance_db
+                custom_mines = governance_db.get_custom_mines()
+                for cm in custom_mines:
+                    feature = {
+                        "type": "Feature",
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [float(cm["longitude"]), float(cm["latitude"])]
+                        },
+                        "properties": {
+                            "mine_id": cm["mine_id"],
+                            "mine_name": cm["mine_name"],
+                            "company": cm.get("company", "MOIL Limited"),
+                            "state": cm["state"],
+                            "district": cm["district"],
+                            "mineral": cm.get("mineral", "Manganese Ore"),
+                            "data_status": "commissioned",
+                            "verification_status": "commissioned_lease",
+                            "coordinate_interpretation": "commissioned_lease_reference",
+                            "coordinate_precision": "gps_survey",
+                            "point_type": "lease_centroid",
+                            "lease_area_ha": cm.get("lease_area_ha", 100.0),
+                            "code_prefix": cm.get("code_prefix", "")
+                        }
+                    }
+                    data.setdefault("features", []).append(feature)
+            except Exception:
+                pass
+
         return data
+
+    def load_all_active_mines_geojson(self) -> Dict[str, Any]:
+        """Loads all statutory and dynamically commissioned mine locations GeoJSON."""
+        return self.load_real_mines_geojson(include_commissioned=True)
 
     def load_real_production_df(
         self,
