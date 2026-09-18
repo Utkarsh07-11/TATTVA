@@ -161,7 +161,7 @@ export default function AppShell() {
       </header>
 
       {/* 2. MAIN WORKSPACE CONTAINER */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 py-4">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 py-4 relative z-0 isolate">
         {error && (
           <div className="mb-4 p-3 text-xs font-mono text-rose-300 border border-rose-800/80 bg-rose-950/30 rounded">
             [SYSTEM ERROR] {error}. Ensure FastAPI backend service is operational on port 8000.

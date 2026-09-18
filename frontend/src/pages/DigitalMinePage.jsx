@@ -80,7 +80,7 @@ export default function DigitalMinePage() {
       </section>
 
       {/* 3. Interactive Digital Mine Cartographic Station */}
-      <div className="rounded-lg border-2 border-[#DCD5CD] bg-[#FAF7F2] shadow-xl p-1 overflow-hidden">
+      <div className="rounded-lg border-2 border-[#DCD5CD] bg-[#FAF7F2] shadow-xl p-1 overflow-hidden relative z-0 isolate">
         <DigitalMineMap
           prospectivityGeoJson={prospectivityGeoJson}
           drillholesGeoJson={drillholesGeoJson}

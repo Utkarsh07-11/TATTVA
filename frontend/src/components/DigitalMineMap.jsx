@@ -854,7 +854,7 @@ export default function DigitalMineMap({
   const activeModelConfig = REAL_PROSPECTIVITY_LAYERS.find((l) => l.id === activeScoreLayer) || REAL_PROSPECTIVITY_LAYERS[0];
 
   return (
-    <div className="panel overflow-hidden flex flex-col h-[calc(100vh-170px)] min-h-[580px]">
+    <div className="panel overflow-hidden flex flex-col h-[calc(100vh-170px)] min-h-[580px] relative z-0 isolate">
       {/* Top Map Control Bar - Solid Creamy White Enterprise Panel */}
       <div id="map-control-bar" className="bg-[#faf8f5] text-stone-900 border-b-2 border-stone-300 shadow-md">
         <div className="border-b border-stone-200 px-3 py-2 flex flex-wrap items-center justify-between gap-2 text-xs text-stone-800">
@@ -1119,7 +1119,7 @@ export default function DigitalMineMap({
       )}
 
       {/* Map Canvas & Overlay Panels */}
-      <div className="relative flex-1 w-full bg-slate-950">
+      <div className="relative flex-1 w-full bg-slate-950 isolate">
         <div ref={mapContainerRef} className="w-full h-full" />
 
         {/* Loading Spinner Overlay */}

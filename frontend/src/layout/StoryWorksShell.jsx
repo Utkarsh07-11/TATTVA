@@ -210,7 +210,7 @@ export default function StoryWorksShell() {
         </div>
       </header>
 
-      <main className="flex-1 w-full">
+      <main className="flex-1 w-full relative z-0 isolate">
         {error && (
           <div className="max-w-[1440px] mx-auto px-5 sm:px-8 pt-4">
             <div className="data-notice">

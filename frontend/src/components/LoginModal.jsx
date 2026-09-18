@@ -59,7 +59,7 @@ export default function LoginModal() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-fadeIn">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-fadeIn">
       {/* Crisp White / Warm Cream Enterprise Card */}
       <div className="relative w-full max-w-lg bg-[#faf9f5] border border-stone-300 shadow-2xl p-6 sm:p-8 rounded-lg text-stone-900">
         <button

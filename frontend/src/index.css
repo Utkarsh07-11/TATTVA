@@ -91,6 +91,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
   width: 100%;
   height: 100%;
   background: #EEE6DD;
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
 }
 
 .leaflet-popup-content-wrapper {
